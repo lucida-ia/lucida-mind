@@ -1,0 +1,60 @@
+---
+quando_usar: criar tela/componente/form, decidir Server vs Client, Server Action, estado, shadcn-first
+última_revisão: 2026-06
+status: canônico
+---
+
+# Modelo de UI (Next.js 15 + React 19)
+
+Fonte: skill `lucida-frontend`. Identidade visual em ui/identidade-visual.md; tokens em ui/design-tokens.md.
+
+## Server Components por padrão
+`"use client"` **só quando** precisa de estado, eventos, refs, Context ou API de browser — nunca "por
+via das dúvidas". Fetch inicial em server component com `await` (sem TanStack Query).
+
+## Dados
+- **Server Component + `await`** para o fetch inicial sem interação.
+- **TanStack Query** só quando precisa de cache/revalidation/polling no client.
+- Nunca fazer fetch em `useEffect` quando dá para ser server component.
+
+## Mutations
+**Server Actions** para mutation disparada do client (submit de form, botão). O schema **Zod revalida no
+servidor** (fonte da verdade).
+
+## Forms
+**react-hook-form + Zod + Server Action**. Schema Zod num `schemas.ts` (tipado, fonte da verdade);
+react-hook-form gerencia estado/validação no client; mensagens exibidas em **pt-BR**, schema/tipos em
+inglês. Não usar `useState` por campo.
+
+## Estado (hierarquia de decisão)
+1. Derivável de outro estado? → derive no render (não é estado).
+2. De um único componente? → `useState` local.
+3. Passa a 1–2 filhos? → `useState` no pai + props.
+4. Dado do servidor? → server component ou TanStack Query.
+5. Deve sobreviver a reload / ser compartilhável? → **URL** (`useSearchParams`, path).
+6. UI compartilhada entre componentes distantes? → **Zustand**.
+7. Config imutável de sessão (tema, locale, usuário)? → **Context**.
+
+## Componentização
+- Alvo **≤ ~200 linhas** por arquivo de componente; acima disso, extraia sub-componentes/hooks/helpers.
+- `page.tsx` e features grandes são **orquestradores finos**.
+- **shadcn-first**: sempre reutilizar primitivos de `components/ui/` (Button, Input, Dialog, Sheet…) em
+  vez de recriar. Recriar do zero é violação. Ver ui/design-tokens.md.
+
+## Estrutura
+```
+src/
+  app/         ← rotas, layouts, page.tsx, actions
+  features/<feature>/   ← componentes, actions, schemas, hooks da feature
+  components/ui/         ← shadcn customizado com tokens da marca
+  components/layout/     ← Header, Footer, Sidebar
+  lib/         ← cn(), utilitários puros
+  hooks/  stores/  server/  styles/
+```
+
+## Anti-patterns (red flags de review)
+`useState` em server component · `"use client"` em componente que só renderiza JSX estático · hex
+hardcoded fora de `globals.css` · fetch em `useEffect` que podia ser server component · `page.tsx` com
+200+ linhas · recriar botão/input/dialog que já existe em `ui/` · `variant` virando `if` gigante (use
+`cva()`) · fonte web sem `next/font` · imagem sem `next/image` · form com `useState` por campo ·
+`z-[9999]` mágico.
