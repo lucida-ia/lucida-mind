@@ -1,6 +1,6 @@
 ---
-quando_usar: entender o porquê de uma decisão de produto (rebrand, analytics, OMR, Classroom, transcrição)
-última_revisão: 2026-06
+quando_usar: entender o porquê de uma decisão de produto (rebrand, analytics, OMR, Classroom, transcrição, biblioteca)
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -38,6 +38,14 @@ tokens cifrados em repouso (AES-256-GCM), importação de turmas/alunos com **re
 Fases 2 (enviar prova → `courseWorkId`) e 3 (passback de nota) estão **engatilhadas, não implementadas**.
 **Bloqueio**: projeto GCP ainda não criado (verificação OAuth leva semanas). Sem as envs, o card fica
 indisponível (degradação graciosa).
+
+## Biblioteca como fonte de conteúdo integrada
+O professor sobe material **uma vez** e reutiliza nas gerações, em vez de re-anexar PDF a cada prova.
+Decisões: o binário **não trafega pela API** (upload/download direto ao storage por **presigned URL** —
+custo e latência fora do servidor); o texto é **extraído uma vez** no upload e reaproveitado (a
+reutilização na geração **não cobra crédito** de extração); acesso **gateado** por dono/org/assinante
+(alavanca de conversão — quem não tem acesso vê upsell); feature **desligável por env** (`LIBRARY_S3_*`
+ausentes → 503, resto da api segue). Mecânica em tecnico/biblioteca.md.
 
 ## PostHog (produto/observabilidade)
 Cloud US, **product analytics + error tracking**. **Session replay e feature flags adiados** de propósito.

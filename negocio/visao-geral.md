@@ -1,6 +1,6 @@
 ---
 quando_usar: explicar o que é a Lucida, problema que resolve, proposta de valor, escopo do produto
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -20,9 +20,11 @@ A Lucida ataca os três: **gera** a prova (objetivas + abertas), **corrige** (ob
 aberta por IA com rubrica + aprovação do professor) e **diagnostica** (analytics por turma/aluno/prova).
 
 ## O que entrega (resumo — detalhe em produto/suite.md)
-- **Provas**: geração por IA em pt-BR/inglês/espanhol, com estilos e níveis; também montagem manual.
+- **Provas**: geração por IA em pt-BR/inglês/espanhol, com estilos, níveis e tipo de atividade (prova,
+  simulado, quiz, lista de exercícios); também montagem manual.
 - **Correção**: objetiva automática; aberta assistida por IA com rubrica, revisada pelo professor.
 - **Planos de aula**: geração estruturada (objetivos, habilidades BNCC, desenvolvimento, avaliação).
+- **Biblioteca**: acervo de materiais (PDF/DOCX/TXT) do professor, reusável como fonte das gerações.
 - **Turmas/alunos/cursos**: organização do dia a dia; importação via Google Classroom.
 - **Scanner OMR**: folha de resposta em papel lida por foto (serviço Python).
 - **Aplicação ao aluno**: link público por prova (`/exam/[shareId]`), sem login do aluno.
@@ -30,7 +32,8 @@ aberta por IA com rubrica + aprovação do professor) e **diagnostica** (analyti
 
 ## Modelo de negócio (resumo — detalhe em negocio/monetizacao-creditos.md)
 Assinatura (planos Básico/Pro, mensal/anual) **+ consumo de créditos**. Cada ação de IA debita créditos;
-créditos vêm de boas-vindas, da renovação do plano ou de top-ups avulsos (cartão ou PIX).
+créditos vêm de boas-vindas, da renovação do plano ou de top-ups avulsos por cartão (o PIX está
+temporariamente indisponível).
 
 ## Mercado e tração
 > a definir — não há base no código. Tamanho de mercado, número de usuários, metas de receita e

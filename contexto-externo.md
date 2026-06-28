@@ -145,7 +145,7 @@ A assinatura é o **barateamento por fidelização** do consumo de créditos —
  
 | Plano | Preço/mês | Créditos/mês | Anual (−20%) |
 |---|---|---|---|
-| Start | R$ 49,90 | 5.000 | ~R$ 39,90/mês |
+| Básico | R$ 49,90 | 5.000 | ~R$ 39,90/mês |
 | Pro | R$ 99,90 | 15.000 | ~R$ 79,90/mês |
  
 ### 5.3 Créditos Avulsos
@@ -197,7 +197,7 @@ Créditos = base 250 + (custo/questão × nº de questões)
 ### 6.1 Precificação
  
 - **Canal parceiro (hoje):** R$ 149,90/mês líquido para a Lúcida = 30% do que o cliente paga ao parceiro (~R$ 500). Parceiro retém 70%.
-- **Preço direto-alvo:** Start × 10 professores × 0,75 (25% off) = **R$ 374,25**. Vender direto captura ~2,5x mais.
+- **Preço direto-alvo:** Básico × 10 professores × 0,75 (25% off) = **R$ 374,25**. Vender direto captura ~2,5x mais.
 **Faixas por volume (direto):**
  
 | Faixa | Desconto | Preço/prof | Receita/mês | Margem |
@@ -429,4 +429,7 @@ O motor é defensável não porque usa BKT ou DKT (algoritmos públicos), mas po
 | jun/2026 | **Ambiente do aluno expandido:** QR Code + gabarito virtual, calendário avaliativo, artefatos pedagógicos (vinculado à instituição), avaliação da disciplina, relatório para pais/aluno. |
 | jun/2026 | **Re-baseline de checkout.** Base pagante reiniciada para 2 usuários (1 instituição + 1 infoprodutor). Histórico de 40 pagantes / MRR R$ 749,55 passa a ser referência, não posição atual. |
 | jun/2026 | **Motor de assertividade fundamentado em literatura científica** (BKT, CDM, DKT, IRT, spacing effects). Pesquisa ativa em inferência de gap por KC e metodologia adaptativa. |
+| jun/2026 | **Biblioteca** (domínio `library`): professor sobe PDF/DOCX/TXT (upload presigned a S3/Railway Buckets), texto extraído uma vez e reusável como fonte das gerações sem custo extra. Gateada por acesso (dono/org/assinante). |
+| jun/2026 | **Tipo de atividade na prova** (`exam`/`mockExam`/`quiz`/`exerciseList`, default `exam`): só classifica/filtra; não muda geração, preço ou correção. |
+| jun/2026 | **PIX (AbacatePay) pausado** por kill-switch (`PIX_TOPUP_ENABLED = false`): top-up só por cartão; webhook segue liquidando cobranças já emitidas. Pausa temporária. |
  

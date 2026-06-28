@@ -1,6 +1,6 @@
 ---
 quando_usar: usar tokens CSS, aplicar theme switch (analytics/kintal), escolher primitivo shadcn
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -17,8 +17,10 @@ hardcoded em componente** — use as classes utilitárias geradas dos tokens (`b
 - **Cores instituição (roxo)**: `--color-analytics-primary #6c3cfb`, `--color-analytics-dark-01 #4d30ce`,
   `--color-analytics-dark-02 #1e0a96`, `--color-analytics-light #927afc`.
 - **Neutros**: `--color-gray-50` … `--color-gray-800`, `--color-ink #0a0a0a`.
-- **Semânticos (shadcn)**: `--color-background`, `--color-foreground`, `--color-muted`, `--color-border`,
-  `--color-input`, `--color-ring`, `--color-primary`, `--color-accent`.
+- **Semânticos (shadcn)**: `--color-background`, `--color-foreground`, `--color-muted`,
+  `--color-muted-foreground`, `--color-border`, `--color-input`, `--color-ring`, `--color-primary`,
+  `--color-primary-foreground`, `--color-accent`, `--color-accent-foreground`.
+- **Terceiros**: `--color-whatsapp #128c7e` (CTAs/integrações de WhatsApp).
 - **Tipografia**: `--font-sans` (Poppins), `--font-serif` (Instrument Serif), `--font-mono` (JetBrains Mono).
 - **Radii**: `--radius-sm` 8px, `--radius` 12px, `--radius-lg` 20px, `--radius-xl` 28px,
   `--radius-2xl` 32px, `--radius-pill` 9999px.
@@ -29,6 +31,16 @@ Aplicados num wrapper de layout — os componentes shadcn herdam **sem** precisa
 - **`.theme-analytics`** — remapeia os semânticos (`--color-primary`, `--color-ring`, shadows) para o
   **roxo** da instituição. É o que faz `/analytics/*` "virar roxo" automaticamente.
 - **`.theme-kintal`** — remapeia para **grayscale** (backoffice interno, sem cor de produto): só neutros.
+
+## Classes utilitárias e print
+Além dos tokens em `@theme`, `globals.css` define utilitários reusáveis (não recriar):
+- **`.surface-dark`** — fundo super-dark com texto off-white (superfícies de alto contraste).
+- **`.safe-top` / `.safe-bottom`** — padding de safe-area (notch/barra) para PWA/mobile.
+- **`.pulse-dot`** — dot pulsante de status (tem variantes por tema: analytics, kintal).
+- **`.scrollbar-thin`** — scrollbar fina custom para áreas roláveis.
+- **Print**: `@page` (A4, margem 20mm) + `@media print` e classes `.print-toolbar`/`.print-page`/
+  `.page-break` — base das rotas `/print/exams/[id]` e `/print/lesson-plans/[id]` (fluxo oficial de
+  export é Ctrl+P → salvar PDF).
 
 ## Primitivos disponíveis (`components/ui/`)
 Reutilize estes em vez de recriar: `button` (variantes primary/accent/outline/ghost/on-dark + sizes via

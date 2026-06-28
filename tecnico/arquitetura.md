@@ -1,6 +1,6 @@
 ---
 quando_usar: criar/mover domínio, decidir camada, DI manual, ordem de middleware, como os apps conversam
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -20,8 +20,9 @@ presentation ──▶ application ──▶ domain ◀── infrastructure
   Recebe dependências por construtor (interfaces). DTOs planos de entrada/saída, nunca entidades cruas.
 - **infrastructure/** — Mongoose (schema, repositório, **mapper** domínio↔documento). Implementa as
   interfaces do `domain/`. Nunca vaza `Document` para fora.
-- **presentation/** — Express + **Zod** (só aqui). Controller fino: valida `req`, chama use case,
-  responde HTTP.
+- **presentation/** — Express + **Zod** para validar **input** (controller fino: valida `req`, chama use
+  case, responde HTTP). Zod também é aceitável em **infrastructure/** para fazer parsing de **respostas de
+  APIs externas** (OpenAI, AbacatePay, NFE.io, Resend) — nunca em application/domain.
 
 Estrutura típica de um domínio:
 ```
@@ -65,4 +66,5 @@ layout/use cases do servidor.
 
 ## SSE
 Geração longa de IA faz **streaming via SSE** (`shared/http/sse.ts`) para não estourar timeout de proxy.
-O cliente escuta com `EventSource`. Headers: `text/event-stream`, `no-cache`, `X-Accel-Buffering: no`.
+O cliente escuta com `EventSource`. Headers: `Content-Type: text/event-stream`, `Cache-Control: no-cache,
+no-transform`, `Connection: keep-alive`, `X-Accel-Buffering: no`.

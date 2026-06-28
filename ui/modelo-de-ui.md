@@ -1,6 +1,6 @@
 ---
 quando_usar: criar tela/componente/form, decidir Server vs Client, Server Action, estado, shadcn-first
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -18,8 +18,9 @@ via das dúvidas". Fetch inicial em server component com `await` (sem TanStack Q
 - Nunca fazer fetch em `useEffect` quando dá para ser server component.
 
 ## Mutations
-**Server Actions** para mutation disparada do client (submit de form, botão). O schema **Zod revalida no
-servidor** (fonte da verdade).
+**Server Actions** para mutation de dados disparada do client (submit de form, botão). O schema **Zod
+revalida no servidor** (fonte da verdade). Exceção aceitável: **fluxos de auth client-side** do BetterAuth
+(`authClient.signIn`/`signUp`/etc.) chamam o client direto, não via Server Action.
 
 ## Forms
 **react-hook-form + Zod + Server Action**. Schema Zod num `schemas.ts` (tipado, fonte da verdade);
@@ -36,7 +37,9 @@ inglês. Não usar `useState` por campo.
 7. Config imutável de sessão (tema, locale, usuário)? → **Context**.
 
 ## Componentização
-- Alvo **≤ ~200 linhas** por arquivo de componente; acima disso, extraia sub-componentes/hooks/helpers.
+- Alvo **≤ ~200 linhas** por arquivo de componente — é **heurística**, não regra dura. O problema é
+  **UI/lógica inline monolítica**, não o total de linhas: um **orquestrador** (page/feature) que delega a
+  sub-componentes pode passar de 200 sem ser red flag.
 - `page.tsx` e features grandes são **orquestradores finos**.
 - **shadcn-first**: sempre reutilizar primitivos de `components/ui/` (Button, Input, Dialog, Sheet…) em
   vez de recriar. Recriar do zero é violação. Ver ui/design-tokens.md.
@@ -53,8 +56,9 @@ src/
 ```
 
 ## Anti-patterns (red flags de review)
-`useState` em server component · `"use client"` em componente que só renderiza JSX estático · hex
-hardcoded fora de `globals.css` · fetch em `useEffect` que podia ser server component · `page.tsx` com
-200+ linhas · recriar botão/input/dialog que já existe em `ui/` · `variant` virando `if` gigante (use
-`cva()`) · fonte web sem `next/font` · imagem sem `next/image` · form com `useState` por campo ·
-`z-[9999]` mágico.
+`useState` em server component · `"use client"` em componente que só renderiza JSX estático · **cor de
+marca** (azul/roxo) hardcoded fora de `globals.css` (exceto cor de **terceiro** — Google `#4285F4`,
+WhatsApp — e cores de **data-viz/Recharts** determinadas por algoritmo) · fetch em `useEffect` que podia
+ser server component · `page.tsx` com **lógica de UI inline** e 200+ linhas (orquestrador que delega é ok)
+· recriar botão/input/dialog que já existe em `ui/` · `variant` virando `if` gigante (use `cva()`) ·
+fonte web sem `next/font` · imagem sem `next/image` · form com `useState` por campo · `z-[9999]` mágico.

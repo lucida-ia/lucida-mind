@@ -1,6 +1,6 @@
 ---
 quando_usar: escrever copy pt-BR, definir tom por frente, falar de tração/churn, responder sobre a Lucida
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -17,7 +17,8 @@ status: canônico
 ## Métricas e tração (cuidado com nuance)
 - **Churn involuntário ≠ cancelamento.** Falha de pagamento (cartão recusado, expirado) não é o cliente
   pedindo para sair — não conte como churn voluntário nem como "cancelamento". Separe sempre os dois ao
-  reportar retenção/receita.
+  reportar retenção/receita. (Disciplina de **reporte**: o código ainda **não distingue** — `Subscription`
+  não tem `cancelReason` e as métricas contam todo `canceled` igual; a separação é manual por enquanto.)
 - Tokens consumidos são **telemetria**, não cobrança — não apresente custo de IA como se fosse preço ao
   cliente (o preço é a tabela de créditos).
 - Receita líquida = bruta − (fees Stripe + impostos); demais despesas (infra, IA, payroll, marketing)

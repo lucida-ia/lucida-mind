@@ -1,6 +1,6 @@
 ---
 quando_usar: precisar do significado preciso de um termo de domínio da Lucida
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -11,7 +11,8 @@ explica em pt-BR.
 
 | Termo | O que é |
 |---|---|
-| **Exam** (prova) | Agregado raiz. Tem `questions[]`, `style`, duração, `securityLevel`, `shareId` e dono (`ownerId`). Pode ter `courseWorkId` (Classroom). |
+| **Exam** (prova) | Agregado raiz. Tem `questions[]`, `style`, `activityType`, duração, `securityLevel`, `shareId` e dono (`ownerId`). Pode ter `courseWorkId` (Classroom). |
+| **ActivityType** | Classificação da prova: `exam` (prova), `mockExam` (simulado), `quiz`, `exerciseList` (lista de exercícios). Padrão `exam`. Só organiza/filtra — não afeta geração, preço ou correção. |
 | **Question** | Value object da questão. Tipo `multipleChoice`, `trueFalse` ou `open`. Objetiva tem opções/gabarito; aberta tem **rubric** + resposta de referência. |
 | **shareId** | Identificador público da prova. Vira o link `/exam/[shareId]` pelo qual o aluno responde sem login. |
 | **Submission** (resposta) | Tentativa de um aluno numa prova. Ciclo: `in_progress` → `submitted`. `source` = `online` ou `scanner`. Guarda respostas objetivas e abertas, score (0–10), flags de integridade. |
@@ -28,7 +29,9 @@ explica em pt-BR.
 | **Student** (aluno) | Aluno de uma turma. Identificado por `code` (gerado), `matricula`, `email`. `classroomRemovedAt` marca remoção suave. |
 | **Organization** (organização/instituição) | Instituição que agrupa professores e dados. `organizationId = null` significa professor individual. |
 | **ExamStyle** | Estilo de geração: `simple`, `contextual`, `analytical`, `reflective`. Afeta texto e preço. |
-| **CreditWallet** (carteira) | Saldo de créditos com escopo (`user`/`organization`), origem (`welcome`/`subscription`/`topup`/`pix`) e validade (`expiresAt`). |
+| **CreditWallet** (carteira) | Saldo de créditos com escopo (`user`/`org`), origem (`subscription`/`topup`/`welcome`/`promo`/`admin_grant`) e validade (`expiresAt`). Não há mais origem `pix` (top-up PIX desativado). |
+| **LibraryFile** | Arquivo da Biblioteca (`pdf`/`docx`/`txt`) com status (`UPLOADING`/`PROCESSING`/`READY`/`ERROR`), texto extraído, disciplina/segmento e métricas de uso. Fonte de conteúdo para geração. |
+| **LibrarySubject** | Disciplina nomeada da Biblioteca, dentro de um segmento (`FUNDAMENTAL`/`MEDIO`/`FACULDADE`/`INFOPRODUTOR`). |
 | **Ledger** | Registro de movimentos de crédito (créditos/débitos) com rastreio de tokens usados. |
 | **BetterAuth** | Framework de autenticação (Google OAuth + e-mail/senha + plugin de organização). Sessão no cookie `lucida.session_token`. |
 | **Kintal** | Backoffice interno staff-only (não exposto ao cliente). |

@@ -1,6 +1,6 @@
 ---
 quando_usar: listar os módulos do produto e o que cada um faz, entender o escopo funcional
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -13,7 +13,10 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecni
   e **abertas** (com rubrica). Parâmetros: estilo, dificuldade, idioma (pt-BR/inglês/espanhol),
   quantidade. Detalhe em produto/estilos-de-questao.md.
 - **Montagem manual** e edição questão a questão; **regeneração** de uma questão específica.
-- **Fontes de conteúdo**: PDF, DOCX, texto colado e **transcrição de vídeo do YouTube**.
+- **Tipo de atividade**: cada prova tem um tipo (`activityType`) — **Prova**, **Simulado**, **Quiz** ou
+  **Lista de Exercícios** — usado para classificar/filtrar; não muda geração, preço nem correção.
+- **Fontes de conteúdo**: PDF, DOCX, texto colado, **transcrição de vídeo do YouTube** e arquivos da
+  **Biblioteca** (ver abaixo).
 - **Aplicação**: cada prova tem um **link público** (`/exam/[shareId]`) — o aluno responde online,
   sem login. Há também versão **imprimível** e nível de segurança configurável.
 
@@ -27,6 +30,13 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecni
 Geração estruturada: objetivos, **habilidades BNCC**, introdução, desenvolvimento, conclusão, avaliação.
 Quatro segmentos: Fundamental, Médio, Faculdade, Infoprodutor. Exporta **DOCX**, duplica, arquiva e
 pode **gerar prova** a partir do plano.
+
+## Biblioteca (library)
+Acervo de materiais do professor (`/app/biblioteca`): sobe **PDF/DOCX/TXT** uma vez (upload direto ao
+storage, presigned), a Lucida **extrai o texto** e organiza por **disciplina e segmento**
+(Fundamental/Médio/Faculdade/Infoprodutor). Esses arquivos viram **fonte reutilizável** na geração de
+provas e planos de aula — sem re-upload nem custo extra de crédito na reutilização. Acesso liberado para
+staff, membros de organização ou assinantes ativos (senão, tela de upsell). Detalhe em tecnico/biblioteca.md.
 
 ## Organização do dia a dia
 - **Turmas** (class), **alunos** (student) e **cursos** (course) que agrupam turmas/provas.

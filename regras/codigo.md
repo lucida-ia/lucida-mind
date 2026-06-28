@@ -1,6 +1,6 @@
 ---
 quando_usar: revisar ou escrever código — regras invioláveis e checklist que os reviewers aplicam
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -19,7 +19,8 @@ tecnico/arquitetura.md e ui/modelo-de-ui.md; convenções gerais em tecnico/conv
 - **Direção de dependência**: `presentation → application → domain ← infrastructure`. Import atravessando
   no sentido errado = erro.
 - **Domínio puro**: nada de lib externa em `domain/` (sem Mongoose/Zod/Express; só `node:crypto`).
-- **Zod só em `presentation/`**. Zod em application/domain = mover.
+- **Zod para validar input só em `presentation/`** (em application/domain = mover). Zod para **parsing de
+  resposta de API externa** (OpenAI, AbacatePay, NFE.io, Resend) é aceitável em `infrastructure/`.
 - **Erros via `DomainError`** com `statusCode`. Nunca `new Error(...)` para regra de negócio.
 - **Use case = uma operação** (`execute`). Mais de um método público → provavelmente 2 use cases.
 - **Repositório nunca retorna `Document` cru** — falta mapper.

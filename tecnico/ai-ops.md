@@ -1,6 +1,6 @@
 ---
 quando_usar: mexer em geração/correção de IA, modelo OpenAI, extractors, streaming SSE, pricing de IA
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -10,8 +10,10 @@ Domínio `ai-ops`. Concentra todas as chamadas à OpenAI: geração de questões
 correção de respostas abertas e extração de conteúdo de fontes.
 
 ## Modelo
-`OPENAI_API_KEY` obrigatório; `OPENAI_MODEL` com default **`gpt-4-1-mini`**. Cobra-se por **tabela
-determinística** (ver tecnico/billing-ledger.md), não por token consumido.
+`OPENAI_API_KEY` obrigatório; `OPENAI_MODEL` com default **`gpt-4.1-mini`**. Cobra-se por **tabela
+determinística** (ver tecnico/billing-ledger.md), não por token consumido. Os preços de **plano de aula**
+são marcados como **provisórios** no código ("recalibrate once token usage is measured"); os de
+prova/correção são estáveis.
 
 ## Geração
 - **Questões objetivas** (`multipleChoice`/`trueFalse`): enunciado, contexto, opções, gabarito,
@@ -34,6 +36,12 @@ determinística** (ver tecnico/billing-ledger.md), não por token consumido.
 ## Extractors (fontes de conteúdo)
 PDF (`pdf-parse`), DOCX (`mammoth`), texto colado e **YouTube** (via serviço Python de transcrição —
 ver tecnico/integracoes.md). O material extraído alimenta a geração de provas/planos.
+
+## Biblioteca como fonte (`libraryFileIds`)
+A geração também aceita arquivos da **Biblioteca** (domínio `library`): passados via `libraryFileIds`, o
+`ai-ops` resolve pela porta `library-source-resolver` (impl. `LibrarySourceResolverAdapter`) e recebe o
+**texto já extraído** — **sem re-extração e sem custo de crédito** pela reutilização. Detalhe em
+tecnico/biblioteca.md.
 
 ## Streaming
 Geração longa transmite via **SSE** (`shared/http/sse.ts`) para evitar timeout de proxy; o front escuta

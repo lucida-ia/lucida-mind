@@ -1,6 +1,6 @@
 ---
 quando_usar: mexer em créditos, wallet, ledger, débito atômico, expiração, custo por operação de IA
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -10,8 +10,11 @@ Domínio `billing`. O lado comercial (planos/top-ups) está em negocio/monetizac
 mecânica.
 
 ## Wallets e ledger
-- **CreditWallet**: saldo com `scope` (`user`/`organization`), `source` (`welcome`/`subscription`/
-  `topup`/`pix`), `balance` e `expiresAt`. Um dono pode ter várias wallets.
+- **CreditWallet**: saldo com `scope` (`user`/`org`), `source` (`subscription`/`topup`/`welcome`/
+  `promo`/`admin_grant`), `balance` e `expiresAt`. Um dono pode ter várias wallets. Consumo segue a
+  prioridade da `source`: `subscription` (0) → `topup`/`admin_grant` (1) → `promo` (2) → `welcome` (3,
+  por último). **Não existe mais `source = pix`**: o PIX (AbacatePay) foi desativado e cobranças PIX que
+  ainda liquidam pelo webhook criam wallet com `source = "topup"`.
 - **Ledger**: registra cada movimento (crédito/débito), incluindo `tokensUsed` para **telemetria**
   (não é o que se cobra).
 - **Welcome credits**: concedidos no `onUserCreated`, idempotentes, valor por `WELCOME_CREDITS`

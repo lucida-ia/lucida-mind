@@ -1,6 +1,6 @@
 ---
 quando_usar: discutir público-alvo, ICP, beachhead, estratégia de expansão e GTM
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: parcial
 ---
 
@@ -12,11 +12,12 @@ status: parcial
 
 ## O que o produto evidencia
 - **Usuário primário = professor individual.** Indícios no código: créditos de boas-vindas concedidos
-  no cadastro, billing por usuário, app do professor (`/app`) como produto principal, geração/correção
-  pensadas para um docente operando sozinho.
+  no cadastro, billing com escopo **padrão `user`**, app do professor (`/app`) como produto principal,
+  geração/correção pensadas para um docente operando sozinho. A **Biblioteca** (acervo reusável de
+  material do professor) reforça o uso individual recorrente.
 - **Expansão = instituição.** Existe uma camada de **organização** (plugin de organização no BetterAuth)
-  com `/analytics` (dashboard de instituição, frente roxa), gestão de membros, billing com escopo de
-  organização e analytics pedagógico agregando turmas/alunos/provas.
+  com `/analytics` (dashboard de instituição, frente roxa), gestão de membros, **billing com escopo `org`
+  que faz pooling de créditos** no nível da instituição, e analytics pedagógico agregando turmas/alunos/provas.
 - **Caminho natural:** professor entra sozinho → vira referência dentro da escola → escola adota a
   camada de instituição. O produto suporta os dois lados; o pulo entre eles é organizacional, não técnico.
 

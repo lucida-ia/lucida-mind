@@ -1,6 +1,6 @@
 ---
 quando_usar: falar de preços, planos, assinatura, top-ups, créditos de boas-vindas, modelo de receita
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -27,8 +27,9 @@ Os anuais têm ~20% de economia vs. mensal. Todos: alunos e provas ilimitados, c
 ilimitada, análises por turma e aluno.
 
 ## Top-ups (avulsos)
-Para esgotamento fora do ciclo. Mesmos pacotes via **Stripe (cartão)** e **PIX (AbacatePay)**.
-Validade de **365 dias**. Fonte: `apps/api/src/domains/billing/domain/topup.ts`.
+Para esgotamento fora do ciclo. Pacotes via **Stripe (cartão)**. O **PIX (AbacatePay)** está
+**temporariamente desativado** (kill-switch `PIX_TOPUP_ENABLED = false`; ver tecnico/integracoes.md) —
+apenas cartão por enquanto. Validade de **365 dias**. Fonte: `apps/api/src/domains/billing/domain/topup.ts`.
 
 | Pacote | Créditos | Preço | Destaque |
 |---|---|---|---|
@@ -45,7 +46,13 @@ Concedido no `onUserCreated` da auth. Fonte: `billing/application/grant-welcome-
 Cada transação de billing (assinatura ou top-up) pode gerar **NFS-e via NFE.io**, idempotente por
 referência externa. Detalhe em tecnico/integracoes.md (seção NFE.io) e domínio `invoicing`.
 
+## Fontes de crédito (wallet)
+Toda wallet tem uma `source` que define a prioridade de consumo (gasto primeiro → por último):
+`subscription` → `topup`/`admin_grant` → `promo` → `welcome`. **Não existe mais** `source = pix` (top-up
+PIX desativado; cobranças PIX residuais que liquidam viram `topup`). Detalhe em tecnico/billing-ledger.md.
+
 ## Custo interno (o que se paga ao OpenAI)
 A relação tokens→créditos é rastreada como **telemetria** (~5,5 tokens por crédito, com desconto de
-prompt caching), mas **não é o que se cobra**: o preço por operação é uma **tabela determinística**
-(ver tecnico/billing-ledger.md). No dashboard financeiro staff, custo de IA entra como `ai_inference`.
+prompt caching) **apenas para análise de custo/auditoria** — **não é o que se cobra do cliente**: o preço
+por operação é uma **tabela determinística** (ver tecnico/billing-ledger.md). No dashboard financeiro
+staff, custo de IA entra como `ai_inference`.

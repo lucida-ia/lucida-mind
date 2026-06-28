@@ -1,6 +1,6 @@
 ---
 quando_usar: escolher cor, tipografia, logo, checar contraste, definir tom de voz da marca
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -37,13 +37,15 @@ escala de cinza `gray-50`…`gray-800` + `ink #0A0A0A`.
 hierarquia herda o tom.
 
 ## Contraste (WCAG)
-- `#007AFF` em branco = 3.04:1 → **AA só para texto grande** (≥ 24px, ou ≥ 18.66px bold). Para texto
-  pequeno, use `#1D14FF` (8.2:1).
-- `#6C3CFB` em branco ≈ 4.98:1 → AA para texto normal ≥ 14px. Texto pequeno → `#4D30CE` (~7.3:1).
+- `#007AFF` em branco = **4.02:1** → **AA para texto grande** (≥ 24px, ou ≥ 18.66px bold). Fica abaixo de
+  4.5:1, então para **texto pequeno** use `#1D14FF` (~8.1:1).
+- `#6C3CFB` em branco = **5.71:1** → **AA para texto normal** (≥ 14px). Para mais folga em texto pequeno,
+  `#4D30CE` (~7.3:1).
 
 ## Tipografia
 - **Poppins** — toda a UI (corpo e títulos).
-- **Instrument Serif Italic** — só palavras de ênfase **dentro de títulos**, nunca corpo.
+- **Instrument Serif** — carregada em weight 400, **normal e itálico**. Uso: ênfase **itálica** dentro de
+  títulos e, em **normal**, blockquotes e destaques de corpo grande (≥ 24px). Não usar em corpo pequeno.
 - Hierarquia: H1 Poppins Regular 70pt/lh1 · H2 40pt/lh1 · corpo 20pt/lh1 · detalhe Light 18pt/lh1.1.
 - Nunca: esticar/distorcer, outline em texto, justificar, kern apertado, trocar a fonte.
 

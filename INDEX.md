@@ -18,6 +18,7 @@
 - tecnico/arquitetura.md — Use quando: criar/mover domínio, decisão de camada (Clean Arch + DDD), DI manual, ordem de middleware
 - tecnico/dominios.md — Use quando: mapear os ~25 domínios da api e suas entidades centrais
 - tecnico/billing-ledger.md — Use quando: mexer em créditos, ledger, débito atômico, custo por operação
+- tecnico/biblioteca.md — Use quando: mexer na Biblioteca (upload de arquivos, presigned S3, extração, fonte de geração)
 - tecnico/ai-ops.md — Use quando: mexer em geração/correção de IA, modelo OpenAI, extractors, SSE
 - tecnico/integracoes.md — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog
 - tecnico/convencoes-de-codigo.md — Use quando: nomear arquivo, idioma do código, comentário, import ESM, clean code

@@ -1,6 +1,6 @@
 ---
 quando_usar: saber versões, libs, gerenciador, comandos, layout do monorepo
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -17,16 +17,25 @@ lucida-monorepo/
 ├── services/  ← microsserviços Python (FastAPI), deploy isolado
 │   ├── omr/                  ← leitura de folha de resposta (OpenCV)
 │   └── youtube-transcript/   ← transcrição de vídeo (yt-dlp + Whisper)
-└── packages/  ← reservado (placeholder p/ código compartilhado; ainda não existe no disco)
+└── packages/  ← código compartilhado entre workspaces
+    └── omr-template/  ← @lucida/omr-template — geometry.json/markers.json (api ↔ serviço OMR)
 ```
+
+A pasta `packages/` **já existe**: hoje contém só `omr-template` (geometria/marcadores ArUco
+compartilhados entre a api e o serviço Python de OMR), consumido via `workspace:*`.
 
 Path alias `@/*` → `src/*` nos dois apps (no api é resolvido em build por `tsc-alias`).
 
 ## Backend (`apps/api`)
 Express 5 + TypeScript **ESM puro**. Principais libs:
 `express` 5, `mongoose` 8, `better-auth`, `zod` 3, `openai`, `stripe`, `resend`, `mongodb`,
-`multer`, `pdf-parse`, `mammoth`, `docx`, `qrcode`, `youtube-transcript`, `posthog-node`, `cors`.
+`multer`, `pdf-parse`, `mammoth`, `docx`, `pdf-lib`, `qrcode`, `youtube-transcript`, `posthog-node`,
+`cors`, e `@aws-sdk/client-s3` + `@aws-sdk/s3-request-presigner` (storage S3/Railway Buckets da
+Biblioteca — ver tecnico/biblioteca.md).
 Dev: `tsx` (watch, porta 3333), `tsc-alias`, `vitest` (configurado, sem testes escritos ainda).
+Scripts em `apps/api/scripts/` (rodados via `pnpm --filter @lucida/api ...`): migrações/seed/backfill,
+incluindo `seed:library-subjects`, `backfill:exam-activity-type`, `backfill:submission-scores`,
+`backfill:math-latex`.
 
 ## Frontend (`apps/web`)
 Next.js 15 (App Router) + React 19 + TypeScript + **Tailwind v4** + shadcn/ui. Principais libs:

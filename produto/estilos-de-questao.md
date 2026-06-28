@@ -1,13 +1,14 @@
 ---
 quando_usar: definir tipos de questão, estilos de geração, dificuldade, idiomas suportados
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
 # Estilos de questão, dificuldade e idiomas
 
 Fontes: `apps/api/src/domains/exam/domain/question.ts`,
-`apps/api/src/domains/ai-ops/domain/generation-types.ts`.
+`apps/api/src/domains/ai-ops/domain/generation-types.ts`,
+`apps/api/src/domains/ai-ops/domain/open-generation-types.ts` (questões abertas).
 
 ## Tipos de questão (no exam)
 `QuestionType = "multipleChoice" | "trueFalse" | "open"`
@@ -34,6 +35,10 @@ Tabela em tecnico/billing-ledger.md.
 
 ## Idiomas de geração (OutputLanguage)
 `"pt-BR" | "en" | "es"` — a prova pode ser gerada em português, inglês ou espanhol.
+
+## Fontes de conteúdo na geração
+Além de PDF/DOCX/texto/YouTube, a geração aceita `libraryFileIds` — arquivos da **Biblioteca** já
+extraídos, passados como fonte sem re-extração nem custo extra (ver tecnico/biblioteca.md).
 
 ## Como a IA gera vs. como o exam armazena
 - Geração objetiva produz um tipo intermediário (`GeneratedQuestion`: enunciado, contexto, opções,

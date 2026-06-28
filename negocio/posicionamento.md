@@ -1,6 +1,6 @@
 ---
 quando_usar: falar de marca, nome, sub-marcas, as três frentes (professor/instituição/aluno), como nomear o produto
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -15,7 +15,7 @@ ponto; o que muda entre contextos é **cor + um qualificador funcional**, não o
 |---|---|---|---|
 | Professor | "Lucida para professores" | Azul `#007AFF` | App do professor (`/app/*`) |
 | Instituição | "Lucida para instituições" | Roxo `#6C3CFB` | Dashboard de organização (`/analytics/*`) |
-| Aluno | "Lucida para alunos" | Azul claro `#5CDAFF` | Identidade futura; hoje o aluno só acessa o link público da prova |
+| Aluno | "Lucida para alunos" | Azul claro `#5CDAFF` *(referência de marca; **sem token CSS** no código)* | Identidade futura; hoje o aluno só acessa o link público da prova |
 
 Regra visual: **nunca misturar** as três cores na mesma tela. Ao entrar numa frente, toda a hierarquia
 visual (CTA, links, accents) herda aquele tom. Detalhe de cores em ui/identidade-visual.md.

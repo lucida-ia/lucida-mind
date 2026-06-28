@@ -1,6 +1,6 @@
 ---
 quando_usar: mapear os domínios da api e suas entidades centrais, achar onde fica uma feature
-última_revisão: 2026-06
+última_revisão: 2026-06-27
 status: canônico
 ---
 
@@ -18,9 +18,10 @@ status: canônico
 | `course` | Cursos do professor — agrupam turmas/provas. |
 | `lesson-plan` | Planos de aula (snapshots de turma/curso/disciplina, BNCC, export DOCX, duplicação). |
 | `ai-ops` | Geração/correção via OpenAI; extractors PDF/DOCX/text/YouTube; pt-BR/inglês/espanhol. |
+| `library` | **Biblioteca** — upload de arquivos (presigned S3/Railway Buckets), extração de texto, acesso por dono/org/assinante, taxonomia por disciplina+segmento; fonte de conteúdo do `ai-ops`. Ver tecnico/biblioteca.md. |
 | `scan` | OMR — proxy para o serviço Python `services/omr`. |
 | `classroom` | Integração Google Classroom (Fase 1: importar turmas/alunos). |
-| `billing` | Créditos, ledger, débito atômico, assinaturas Stripe, top-ups, PIX, webhook. |
+| `billing` | Créditos, ledger, débito atômico, assinaturas Stripe, top-ups por cartão, webhook. PIX (AbacatePay) **desativado** por kill-switch — ver tecnico/billing-ledger.md e tecnico/integracoes.md. |
 | `invoicing` | NFS-e via NFE.io, disparada por transações de billing. |
 | `finance` | Dashboard financeiro staff-only (receita, despesas, categorização). |
 | `analytics` | Visões de organização — "cubo" parametrizável (overview/professor/turma/aluno/prova/membros). |
@@ -36,8 +37,9 @@ status: canônico
 | `tickets` | Suporte por e-mail — inbound via Resend Inbound, threading, fila staff no Kintal. |
 
 ## Entidades centrais (domínios core)
-- **Exam** — id, classId, courseId (snapshot), ownerId, title, style, duration, securityLevel,
-  questions[], shareId, courseWorkId.
+- **Exam** — id, classId, courseId (snapshot), ownerId, title, description, **activityType**
+  (`exam|mockExam|quiz|exerciseList`, default `exam`), style, duration, securityLevel, questions[],
+  shareId, courseWorkId, usage (telemetria de tokens).
 - **Question** (VO) — tipo `multipleChoice|trueFalse|open`; objetiva tem opções/gabarito; aberta tem
   **Rubric** + referenceAnswer.
 - **Rubric** — criteria[] → cada critério tem levels[] (com points). Max = maior nível por critério.
@@ -47,6 +49,6 @@ status: canônico
   status (`ai_suggested|approved`).
 - **Class / Student / Course** — turma / aluno (com `code`, `matricula`, campos Classroom) / curso.
 - **LessonPlan** — segment, status (`DRAFT|READY|ARCHIVED`), identification + content (BNCC, seções).
-- **CreditWallet** — scope (`user|organization`), source (`welcome|subscription|topup|pix`), balance, expiresAt.
+- **CreditWallet** — scope (`user|org`), source (`subscription|topup|welcome|promo|admin_grant`), balance, expiresAt.
 
 Detalhe de créditos em tecnico/billing-ledger.md; de geração/correção em tecnico/ai-ops.md.
