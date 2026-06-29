@@ -21,6 +21,7 @@
 - tecnico/biblioteca.md — Use quando: mexer na Biblioteca (upload de arquivos, presigned S3, extração, fonte de geração)
 - tecnico/ai-ops.md — Use quando: mexer em geração/correção de IA, modelo OpenAI, extractors, SSE
 - tecnico/integracoes.md — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog
+- tecnico/eventos-posthog.md — Use quando: consultar a taxonomia de eventos PostHog (nome, propriedades, onde dispara), montar funil/insight, instrumentar evento novo
 - tecnico/convencoes-de-codigo.md — Use quando: nomear arquivo, idioma do código, comentário, import ESM, clean code
 
 ## UI
