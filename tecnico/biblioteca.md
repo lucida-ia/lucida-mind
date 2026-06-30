@@ -1,6 +1,6 @@
 ---
 quando_usar: mexer na Biblioteca — upload de arquivos, presigned S3, extração de texto, fonte de geração
-última_revisão: 2026-06-27
+última_revisão: 2026-06-30
 status: canônico
 ---
 
@@ -42,9 +42,10 @@ Entra em `generate-exam-questions`, `generate-open-questions`, `generate-lesson-
 `regenerate-*`, ao lado de PDF/DOCX/texto/YouTube (ver tecnico/ai-ops.md).
 
 ## Acesso
-`LibraryAccessPolicy` libera para **staff**, **membro de organização** ou **assinante ativo**. No backend,
-middleware `requireLibraryAccess` gateia os endpoints; no web, `getCanAccessLibrary()` decide entre
-`<LibraryView />` e `<LibraryUpsell />`.
+A `SubscriberAccessPolicy` **compartilhada** (`shared/access/subscriber-access-policy.ts`) libera para
+**staff**, **membro de organização** ou **assinante ativo** — a mesma política do Calendário (ver
+tecnico/calendario.md). No backend, o middleware `requireLibraryAccess` gateia os endpoints (acesso negado
+→ **402**); no web, `getCanAccessLibrary()` decide entre `<LibraryView />` e `<LibraryUpsell />`.
 
 ## Storage (portas + adapters)
 - Porta `library/domain/ports/file-storage.ts` (`FileStorage`): `createUploadUrl`/`createDownloadUrl`

@@ -1,6 +1,6 @@
 ---
 quando_usar: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog, S3/Biblioteca, cron
-última_revisão: 2026-06-27
+última_revisão: 2026-06-30
 status: canônico
 ---
 
@@ -41,9 +41,10 @@ da api segue. **Gotcha**: o bucket precisa de **CORS** liberado ao `WEB_ORIGIN` 
 browser; não há fallback de proxy). Detalhe em tecnico/biblioteca.md.
 
 ## Resend (e-mail) + Tickets Inbound
-E-mails transacionais: verificação, reset, convites, recibos, form de ajuda. Envs: `RESEND_API_KEY`,
-`EMAIL_FROM`. **Resend Inbound** alimenta tickets de suporte (`TICKETS_INBOUND_SECRET`,
-`TICKETS_FROM_EMAIL`) → fila staff no Kintal.
+E-mails transacionais: verificação, reset, convites, recibos, form de ajuda e **notificação de abertura de
+atividade** (domínio `exam-notification` — ver tecnico/calendario.md). Envs: `RESEND_API_KEY`,
+`EMAIL_FROM`, `SUPPORT_EMAIL` (default `contato@lucidaexam.com`). **Resend Inbound** alimenta tickets de
+suporte (`TICKETS_INBOUND_SECRET`, `TICKETS_FROM_EMAIL`) → fila staff no Kintal.
 
 ## Google Classroom
 OAuth **próprio**, separado do BetterAuth (`access_type=offline` + `prompt=consent`), state HMAC-assinado;
@@ -78,4 +79,9 @@ API keys **HMAC** (`api-access`) gateiam `/v1/public/*` (`public-api`). Submiss�
 `submission.completed` para os endpoints cadastrados (`webhook-dispatch`).
 
 ## CRON interno
-`POST /v1/internal/expire-credits` (header `CRON_SECRET`) expira wallets vencidas. Sem env → 503.
+Endpoints internos protegidos pelo header `CRON_SECRET` (≥16). Sem a env → **503**; secret errado na rota
+de notificações → **404** (não vaza existência). Disparados por scheduler do Railway.
+- `POST /v1/internal/expire-credits` — expira wallets vencidas (billing).
+- `POST /v1/internal/dispatch-exam-window-notifications` — drena o outbox de notificações de abertura de
+  prova (`exam-notification`). **Ainda não registrado no Railway** — até registrar, só o reenvio manual do
+  professor envia e-mail. Ver tecnico/calendario.md.

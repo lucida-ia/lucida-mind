@@ -19,6 +19,7 @@
 - tecnico/dominios.md — Use quando: mapear os ~25 domínios da api e suas entidades centrais
 - tecnico/billing-ledger.md — Use quando: mexer em créditos, ledger, débito atômico, custo por operação
 - tecnico/biblioteca.md — Use quando: mexer na Biblioteca (upload de arquivos, presigned S3, extração, fonte de geração)
+- tecnico/calendario.md — Use quando: mexer em agendamento de prova (janela de resposta), calendário, notificação de abertura por e-mail (outbox + cron)
 - tecnico/ai-ops.md — Use quando: mexer em geração/correção de IA, modelo OpenAI, extractors, SSE
 - tecnico/integracoes.md — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog
 - tecnico/eventos-posthog.md — Use quando: consultar a taxonomia de eventos PostHog (nome, propriedades, onde dispara), montar funil/insight, instrumentar evento novo

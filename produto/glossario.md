@@ -1,6 +1,6 @@
 ---
 quando_usar: precisar do significado preciso de um termo de domínio da Lucida
-última_revisão: 2026-06-27
+última_revisão: 2026-06-30
 status: canônico
 ---
 
@@ -11,7 +11,8 @@ explica em pt-BR.
 
 | Termo | O que é |
 |---|---|
-| **Exam** (prova) | Agregado raiz. Tem `questions[]`, `style`, `activityType`, duração, `securityLevel`, `shareId` e dono (`ownerId`). Pode ter `courseWorkId` (Classroom). |
+| **Exam** (prova) | Agregado raiz. Tem `questions[]`, `style`, `activityType`, duração, `securityLevel`, `shareId` e dono (`ownerId`). Pode ter `courseWorkId` (Classroom) e `schedule` (**ExamSchedule**). |
+| **ExamSchedule** | Janela de resposta da prova: `availableFrom`, `availableUntil`, `notifyOnOpen`. Sem schedule → prova sempre respondível. `notifyOnOpen` liga o e-mail "atividade disponível". |
 | **ActivityType** | Classificação da prova: `exam` (prova), `mockExam` (simulado), `quiz`, `exerciseList` (lista de exercícios). Padrão `exam`. Só organiza/filtra — não afeta geração, preço ou correção. |
 | **Question** | Value object da questão. Tipo `multipleChoice`, `trueFalse` ou `open`. Objetiva tem opções/gabarito; aberta tem **rubric** + resposta de referência. |
 | **shareId** | Identificador público da prova. Vira o link `/exam/[shareId]` pelo qual o aluno responde sem login. |
@@ -24,10 +25,13 @@ explica em pt-BR.
 | **OMR** | *Optical Mark Recognition* — leitura de folha de resposta em papel por foto (serviço Python). Gera submission com `source = scanner`. |
 | **Lesson plan** (plano de aula) | Agregado com identificação (título/disciplina/nível/duração) + conteúdo (objetivos, BNCC, seções) + `status` (`DRAFT`/`READY`/`ARCHIVED`). |
 | **Segment** (segmento) | Nível do plano de aula: `FUNDAMENTAL`, `MEDIO`, `FACULDADE`, `INFOPRODUTOR`. Define o preço da geração. |
-| **Class** (turma) | Agregado com nome, disciplina, série; pode pertencer a um `course`, a uma `organization` e a um curso do Classroom (`classroomCourseId`). |
+| **Class** (turma) | Agregado com nome, disciplina, **nível** (EducationLevel) e **objetivos** (LearningObjective[]); pode pertencer a um `course`, a uma `organization` e a um curso do Classroom (`classroomCourseId`). |
+| **EducationLevel** | Nível de ensino da turma: `stage` (`FUNDAMENTAL`/`MEDIO`/`SUPERIOR`/`CUSTOM` ou nulo) + `grade` (série, texto livre). **Não confundir** com **Segment** do plano de aula/Biblioteca (enum diferente: `FACULDADE`/`INFOPRODUTOR` no lugar de `SUPERIOR`/`CUSTOM`). |
+| **LearningObjective** | Objetivo de aprendizagem da turma: `source` (`bncc`/`custom`), `code` (ref. da taxonomia, opcional), `label`. |
 | **Course** (curso) | Agrupa turmas/provas sob um tema/disciplina do professor. |
 | **Student** (aluno) | Aluno de uma turma. Identificado por `code` (gerado), `matricula`, `email`. `classroomRemovedAt` marca remoção suave. |
 | **Organization** (organização/instituição) | Instituição que agrupa professores e dados. `organizationId = null` significa professor individual. |
+| **passingGrade** (média de aprovação) | Nota de corte do professor (0–10, default **6**), campo do usuário no BetterAuth. Resolve `org → professor → 6` (org adiado). Classifica aprovado/reprovado nas análises (sai como `meta.passingGrade` no cubo). **Não** é a aprovação da correção. |
 | **ExamStyle** | Estilo de geração: `simple`, `contextual`, `analytical`, `reflective`. Afeta texto e preço. |
 | **CreditWallet** (carteira) | Saldo de créditos com escopo (`user`/`org`), origem (`subscription`/`topup`/`welcome`/`promo`/`admin_grant`) e validade (`expiresAt`). Não há mais origem `pix` (top-up PIX desativado). |
 | **LibraryFile** | Arquivo da Biblioteca (`pdf`/`docx`/`txt`) com status (`UPLOADING`/`PROCESSING`/`READY`/`ERROR`), texto extraído, disciplina/segmento e métricas de uso. Fonte de conteúdo para geração. |

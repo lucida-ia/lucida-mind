@@ -1,6 +1,6 @@
 ---
 quando_usar: listar os módulos do produto e o que cada um faz, entender o escopo funcional
-última_revisão: 2026-06-27
+última_revisão: 2026-06-30
 status: canônico
 ---
 
@@ -17,8 +17,12 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecni
   **Lista de Exercícios** — usado para classificar/filtrar; não muda geração, preço nem correção.
 - **Fontes de conteúdo**: PDF, DOCX, texto colado, **transcrição de vídeo do YouTube** e arquivos da
   **Biblioteca** (ver abaixo).
+- **Matemática**: enunciados, alternativas e explicações suportam **fórmulas (LaTeX)**, renderizadas com
+  KaTeX na prova online e na versão imprimível.
 - **Aplicação**: cada prova tem um **link público** (`/exam/[shareId]`) — o aluno responde online,
   sem login. Há também versão **imprimível** e nível de segurança configurável.
+- **Agendamento**: a prova pode ter uma **janela de resposta** (abre/fecha em data-hora) e, opcionalmente,
+  **avisar os alunos por e-mail quando abrir**. Sem janela, fica sempre respondível. Ver Calendário abaixo.
 
 ## Correção (submission + ai-ops)
 - **Objetiva**: corrigida automaticamente (gabarito).
@@ -38,9 +42,20 @@ storage, presigned), a Lucida **extrai o texto** e organiza por **disciplina e s
 provas e planos de aula — sem re-upload nem custo extra de crédito na reutilização. Acesso liberado para
 staff, membros de organização ou assinantes ativos (senão, tela de upsell). Detalhe em tecnico/biblioteca.md.
 
+## Calendário (calendar + exam-notification)
+Visão de **agenda das provas com janela** (`/app/calendario`): mostra num grid de mês quando cada
+atividade abre/fecha. Quando uma prova marcada com "avisar ao abrir" entra na janela, a Lucida **dispara
+e-mail aos alunos** com o link, automaticamente (ou por reenvio manual do professor). Feature **de
+assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe em tecnico/calendario.md.
+
 ## Organização do dia a dia
-- **Turmas** (class), **alunos** (student) e **cursos** (course) que agrupam turmas/provas.
+- **Turmas** (class), **alunos** (student) e **cursos** (course) que agrupam turmas/provas. A turma guarda
+  **nível de ensino** (Fundamental/Médio/Superior/Personalizado + série livre) e **objetivos de
+  aprendizagem** (BNCC ou personalizados).
 - **Google Classroom**: importa turmas e alunos com reconciliação por e-mail (Fase 1).
+- **Média de aprovação**: o professor configura sua **nota de corte** (default 6) — usada para classificar
+  aprovado/reprovado nas análises e nos indicadores. Ver produto/decisoes-de-produto.md.
+- **Onboarding**: tour guiado (mascote Lulu) na primeira vez no `/app`, refazível pelo menu de perfil.
 
 ## Scanner OMR (scan)
 Folha de resposta **em papel**: o servidor gera um PDF (1 página por aluno, com QR), o professor imprime,

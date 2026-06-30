@@ -1,6 +1,6 @@
 ---
-quando_usar: decidir comportamento de produto — degradação, idiomas, rubrica, aprovação, replica set, acesso do aluno
-última_revisão: 2026-06-27
+quando_usar: decidir comportamento de produto — degradação, idiomas, rubrica, aprovação, replica set, acesso do aluno, features de assinante
+última_revisão: 2026-06-30
 status: canônico
 ---
 
@@ -17,6 +17,13 @@ app por falta de integração secundária. Detalhe em tecnico/integracoes.md.
 > **PIX é diferente**: não é opcional-por-env, é **desligado por kill-switch** (`PIX_TOPUP_ENABLED =
 > false`) — devolve 503 **mesmo com `ABACATEPAY_*` configurado**. É pausa intencional, não falta de env.
 
+## Features de assinante
+- **Biblioteca** e **Calendário** são **exclusivas de assinante** — liberadas para staff, membro de
+  instituição ou assinatura ativa (`SubscriberAccessPolicy` compartilhada). Sem direito → **402** no
+  backend e tela de **upsell** no web. É alavanca de conversão, não bug.
+- **Notificação de abertura de prova** depende do cron interno; sem `CRON_SECRET`/cron registrado, o envio
+  automático não roda — o professor ainda tem o **reenvio manual**. Nunca derrubar nada por isso.
+
 ## Geração e correção
 - **Três idiomas** de geração: pt-BR, inglês, espanhol.
 - **Questão aberta exige rubrica** — não existe aberta sem critérios/níveis.
@@ -27,6 +34,9 @@ app por falta de integração secundária. Detalhe em tecnico/integracoes.md.
   prova — não muda geração, preço ou correção.
 - A **Biblioteca** (arquivos do professor, extract-once) é fonte de geração; reutilizar arquivo já
   extraído **não cobra crédito** de extração (tecnico/biblioteca.md).
+- **Dois "aprovar" distintos**: a **aprovação da correção** (professor valida o nível sugerido pela IA, e
+  só então conta no score) é diferente da **média de aprovação** (`passingGrade`, default 6) — esta é só a
+  nota de corte que classifica aluno aprovado/reprovado nas **análises**, configurável por professor.
 
 ## Créditos
 - Toda ação de IA **debita créditos**; há pré-check de saldo antes de operações caras.
