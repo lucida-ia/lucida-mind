@@ -17,10 +17,14 @@ Cada arquivo indica `destino`, `acao` (substituir / criar) e `origem` (seção d
 | [negocio-competidores.md](negocio-competidores.md) | `negocio/competidores.md` | **Criar** | §10 |
 | [produto-suite.md](produto-suite.md) | `produto/suite.md` | Substituir | §4.1 · §4.2 · §4.3 |
 | [produto-roadmap.md](produto-roadmap.md) | `produto/roadmap.md` | **Criar** | §4.4 |
-| [produto-motor-assertividade.md](produto-motor-assertividade.md) | `produto/motor-assertividade.md` | **Criar** | §13 · §14 |
 | [regras-pitch.md](regras-pitch.md) | `regras/pitch.md` | **Criar** | §11 |
 
-**Total:** 5 substituições · 7 arquivos novos
+**Total:** 4 substituições · 6 arquivos novos
+
+> **Já publicado direto no canônico (jul/2026):** `produto/motor-assertividade.md` — versão
+> reescrita pelo Gabriel (base científica + parametrização + escada de maturidade). O rascunho
+> anterior foi deletado. Os rascunhos de moat-flywheel e roadmap foram atualizados para referenciar
+> o novo doc.
 
 ---
 
@@ -33,6 +37,5 @@ Cada arquivo indica `destino`, `acao` (substituir / criar) e `origem` (seção d
 - negocio/modelo-institucional.md — Use quando: discutir preço institucional, canal parceiro vs. direto, GTM professor-led
 - negocio/competidores.md — Use quando: discutir cenário competitivo, big tech, diferencial real
 - produto/roadmap.md — Use quando: discutir prioridades de produto, sequência de desenvolvimento
-- produto/motor-assertividade.md — Use quando: discutir motor de inferência, BKT/CDM/DKT, Q-matrix, Knowledge Components
 - regras/pitch.md — Use quando: escrever pitch, landing page, copy de aquisição, narrativa para investidor
 ```

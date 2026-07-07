@@ -12,6 +12,7 @@
 - produto/glossario.md — Use quando: precisar do significado de um termo de domínio (exam, submission, rubric, OMR…)
 - produto/estilos-de-questao.md — Use quando: tipos de questão, estilos de geração, dificuldade, idiomas
 - produto/decisoes-de-produto.md — Use quando: entender o porquê de uma decisão (rebrand, analytics-cubo, OMR, Classroom)
+- produto/motor-assertividade.md — Use quando: fundamentar o motor de assertividade (BKT/CDM/IRT), definir escopo por fase de maturidade, consultar parâmetros e princípios de design de avaliação
 
 ## Técnico
 - tecnico/stack.md — Use quando: saber versões, libs, comandos, layout do monorepo

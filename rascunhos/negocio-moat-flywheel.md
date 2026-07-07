@@ -9,6 +9,16 @@ status: rascunho
 
 # Moat & Flywheel
 
+## A tese em uma frase
+
+O defensável não é gerar avaliação com qualidade (copiável por qualquer ferramenta). É a
+**interoperabilidade entre o que avaliar, quando avaliar e como avaliar**, fechada com **outcome
+medido** — gerando um data network effect que players digital-first não capturam.
+
+Fundamento técnico-científico dessa tese em produto/motor-assertividade.md.
+
+## Flywheel vs. moat
+
 **Flywheel = fluxo.** A engrenagem que, girando, acumula vantagem. É a causa.
 **Moat = estoque.** A barreira acumulada que resulta do flywheel girar. É o efeito.
 
@@ -60,6 +70,18 @@ copiável.
 
 **Janela competitiva estimada:** ~18 meses antes de big tech fechar o gap em PT-BR (detalhe em
 negocio/competidores.md).
+
+## Os cinco pontos de interoperabilidade (o moat, destrinchado)
+
+Nenhum ponto isolado é defensável; cada um já existe em alguma ferramenta. O que ninguém tem junto:
+
+1. **Feedback nivelado** (Hattie) escrito de volta num
+2. **grafo de KC validado** (Q-matrix + BNCC), através de
+3. **objetos rastreáveis longitudinalmente** (`family_id`), numa
+4. **avaliação de dupla função** (somativa + formativa) sem fricção pro professor,
+5. de forma **invisível** (orquestração inferida, não digitada).
+
+O algoritmo é público; a orquestração fechada com dado proprietário é o moat.
 
 ## O que protege o moat
 

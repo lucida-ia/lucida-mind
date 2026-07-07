@@ -36,7 +36,24 @@ backbone + LaTeX + discursivas
 **Diagnóstico por competência BNCC o quanto antes** — é o que fecha o loop e torna o moat
 mensurável. Sem ele, não é possível distinguir dado que acumula vantagem de vanity data.
 
-## Fundamentos técnicos
+## Critério de sequenciamento: a escada de maturidade
 
-Detalhes do motor de assertividade (BKT, CDM, DKT, IRT, espaçamento) em
-produto/motor-assertividade.md.
+O escopo de cada mudança de código no motor segue as fases de produto/motor-assertividade.md (§4):
+
+| Fase | O que existe | O que destrava |
+|---|---|---|
+| 0 — Atual | Item analysis isolado por prova, sem KC | Escopo imediato: tagging de KC + `family_id` nas questões (proposta de schema em produto/motor-assertividade.md §8 — aguardando avaliação) |
+| 1 — Objeto longitudinal | Questões carregam KC(s) via Q-matrix | Séries temporais por KC entre provas |
+| 2 — BKT por KC | ≥4 observações por KC | `p(domínio)`, "aprendido vs. não", Confiável/Direcional |
+| 3 — Pré-requisito (CDM) | Grafo de KCs + volume de padrões | Loop fechado de redesenho de material |
+| 4 — Neural (DKT) | Dado longitudinal denso | Refinamento — não é pré-requisito do MVP |
+
+## Restrições de design do gerador
+
+Duas regras de produto/motor-assertividade.md (§5–§6) que restringem geração e orientação ao professor:
+
+- **N ≥ 4 atividades com tópicos sobrepostos** por KC antes de feedback confiável — orientar o
+  professor a construir sequências, não provas avulsas. Abaixo disso, estimativa é "Direcional".
+- **Amplitude máxima de KCs por atividade**; sob escassez de material, máximo de formatos por KC
+  (mede transferência). Amplitude opera dentro da atividade; profundidade, ao longo da sequência —
+  não competem.
