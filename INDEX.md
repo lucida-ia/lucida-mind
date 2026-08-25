@@ -25,6 +25,8 @@
 - tecnico/integracoes.md — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog
 - tecnico/eventos-posthog.md — Use quando: consultar a taxonomia de eventos PostHog (nome, propriedades, onde dispara), montar funil/insight, instrumentar evento novo
 - tecnico/convencoes-de-codigo.md — Use quando: nomear arquivo, idioma do código, comentário, import ESM, clean code
+- tecnico/testes.md — Use quando: escrever teste, entender a estratégia por camada, rodar a suíte, interpretar cobertura, montar E2E
+- tecnico/framework-claude.md — Use quando: saber que skill/agent/comando/hook existe no monorepo, escolher quem chamar, entender o que é bloqueado automaticamente
 
 ## UI
 - ui/modelo-de-ui.md — Use quando: criar tela/componente, Server vs Client, Server Action, estado, shadcn-first
@@ -32,6 +34,7 @@
 - ui/identidade-visual.md — Use quando: escolher cor, tipografia, logo, contraste, tom de voz
 
 ## Regras
-- regras/codigo.md — Use quando: revisar/escrever código — regras invioláveis + checklist dos reviewers
+- regras/codigo.md — Use quando: revisar/escrever código — regras invioláveis, hooks bloqueantes, checklist dos reviewers
+- regras/processo.md — Use quando: citar uma regra numerada, entender como se trabalha no monorepo, decidir onde registrar uma decisão
 - regras/produto.md — Use quando: decidir comportamento de produto (degradação graciosa, idiomas, rubrica, replica set)
 - regras/comunicacao.md — Use quando: escrever copy pt-BR, falar de tração/churn (involuntário ≠ cancelamento)

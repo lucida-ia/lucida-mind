@@ -1,6 +1,6 @@
 ---
 quando_usar: escolher cor, tipografia, logo, checar contraste, definir tom de voz da marca
-última_revisão: 2026-06-27
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -48,6 +48,13 @@ hierarquia herda o tom.
   títulos e, em **normal**, blockquotes e destaques de corpo grande (≥ 24px). Não usar em corpo pequeno.
 - Hierarquia: H1 Poppins Regular 70pt/lh1 · H2 40pt/lh1 · corpo 20pt/lh1 · detalhe Light 18pt/lh1.1.
 - Nunca: esticar/distorcer, outline em texto, justificar, kern apertado, trocar a fonte.
+
+> **Ressalva do código, não da marca**: `globals.css` aplica `letter-spacing: -0.01em` no `body` via
+> `@layer base`. É um aperto global de −1%, tecnicamente em tensão com "nunca kern apertado". Está
+> registrado aqui para a divergência não ser redescoberta; mudar é decisão de design.
+
+Na web, a Poppins é carregada com os weights `300, 400, 500, 600, 700` via `next/font`. A referência
+de marca cita `300/400/500/700` — o **600** é extra e vive só no código.
 
 ## Logotipo
 - Tamanho mínimo: **160px** (logo completo), **40px** (só o símbolo).

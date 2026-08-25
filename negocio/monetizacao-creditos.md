@@ -1,6 +1,6 @@
 ---
 quando_usar: falar de preços, planos, assinatura, top-ups, créditos de boas-vindas, modelo de receita
-última_revisão: 2026-06-27
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -56,3 +56,33 @@ A relação tokens→créditos é rastreada como **telemetria** (~5,5 tokens por
 prompt caching) **apenas para análise de custo/auditoria** — **não é o que se cobra do cliente**: o preço
 por operação é uma **tabela determinística** (ver tecnico/billing-ledger.md). No dashboard financeiro
 staff, custo de IA entra como `ai_inference`.
+
+## Quem paga: professor ou instituição
+O débito resolve o alvo antes de descontar. Organização **sem** configuração de billing cai no
+default fail-safe: cobra da carteira **pessoal** do professor. A instituição só passa a pagar quando
+adota explicitamente um modo — hoje **`pool`** (créditos compartilhados; carteiras pessoais dos
+membros ficam congeladas) ou **`unlimited`** (sem checagem de saldo, mas com ledger para auditoria).
+`per_teacher` e `pay_per_use` existem no tipo mas estão **reservados, não ligados**.
+
+Consequência comercial: quando o pool da instituição acaba, o erro é `InstitutionOutOfCredits` — quem
+precisa comprar é o **admin**, não o professor que travou. É outra conversa de suporte e outra copy.
+
+## Expiração por fonte
+- **Assinatura** — expira no fim do ciclo (`expiresAt = currentPeriodEnd`). No mensal os créditos
+  **não acumulam**.
+- **Top-up** — 365 dias.
+- **Welcome** — **nunca expira**.
+
+## Faixa de preço por ação (para a conversa comercial)
+Derivado da tabela determinística (detalhe em tecnico/billing-ledger.md):
+
+| Ação | Faixa em créditos |
+|---|---|
+| Prova objetiva (1–50 questões) | 275 – 2.500 |
+| Prova discursiva (1–30 questões) | 310 – 2.050 |
+| Correção de discursiva | 30 por resposta (em branco não cobra) |
+| Plano de aula | 300 – 400, conforme o segmento |
+
+> **Cuidado com o `docs/CREDITOS_E_PRECOS.md` do monorepo.** Ele está **mais defasado que esta base**:
+> lista uma origem de carteira `custom` que não existe, omite `promo` e `admin_grant`, e diz que
+> top-up sai por PIX ignorando o kill-switch. Se precisar conferir, vá ao código.

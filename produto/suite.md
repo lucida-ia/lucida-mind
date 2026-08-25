@@ -1,6 +1,6 @@
 ---
 quando_usar: listar os módulos do produto e o que cada um faz, entender o escopo funcional
-última_revisão: 2026-06-30
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -20,7 +20,13 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecni
 - **Matemática**: enunciados, alternativas e explicações suportam **fórmulas (LaTeX)**, renderizadas com
   KaTeX na prova online e na versão imprimível.
 - **Aplicação**: cada prova tem um **link público** (`/exam/[shareId]`) — o aluno responde online,
-  sem login. Há também versão **imprimível** e nível de segurança configurável.
+  sem login; se não estiver na turma, entra por **auto-cadastro** (a Lucida gera `code`/`matricula`).
+  Há também um **link por aluno** (`/exam/[shareId]/start/[token]`), com a identidade pré-preenchida,
+  emitido pelo escopo `exams:share` da API pública. Versão **imprimível** e **modo de aplicação**
+  (livre / estrito) configurável — no estrito, a prova auto-finaliza no 3º strike de troca de aba.
+  O modo é editável **depois** da criação, e uma prova copiada **herda** o modo da origem.
+- **Faixa de páginas**: ao usar um PDF (anexo ou da Biblioteca), o professor escolhe de qual página
+  a qual página gerar, em vez de mandar o arquivo inteiro.
 - **Agendamento**: a prova pode ter uma **janela de resposta** (abre/fecha em data-hora) e, opcionalmente,
   **avisar os alunos por e-mail quando abrir**. Sem janela, fica sempre respondível. Ver Calendário abaixo.
 
@@ -31,6 +37,9 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecni
 - **Nota final**: 0–10, uma casa decimal.
 
 ## Planos de aula (lesson-plan + ai-ops)
+> **Em beta.** A própria UI avisa que "o módulo de Aulas ainda está em testes", e o botão
+> "Gerar material" está desabilitado com selo "Em breve".
+
 Geração estruturada: objetivos, **habilidades BNCC**, introdução, desenvolvimento, conclusão, avaliação.
 Quatro segmentos: Fundamental, Médio, Faculdade, Infoprodutor. Exporta **DOCX**, duplica, arquiva e
 pode **gerar prova** a partir do plano.
@@ -56,6 +65,10 @@ assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe 
 - **Média de aprovação**: o professor configura sua **nota de corte** (default 6) — usada para classificar
   aprovado/reprovado nas análises e nos indicadores. Ver produto/decisoes-de-produto.md.
 - **Onboarding**: tour guiado (mascote Lulu) na primeira vez no `/app`, refazível pelo menu de perfil.
+- **"Lulu sugere"**: card no dashboard que aponta o que fazer agora — correções pendentes, alunos em
+  risco. A Lulu não é só mascote do tour; é a superfície de sugestão do dashboard.
+- **Matrícula**: a unicidade pode ser por professor (default) ou **por organização**, configurável nas
+  preferências da instituição.
 
 ## Scanner OMR (scan)
 Folha de resposta **em papel**: o servidor gera um PDF (1 página por aluno, com QR), o professor imprime,
@@ -63,13 +76,50 @@ aplica, fotografa e a Lucida lê as marcações via serviço Python (OpenCV). Vi
 `source = scanner`.
 
 ## Instituições e analytics (analytics)
-Dashboard de **organização** (frente roxa, `/analytics`): visões de overview, professor, turma, aluno,
-prova e membros. Motor de analytics parametrizável ("cubo"). Detalhe em produto/decisoes-de-produto.md.
+Dashboard de **organização** (frente roxa, `/analytics`). Motor de analytics parametrizável ("cubo"),
+com **escopo** ∈ `instituicao | professor | turma | aluno | prova` e **corte** (breakdown) ∈ `none |
+questao | dificuldade | habilidade | criterio_rubrica | estilo | tempo | peer | turmas | alunos |
+provas`. Gestão de membros é tela própria, não escopo do cubo. Detalhe em
+produto/decisoes-de-produto.md.
 
 ## Plataforma para parceiros (public-api + api-access + webhook-dispatch)
-REST externo com API keys HMAC: turmas, alunos, links de prova, resultados. Webhooks de
-`submission.completed` para endpoints cadastrados. Documentação em `/docs`.
+REST externo com API keys HMAC: turmas, alunos, links de prova, resultados — e **geração de prova por
+IA de forma assíncrona** (`POST` devolve 202 + `jobId`, o parceiro faz polling; aceita até 10 arquivos
+de 25 MB). Escopos de chave: `classes:read/write`, `students:read/write`, `exams:read/write/share`.
+Webhooks de `submission.completed` — o único evento — para endpoints cadastrados. Documentação em
+`/docs`.
 
 ## Backoffice (kintal)
-Área interna staff-only: dashboard, gestão de staff/usuários/créditos, métricas (Mongo + PostHog),
-kanban, notificações, roadmap, tickets de suporte. Não é exposto ao cliente.
+Área interna staff-only (`/kintal`): dashboard, acessos, usuários, **instituições**, financeiro,
+métricas (Mongo + PostHog), board (kanban), notificações e a fila de tickets de suporte. Inclui
+**"atuar como"** (impersonação de usuário ou de instituição, com audit log). Não é exposto ao cliente.
+
+O **roadmap não vive aqui** — é rota pública (ver abaixo).
+
+## Auxiliares (assistente de professor)
+Um professor pode delegar o dia a dia a um **auxiliar**: o vínculo é N:N dentro de uma organização, e
+o auxiliar passa a operar **em nome** do professor supervisionado, com um seletor de professor-alvo
+(`/auxiliar/escolher`) e um banner "atuando como" enquanto o modo está ativo. A revogação é soft-delete
+(`revokedAt`), e a gestão dos vínculos existe tanto no painel da instituição quanto no Kintal.
+
+Delegação concede os **dados** do professor, nunca a **autoridade administrativa** dele — ver
+regras/produto.md.
+
+## Notificações in-app
+Inbox do usuário (`/app/notificacoes` e `/analytics/notificacoes`) com sino e contador, além de
+**campanhas** disparadas por staff ou por admin de organização. Severidades: `info`, `success`,
+`warning`, `alert`. Convive com o e-mail; não o substitui.
+
+## Roadmap público
+`/roadmap` — kanban aberto onde o usuário **sugere** feature e **vota**. Estágios: `suggested`,
+`under_review`, `planned`, `in_progress`, `shipped`, `declined`; produtos `exam` e `analytics`. Staff
+modera e edita pelas ações inline da própria página. É canal de priorização com usuário, em uso.
+
+## Convite e aceite
+A instituição convida professor ou aluno por e-mail; o destinatário cai em `/accept-invite`, que cobre
+quatro estados: já tem conta, precisa se cadastrar e aceitar, e-mail divergente, e erro. Há reenvio e
+cópia de link para quando o e-mail não chega.
+
+## Suporte
+`/app/ajuda` e `/analytics/ajuda` — formulário que abre **ticket**, com threading por e-mail via Resend
+Inbound e fila staff no Kintal.

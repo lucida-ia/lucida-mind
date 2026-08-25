@@ -1,6 +1,6 @@
 ---
 quando_usar: entender o porquê de uma decisão de produto (rebrand, analytics, OMR, Classroom, transcrição, biblioteca, calendário, média de aprovação, matemática, onboarding)
-última_revisão: 2026-06-30
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -28,14 +28,19 @@ fill-ratio. O **PDF é gerado pelo servidor** (1 página por aluno); o **scoring
 Python. Validado ponta a ponta.
 
 ## Serviço de transcrição do YouTube
-Serviço Python (yt-dlp + Whisper) para extrair transcrição de vídeo e usar como fonte em provas/aulas.
+Serviço Python para extrair transcrição de vídeo e usar como fonte em provas/aulas: tenta a legenda
+via yt-dlp e, sem legenda, transcreve o áudio pela API da OpenAI (não há Whisper local).
 yt-dlp **exige** `player_client=android` (caso contrário bloqueia). Preferência de idioma pt → es → en →
 qualquer; legendas manuais antes de auto antes de áudio. Há fallback JS (frágil). Deploy no Railway.
 
 ## Integração Google Classroom
 **Fase 1 feita**: OAuth próprio (separado do BetterAuth, `access_type=offline` + `prompt=consent`),
 tokens cifrados em repouso (AES-256-GCM), importação de turmas/alunos com **reconciliação por e-mail**.
-Fases 2 (enviar prova → `courseWorkId`) e 3 (passback de nota) estão **engatilhadas, não implementadas**.
+Fases 2 (enviar prova → `courseWorkId`) e 3 (passback de nota) estão **implementadas e testadas, mas
+não wired**: `SendExamToClassroomUseCase` e `PushGradeToClassroomUseCase` existem com teste e não são
+referenciados por controller, rota ou UI em lugar nenhum — e o cliente da API do Google para elas é
+stub. Pela regra do projeto ("feature não wired não existe"), é **código morto** hoje, não feature
+engatilhada.
 **Bloqueio**: projeto GCP ainda não criado (verificação OAuth leva semanas). Sem as envs, o card fica
 indisponível (degradação graciosa).
 
@@ -92,3 +97,65 @@ Instrumentado no PostHog (ver tecnico/eventos-posthog.md).
 A geração ficou **agnóstica à família do modelo**: um utilitário detecta modelos de raciocínio (`gpt-5`,
 série `o`) e ajusta os parâmetros (sem `temperature`, com `reasoning_effort`, `max_completion_tokens`).
 Trocar para um gpt-5 é só mudar `OPENAI_MODEL` — **o default segue `gpt-4.1-mini`** por ora. Em tecnico/ai-ops.md.
+
+## Descrição de prova: 500 → 10.000 caracteres
+O limite de 500 apertava demais o enunciado de contexto de prova. Subiu para **10.000**. Decisão de
+produto simples, registrada porque o número aparece em validação nos dois lados.
+
+## Modo de aplicação editável depois da criação
+O nível de segurança (livre / estrito) só podia ser escolhido no wizard: a página de detalhe não
+mostrava nem deixava mudar, embora a api já devolvesse e aceitasse o campo. Pior, **prova copiada
+herda o modo da origem** — dava para copiar uma prova estrita e aplicar sem o professor nunca ver.
+Agora o detalhe mostra um selo "Modo estrito", o diálogo de metadados edita o campo, e o diálogo de
+cópia diz o que é herdado (questões, duração, modo) e o que não é (janela de disponibilidade,
+submissões).
+
+## Delegação a auxiliares
+Professor com secretaria/monitoria precisa delegar o operacional sem entregar a conta. Modelo: vínculo
+**N:N** professor↔auxiliar **dentro de uma organização**, com seletor de professor-alvo e banner
+"atuando como"; revogação por **soft-delete**, para o histórico não sumir. A fronteira é dura:
+delegação dá acesso aos **dados** do professor, nunca à **autoridade administrativa** dele. Ver
+regras/produto.md.
+
+## Roadmap público como canal de priorização
+Em vez de coletar pedido por e-mail e suporte, um **kanban público** onde o usuário sugere e vota
+(`/roadmap`). Sugestão nasce aprovada por padrão, com fila de moderação reservada para quando o
+volume justificar. É canal de produto, não vitrine: staff mexe pelas ações inline da própria página.
+
+---
+
+# Decisões de 2026-08-15 (fundação do motor de assertividade)
+
+As três abaixo foram tomadas juntas e são **pré-condição** uma da outra. Nenhuma está implementada —
+todas dependem do ADR-0012 (ver produto/motor-assertividade.md).
+
+## Indicadores por KC, mirando IDEB
+Reportar desempenho por **Knowledge Component** em vez de por nota da prova, com o código **BNCC**
+como chave quando aplicável e KC provisório (slug curto) onde a taxonomia não se aplica
+(FACULDADE/INFOPRODUTOR). Nunca vazio. É o que permitiria à instituição ler o próprio resultado na
+mesma unidade do indicador oficial.
+
+## Aluno como usuário
+Para haver série histórica por aluno atravessando professores e turmas, o aluno precisa de identidade
+persistente — hoje ele é registro de turma, não conta. Formalizado depois no ADR-0013
+(só-por-convite). Ver regras/produto.md e negocio/posicionamento.md.
+
+## Flashcards como coletor de KC
+Prova é evento raro; N≥4 observações por KC não chega rápido só com prova. Flashcards seriam a
+superfície de **coleta barata e frequente** de resposta por KC, alimentando o motor entre avaliações.
+Depende do objeto de aprendizagem existir primeiro.
+
+## ADR-0012 — a questão como objeto rastreável
+Decidido (status `proposto`, em branch): cada questão recebe um **`questionId` estável** embutido no
+snapshot do `Exam`; a metadata pedagógica mutável (`kc[]`, `kc_status`, `family_id`,
+`nivel_cognitivo`, `distrator_diagnostico`) vive num **novo bounded context `learning-object`** — a
+Q-matrix, um documento por `questionId`; e a `Submission` passa a persistir o `questionId` de cada
+resposta, além do índice posicional. O `Exam` continua **snapshot imutável** — reeditar questão nunca
+pode mudar nota histórica. Escopo: só a Fase 0→1. Não decide BKT, feedback nem área do aluno.
+
+## ADR-0013 — modelo multi-tenant de instituição
+Decidido (status `proposto`, em branch): a instituição **é** o `organization` do BetterAuth, não uma
+entidade nova; toda conta de professor nasce com organização-padrão ("tenant de um");
+`organizationId` vira **obrigatório**; papéis `owner`/`admin`/`secretary`/`teacher`; e o aluno é
+usuário BetterAuth **só-por-convite**. A migração professor→instituição é **opt-in e explícita**:
+aceitar convite de uma escola **não** expõe as turmas pessoais do professor a ela.

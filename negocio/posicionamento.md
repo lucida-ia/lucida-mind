@@ -1,6 +1,6 @@
 ---
 quando_usar: falar de marca, nome, sub-marcas, as três frentes (professor/instituição/aluno), como nomear o produto
-última_revisão: 2026-06-27
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -23,11 +23,17 @@ visual (CTA, links, accents) herda aquele tom. Detalhe de cores em ui/identidade
 ## O que é só rótulo de marca vs. o que é técnico
 - Nomes **técnicos** seguem em inglês e não mudam com o rebrand: o domínio continua `exam`, a área de
   organização continua `analytics`, as rotas idem. "Frente" é camada de marca/copy, não de código.
-- A frente do **aluno** ainda não tem auth nem produto dedicado — é referência de marca. O aluno entra
-  apenas pelo **link público** `/exam/[shareId]`, sem cadastro.
+- A frente do **aluno** ainda não tem auth nem produto dedicado — é referência de marca. Hoje o aluno
+  entra pelo **link público** `/exam/[shareId]` (sem cadastro, com auto-cadastro se não estiver na
+  turma) ou por um **link com token** por aluno, emitido pela API pública. Nenhum dos dois é login.
 
 ## Pendências
 - **Login unificado por frente** (decidir destino pós-login `/app` vs `/analytics` por membership de
   organização, sem campo `accountType`) foi **adiado** — "por enquanto não vamos mexer no login".
+- **A frente do aluno pode deixar de ser só marca.** O **ADR-0013** (status `proposto`, em branch)
+  decide que o aluno vira um tipo de usuário BetterAuth distinto, **só-por-convite**, com área
+  própria e seleção de instituição. Se for aceito, a linha "o aluno não faz login" cai — e a paleta
+  azul clara passa a ter produto atrás dela. Há scaffolding vazio no repositório
+  (`app/aluno/`, `domains/student-portal/`), mas **zero código**.
 
 Fonte: memória de projeto `rebrand-lucida-unica.md`; cores em `apps/web/src/styles/globals.css`.

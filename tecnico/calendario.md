@@ -1,6 +1,6 @@
 ---
 quando_usar: mexer em agendamento de prova (janela de resposta), calendário, notificação de abertura por e-mail, outbox, cron de notificações
-última_revisão: 2026-06-30
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -50,9 +50,15 @@ aborta o lote.
 
 Use cases (`application/`):
 - `DispatchExamWindowNotificationsUseCase` — **drain do cron**: acha provas prontas
-  (`findReadyToNotify` = `notifyOnOpen && availableFrom <= now && notificationsMaterializedAt == null`),
+  (`findReadyToNotify` = `notifyOnOpen` **e** `availableFrom != null` **e** `availableFrom <= now`
+  **e** `notificationsMaterializedAt == null` **e** janela ainda não fechada — `availableUntil == null`
+  ou `>= now`; ordenado por `availableFrom`, com limite),
   materializa os jobs (1 por aluno), marca a prova, dá `claimBatch` e envia. Devolve
   `{ materializedExams, claimed, sent, failed }`. **Idempotente** (índice único barra duplicata).
+  Limites: `MATERIALIZE_LIMIT = 50`, `DRAIN_LIMIT = 100`, `LEASE_MS = 5 min`, `maxAttempts` default 5.
+  Aluno sem e-mail nasce **`skipped`** já na materialização — não é transição posterior. Se a prova
+  sumiu na hora do envio, o job é marcado `failed` com "Atividade não encontrada ao enviar."; sem nome
+  de turma, o template usa o fallback "sua turma".
 - `ResendExamNotificationsUseCase` — **reenvio manual do professor**: materializa se faltou, reseta os
   `failed` (`resetForRetry`), faz claim **só dessa prova** e reenvia.
 - `GetExamNotificationStatusUseCase` — dashboard: `enabled`, `materialized`, `counts` por status,
@@ -69,8 +75,10 @@ prazo formatado em `America/Sao_Paulo`). Não cria client Resend novo.
 | `GET /v1/exams/:examId/notifications` | professor (`requireAuth` + dono) | status/contagens. |
 | `POST /v1/exams/:examId/notifications/resend` | professor (`requireAuth` + dono) | reenvio manual. |
 
-A rota interna é montada em `rawBodyRouters` (antes do `express.json()`) por convenção do composition root,
-embora não precise de corpo cru. Wiring em `apps/api/src/main.ts` (~1479–1538).
+A rota interna é montada nos **`routers` normais**, depois do `express.json()` — ela não precisa de
+corpo cru. (Os `rawBodyRouters` só têm o webhook Stripe, o webhook NFE.io e o inbound de tickets.)
+Wiring em `main.ts`: controller e use cases junto do bloco de `exam-notification`, e os routers no
+array `routers` — o autenticado e o `makeExamNotificationInternalRouter`.
 
 ## Env e degradação
 - `CRON_SECRET` (≥16) — gate da rota de dispatch. Sem ela, **só o reenvio manual do professor funciona**;

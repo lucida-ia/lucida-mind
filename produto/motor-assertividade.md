@@ -1,6 +1,6 @@
 ---
 quando_usar: fundamentar o motor de assertividade (BKT/CDM/IRT), definir escopo de mudança de código por fase, consultar parâmetros do motor e princípios de design de avaliação
-última_revisão: 2026-07
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -105,6 +105,10 @@ Toda questão carrega KC(s) via Q-matrix + `family_id` (skill Objeto de Aprendiz
 mesmo KC passam a ser comparáveis entre provas.
 Requisito: Q-matrix validada (ainda que provisória). → destrava séries temporais por KC.
 
+> **A arquitetura desta fase já foi decidida** — ADR-0012 (2026-08-17, status `proposto`, em branch).
+> Ver §8.7 abaixo. A auditoria que fundamenta o ADR confirma o diagnóstico da Fase 0: a questão é um
+> Value Object sem identidade, e a resposta agrega por **índice posicional**, não por KC.
+
 **Fase 2 — BKT por KC.**
 Com `N_min_observacoes_kc` atingido por KC (≥4), estimar `p(domínio)` e marcar Confiável/Direcional.
 Requisito: ≥4 atividades com tópicos sobrepostos por KC (§5). → destrava "aferir o nível" e
@@ -202,6 +206,19 @@ ser rastreável **entre provas diferentes**, não apenas dentro de uma prova. Se
 questão é evento isolado; com ela, cada resposta do aluno vira evidência dentro da trajetória de um
 KC.
 
+### 8.1.1 O que "identidade" significa aqui — três conceitos, não um
+
+O gerador **cria questões novas a cada prova**; ele não reusa o mesmo objeto-questão entre provas.
+Isso é o que ninguém deduz do código, e confundir os três leva a modelagem errada:
+
+- **`questionId`** — identidade da *instância*: uma ocorrência de questão numa prova. É o que permite
+  atribuir a resposta a ela.
+- **`family_id`** — chave de *agrupamento* das instâncias que testam o(s) mesmo(s) KC(s) entre provas.
+  É o âncora longitudinal de verdade, e o gancho de deduplicação.
+- **`kc[]`** — os códigos (BNCC ou provisórios) que a instância exercita.
+
+"Dar identidade à questão" é, na prática, **dar `questionId` à instância + dar dono ao `family_id`**.
+
 ### 8.2 Schema proposto do objeto
 
 | Campo | Tipo | Descrição |
@@ -283,6 +300,29 @@ a alimentar o grafo de KCs antes mesmo da primeira prova gerada na Lucida — en
 `N_min_observacoes_kc` (§5) para professores que chegam com acervo.
 
 ---
+
+### 8.7 O que o ADR-0012 decidiu (Fase 0→1)
+
+Diferente do resto da §8, isto **não** é proposta: é decisão registrada (status `proposto`, aguardando
+merge), e supera o que estiver em conflito acima. Quatro pontos:
+
+1. **Identidade de instância** — `Question`/`QuestionDoc` ganham `questionId` (id-string custom, criado
+   na geração). O `Exam` **continua** agregado raiz e dono do array ordenado de snapshots imutáveis.
+2. **Registro Q-matrix separado** — novo domínio `learning-object`, coleção `learning_objects`, um doc
+   por `questionId`, escopado por `ownerId` + `organizationId`, com `kc[]` (nunca vazio),
+   `kc_status` (`not_validated` → `validated` numa ação única do professor, espelhando o
+   `ai_suggested → approved` da correção de abertas), `family_id`, `nivel_cognitivo` (Bloom para
+   objetiva, SOLO para discursiva) e `distrator_diagnostico` (só objetivas).
+3. **Resposta por KC** — a `Submission` passa a carregar o `questionId` de cada resposta, **além** do
+   índice posicional, que permanece para não quebrar OMR, impressão e correção. A série temporal por
+   KC é a junção `resposta → questionId → learning_object.kc/family_id`.
+4. **Escopo fechado na Fase 0→1.** Entrega identidade + modelo de dado + persistência da resposta por
+   KC. **Não** decide BKT, `p(domínio)`, feedback de Hattie, IDEB por KC nem área do aluno — só cria a
+   fundação que esses consomem.
+
+A razão de a metadata pedagógica viver **fora** do `Exam`: ela é mutável, e o `Exam` é registro de
+avaliação **imutável**. Se corrigir o mapeamento de KC de uma questão alterasse provas já aplicadas, a
+nota do aluno mudaria retroativamente — inaceitável.
 
 ## 9. Referências (para due diligence técnica)
 
