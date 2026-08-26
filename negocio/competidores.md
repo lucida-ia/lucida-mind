@@ -1,12 +1,13 @@
 ---
 quando_usar: discutir cenário competitivo, ameaças, diferencial real, radar big tech
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # Cenário competitivo
 
-> Levantamento de **jun/2026** — cheque antes de citar funding ou timeline de concorrente.
+> **Rascunho — nunca validado.** Levantamento de jun/2026 que ninguém do time conferiu. Funding,
+> timeline e feature de terceiro envelhecem rápido e são fáceis de errar: cheque antes de citar.
 
 ## Concorrentes diretos
 

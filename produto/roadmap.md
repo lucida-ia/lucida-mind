@@ -1,10 +1,14 @@
 ---
 quando_usar: discutir prioridades de produto, sequência de desenvolvimento, lente de moat
 última_revisão: 2026-08-25
-status: canônico
+status: parcial
 ---
 
 # Roadmap de produto (lente de moat)
+
+> **Parcial.** A priorização e a sequência abaixo são proposta de jun/2026, não roadmap aprovado —
+> o que o time está executando vive nas **GitHub Issues**, na milestone Instituição. As seções "O que
+> já está entregue" e "Onde a Fase 1 está sendo desenhada" foram conferidas no código e valem.
 
 | Peça | Papel no moat | Prioridade |
 |---|---|---|

@@ -1,12 +1,13 @@
 ---
 quando_usar: discutir canais de aquisição, programa de afiliados, o que foi testado e descartado, base de leads
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # Canais de aquisição
 
-> Dados de canal e CAC são de **jun/2026**.
+> **Rascunho — nunca validado.** Canais, CAC e régua de comissão são de jun/2026 e ninguém do time
+> conferiu. Nada aqui está implementado no produto.
 
 ## Ativos (jun/2026)
 

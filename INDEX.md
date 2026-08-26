@@ -4,20 +4,20 @@
 ## Negócio
 - [negocio/visao-geral.md](negocio/visao-geral.md) — Use quando: explicar o que é a Lucida, o problema e a proposta de valor
 - [negocio/posicionamento.md](negocio/posicionamento.md) — Use quando: falar de marca, sub-marcas, as três frentes (professor/instituição/aluno)
-- [negocio/icp-beachhead.md](negocio/icp-beachhead.md) — Use quando: discutir público-alvo, ICP, wedge de cursinho STEM, GTM professor-led
 - [negocio/monetizacao-creditos.md](negocio/monetizacao-creditos.md) — Use quando: falar de planos, preços, top-ups, créditos de boas-vindas
-- [negocio/modelo-institucional.md](negocio/modelo-institucional.md) — Use quando: discutir preço institucional, canal parceiro vs. direto, desconto por volume
-- [negocio/metricas.md](negocio/metricas.md) — Use quando: reportar tração, MRR, retenção, base pagante
-- [negocio/canais-aquisicao.md](negocio/canais-aquisicao.md) — Use quando: falar de canais, afiliados, o que foi testado e descartado
-- [negocio/competidores.md](negocio/competidores.md) — Use quando: discutir cenário competitivo, big tech, diferencial real
-- [negocio/moat-flywheel.md](negocio/moat-flywheel.md) — Use quando: discutir vantagem competitiva, flywheel, janela competitiva
+- ⚠ [negocio/icp-beachhead.md](negocio/icp-beachhead.md) — Use quando: discutir público-alvo, ICP, wedge de cursinho STEM, GTM professor-led
+- ⚠ [negocio/modelo-institucional.md](negocio/modelo-institucional.md) — Use quando: discutir preço institucional, canal parceiro vs. direto, desconto por volume
+- ⚠ [negocio/metricas.md](negocio/metricas.md) — Use quando: reportar tração, MRR, retenção, base pagante
+- ⚠ [negocio/canais-aquisicao.md](negocio/canais-aquisicao.md) — Use quando: falar de canais, afiliados, o que foi testado e descartado
+- ⚠ [negocio/competidores.md](negocio/competidores.md) — Use quando: discutir cenário competitivo, big tech, diferencial real
+- ⚠ [negocio/moat-flywheel.md](negocio/moat-flywheel.md) — Use quando: discutir vantagem competitiva, flywheel, janela competitiva
 
 ## Produto
 - [produto/suite.md](produto/suite.md) — Use quando: listar os módulos do produto e o que cada um faz
 - [produto/glossario.md](produto/glossario.md) — Use quando: precisar do significado de um termo de domínio (exam, submission, rubric, OMR…)
 - [produto/estilos-de-questao.md](produto/estilos-de-questao.md) — Use quando: tipos de questão, estilos de geração, dificuldade, idiomas
 - [produto/decisoes-de-produto.md](produto/decisoes-de-produto.md) — Use quando: entender o porquê de uma decisão (rebrand, analytics-cubo, OMR, Classroom)
-- [produto/roadmap.md](produto/roadmap.md) — Use quando: discutir prioridades de produto, sequência de desenvolvimento, lente de moat
+- ⚠ [produto/roadmap.md](produto/roadmap.md) — Use quando: discutir prioridades de produto, sequência de desenvolvimento, lente de moat
 - [produto/motor-assertividade.md](produto/motor-assertividade.md) — Use quando: fundamentar o motor de assertividade (BKT/CDM/IRT), definir escopo por fase de maturidade, consultar parâmetros e princípios de design de avaliação
 
 ## Técnico
@@ -44,10 +44,13 @@
 - [regras/processo.md](regras/processo.md) — Use quando: citar uma regra numerada, entender como se trabalha no monorepo, decidir onde registrar uma decisão
 - [regras/produto.md](regras/produto.md) — Use quando: decidir comportamento de produto (degradação graciosa, idiomas, rubrica, replica set)
 - [regras/comunicacao.md](regras/comunicacao.md) — Use quando: escrever copy pt-BR, falar de tração/churn (involuntário ≠ cancelamento)
-- [regras/pitch.md](regras/pitch.md) — Use quando: escrever pitch, landing page, copy de aquisição, narrativa para investidor
+- ⚠ [regras/pitch.md](regras/pitch.md) — Use quando: escrever pitch, landing page, copy de aquisição, narrativa para investidor
 
 ---
 
-**Antes de usar:** os docs técnicos e de produto saem do código — se divergirem dele, o código ganha, e
-`./check-drift.sh` aponta onde. Os de negócio trazem números de jun/2026 sem fonte no repositório;
-confirme antes de levar a pitch ou decisão de preço.
+**⚠ = não validado.** Esses oito docs saem de contexto de negócio de jun/2026 que ninguém do time
+conferiu. Estão aqui para serem achados e revisados, não para serem citados como fato da Lucida —
+não cote cliente nem monte pitch a partir deles sem confirmar. Validado, o `status:` do doc sobe para
+`canônico` e o ⚠ sai daqui.
+
+Os demais saem do código. Divergiu do código, o código ganha — e `./check-drift.sh` aponta onde.

@@ -1,12 +1,15 @@
 ---
 quando_usar: discutir vantagem competitiva, flywheel, estratégia de longo prazo, por que o moat é defensável
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # Moat & Flywheel
 
-> Números e leitura de estágio são de **jun/2026**. Tração em [negocio/metricas.md](../negocio/metricas.md).
+> **Rascunho — nunca validado.** É a tese estratégica escrita em jun/2026, não decisão fechada pelo
+> time. Vale como hipótese e como vocabulário; não como afirmação sobre a Lucida. A seção "Onde o
+> código está hoje" é a exceção — essa foi conferida contra o repositório.
+> Tração em [negocio/metricas.md](../negocio/metricas.md).
 
 ## A tese em uma frase
 

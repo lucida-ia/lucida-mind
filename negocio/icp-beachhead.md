@@ -1,10 +1,14 @@
 ---
 quando_usar: discutir público-alvo, ICP, beachhead, estratégia de expansão e GTM
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # ICP e beachhead
+
+> **Rascunho — nunca validado.** O perfil de ICP e a aposta de wedge foram escritos em jun/2026 e
+> ninguém do time confirmou. A seção "O que o produto evidencia", no fim, é a exceção: sai do código
+> e vale como fato.
 
 ## Wedge de densidade (prioridade estratégica)
 

@@ -1,14 +1,15 @@
 ---
 quando_usar: discutir preço institucional, canal parceiro vs. direto, desconto por volume, GTM professor-led
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # Modelo institucional
 
-> Preços e faixas são de **jun/2026**, e **nenhum deles está no código**: o produto só conhece os
-> quatro planos individuais. Contrato institucional é negociado fora do sistema e liquidado com
-> crédito manual no escopo `org` da carteira.
+> **Rascunho — nunca validado.** Preços e faixas são de jun/2026 e ninguém do time conferiu. **Não
+> cotar cliente com esta tabela.** Nada disso está no código: o produto só conhece os quatro planos
+> individuais, e contrato institucional é negociado fora do sistema, liquidado com crédito manual no
+> escopo `org` da carteira.
 
 ## Precificação
 

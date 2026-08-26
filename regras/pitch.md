@@ -1,10 +1,14 @@
 ---
 quando_usar: escrever pitch, landing page, copy de aquisição, narrativa para investidor
 última_revisão: 2026-08-25
-status: canônico
+status: parcial
 ---
 
 # Narrativas de pitch (pós-pivô jun/2026)
+
+> **Parcial.** As narrativas são propostas de jun/2026 que ninguém do time aprovou — trate como
+> ponto de partida, não como copy oficial. A seção "Fronteira entre visão e entrega", no fim, é
+> regra e vale: ela diz o que **não** prometer, e sai do estado real do código.
 
 ## Para professor (30s, gancho de dor)
 

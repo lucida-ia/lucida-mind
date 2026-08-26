@@ -1,13 +1,15 @@
 ---
 quando_usar: reportar tração, falar de MRR, retenção, base pagante, métricas de uso
 última_revisão: 2026-08-25
-status: canônico
+status: rascunho
 ---
 
 # Métricas atuais
 
-> Números de **jun/2026**. Re-baseline de checkout naquele mês reiniciou a base pagante: o histórico
-> de 40 pagantes e MRR R$ 749,55 é referência, não posição atual. Confirme antes de usar em pitch.
+> **Rascunho — nunca validado.** Números de jun/2026, vindos de contexto de negócio e não conferidos
+> por ninguém do time. Não afirme nada daqui como fato da Lucida. Além da idade: o re-baseline de
+> checkout de jun/2026 reiniciou a base pagante, então o histórico de 40 pagantes e MRR R$ 749,55 é
+> referência, não posição.
 
 ## Situação atual (jun/2026)
 
