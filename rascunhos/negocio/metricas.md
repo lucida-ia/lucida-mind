@@ -30,12 +30,12 @@ atual (R$ 49,90+) — ticket realizado histórico era R$ 18,74; fechar essa defa
 aquisição nova no imediato.
 
 **Break-even:** dezenas de pagantes no preço de tabela — ver custos fixos em
-[negocio/monetizacao-creditos.md](../negocio/monetizacao-creditos.md).
+[negocio/monetizacao-creditos.md](../../negocio/monetizacao-creditos.md).
 
 ## Notas de interpretação
 
 - **Churn involuntário ≠ cancelamento.** Falha de pagamento não é o cliente pedindo para sair —
-  separar sempre ao reportar retenção (ver [regras/comunicacao.md](../regras/comunicacao.md)).
+  separar sempre ao reportar retenção (ver [regras/comunicacao.md](../../regras/comunicacao.md)).
 - Usabilidade 80% = 80% da base ativa respondeu ao menos uma prova; não confundir com NPS ou
   satisfação.
 
@@ -47,4 +47,4 @@ Não há relatório único.
   cruza receita com despesa operacional.
 - **Uso do produto** — `/kintal/metricas`, combinando Mongo (provas, submissões, correções) com
   PostHog via HogQL (funil de signup, assinatura, top-up, geração, submissão).
-- **Leads e social** — fora do produto. Ver [negocio/canais-aquisicao.md](../negocio/canais-aquisicao.md).
+- **Leads e social** — fora do produto. Ver [negocio/canais-aquisicao.md](canais-aquisicao.md).

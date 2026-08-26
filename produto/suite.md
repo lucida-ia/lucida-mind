@@ -11,7 +11,7 @@ Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em [tecn
 ## Provas (exam + ai-ops)
 - **Geração por IA**: a partir de um tema/material, gera questões **objetivas** (múltipla escolha / V-F)
   e **abertas** (com rubrica). Parâmetros: estilo, dificuldade, idioma (pt-BR/inglês/espanhol),
-  quantidade. Detalhe em [produto/estilos-de-questao.md](../produto/estilos-de-questao.md).
+  quantidade. Detalhe em [produto/estilos-de-questao.md](estilos-de-questao.md).
 - **Montagem manual** e edição questão a questão; **regeneração** de uma questão específica.
 - **Tipo de atividade**: cada prova tem um tipo (`activityType`) — **Prova**, **Simulado**, **Quiz** ou
   **Lista de Exercícios** — usado para classificar/filtrar; não muda geração, preço nem correção.
@@ -63,7 +63,7 @@ assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe 
   aprendizagem** (BNCC ou personalizados).
 - **Google Classroom**: importa turmas e alunos com reconciliação por e-mail (Fase 1).
 - **Média de aprovação**: o professor configura sua **nota de corte** (default 6) — usada para classificar
-  aprovado/reprovado nas análises e nos indicadores. Ver [produto/decisoes-de-produto.md](../produto/decisoes-de-produto.md).
+  aprovado/reprovado nas análises e nos indicadores. Ver [produto/decisoes-de-produto.md](decisoes-de-produto.md).
 - **Onboarding**: tour guiado (mascote Lulu) na primeira vez no `/app`, refazível pelo menu de perfil.
 - **"Lulu sugere"**: card no dashboard que aponta o que fazer agora — correções pendentes, alunos em
   risco. A Lulu não é só mascote do tour; é a superfície de sugestão do dashboard.
@@ -80,7 +80,7 @@ Dashboard de **organização** (frente roxa, `/analytics`). Motor de analytics p
 com **escopo** ∈ `instituicao | professor | turma | aluno | prova` e **corte** (breakdown) ∈ `none |
 questao | dificuldade | habilidade | criterio_rubrica | estilo | tempo | peer | turmas | alunos |
 provas`. Gestão de membros é tela própria, não escopo do cubo. Detalhe em
-[produto/decisoes-de-produto.md](../produto/decisoes-de-produto.md).
+[produto/decisoes-de-produto.md](decisoes-de-produto.md).
 
 ## Plataforma para parceiros (public-api + api-access + webhook-dispatch)
 REST externo com API keys HMAC: turmas, alunos, links de prova, resultados — e **geração de prova por

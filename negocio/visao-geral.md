@@ -35,11 +35,11 @@ aberta por IA com rubrica + aprovação do professor) e **diagnostica** (analyti
 - **Auxiliares**: o professor delega o operacional a um auxiliar que atua em nome dele, sem herdar
   a autoridade administrativa.
 
-## Modelo de negócio (resumo — detalhe em [negocio/monetizacao-creditos.md](../negocio/monetizacao-creditos.md))
+## Modelo de negócio (resumo — detalhe em [negocio/monetizacao-creditos.md](monetizacao-creditos.md))
 Assinatura (planos Básico/Pro, mensal/anual) **+ consumo de créditos**. Cada ação de IA debita créditos;
 créditos vêm de boas-vindas, da renovação do plano ou de top-ups avulsos por cartão (o PIX está
 temporariamente indisponível).
 
 ## Mercado e tração
 > a definir — não há base no código. Tamanho de mercado, número de usuários, metas de receita e
-> narrativa de GTM precisam de contexto de negócio externo. Ver [negocio/icp-beachhead.md](../negocio/icp-beachhead.md).
+> narrativa de GTM precisam de contexto de negócio externo. Ver [negocio/icp-beachhead.md](icp-beachhead.md).

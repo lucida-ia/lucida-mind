@@ -41,11 +41,11 @@ via **presigned URL** (`@aws-sdk/client-s3` + `@aws-sdk/s3-request-presigner`; a
 `LIBRARY_S3_REGION` (default `us-east-1`), `LIBRARY_S3_ACCESS_KEY_ID`, `LIBRARY_S3_SECRET_ACCESS_KEY`,
 `LIBRARY_UPLOAD_MAX_BYTES` (default 50 MB). Sem elas → `UnavailableFileStorage` devolve **503** e o resto
 da api segue. **Gotcha**: o bucket precisa de **CORS** liberado ao `WEB_ORIGIN` (upload/download vêm do
-browser; não há fallback de proxy). Detalhe em [tecnico/biblioteca.md](../tecnico/biblioteca.md).
+browser; não há fallback de proxy). Detalhe em [tecnico/biblioteca.md](biblioteca.md).
 
 ## Resend (e-mail) + Tickets Inbound
 E-mails transacionais: verificação, reset, convites, recibos, form de ajuda e **notificação de abertura de
-atividade** (domínio `exam-notification` — ver [tecnico/calendario.md](../tecnico/calendario.md)). Envs: `RESEND_API_KEY`,
+atividade** (domínio `exam-notification` — ver [tecnico/calendario.md](calendario.md)). Envs: `RESEND_API_KEY`,
 `EMAIL_FROM`, `SUPPORT_EMAIL` (default `contato@lucidaexam.com`). **Resend Inbound** alimenta tickets de
 suporte (`TICKETS_INBOUND_SECRET`, `TICKETS_FROM_EMAIL`) → fila staff no Kintal.
 
@@ -101,7 +101,7 @@ Quatro endpoints `/v1/internal/*`, todos protegidos pelo header `x-cron-secret` 
   `{ scanned, expired, creditsExpired }` e grava ledger com `reason: "expiration"`.
 - `POST /v1/internal/dispatch-exam-window-notifications` — drena o outbox de notificações de abertura de
   prova (`exam-notification`). **Ainda não registrado no Railway** — até registrar, só o reenvio manual do
-  professor envia e-mail. Ver [tecnico/calendario.md](../tecnico/calendario.md).
+  professor envia e-mail. Ver [tecnico/calendario.md](calendario.md).
 - `POST /v1/internal/invoicing/process-pending` — emite as NFS-e pendentes (`invoicing`).
 - `POST /v1/internal/rescue-exam-generation` — retoma jobs de geração órfãos da API pública. Sem esse
   cron agendado, job interrompido fica travado.

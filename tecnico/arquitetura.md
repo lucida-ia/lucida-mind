@@ -121,7 +121,7 @@ Mais `skipTrailingSlashRedirect: true` (exigido pela ingestão do PostHog) e um 
 lesson-plans,library,me,public,scans,students,support,tickets}`, `/api/auth`, `/api/roadmap`,
 `/api/notifications`, `/health`.
 
-As rotas `/v1/internal/*` são de **cron**, gateadas por `CRON_SECRET` — ver [tecnico/integracoes.md](../tecnico/integracoes.md).
+As rotas `/v1/internal/*` são de **cron**, gateadas por `CRON_SECRET` — ver [tecnico/integracoes.md](integracoes.md).
 
 Auth = BetterAuth, cookie `lucida.session_token` (`__Secure-` em prod). O middleware do web protege
 `/app`, `/analytics`, `/kintal` só checando presença do cookie no edge, com a exceção

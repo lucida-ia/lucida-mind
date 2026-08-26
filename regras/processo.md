@@ -7,7 +7,7 @@ status: canônico
 # Processo e regras numeradas
 
 As regras do projeto são **numeradas** para poderem ser citadas em ADR, contrato e prompt de subagent.
-As de código no detalhe estão em [regras/codigo.md](../regras/codigo.md); aqui estão todas, com a numeração canônica.
+As de código no detalhe estão em [regras/codigo.md](codigo.md); aqui estão todas, com a numeração canônica.
 
 ## Isolamento e segurança (1–5.4)
 As que mais doem se quebrarem.

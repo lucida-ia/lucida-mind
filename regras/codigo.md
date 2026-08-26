@@ -9,7 +9,7 @@ status: canônico
 Sintetiza o que os agents `backend-reviewer` e `frontend-reviewer` cobram e o que os **hooks**
 bloqueiam antes mesmo da revisão. Detalhe arquitetural em [tecnico/arquitetura.md](../tecnico/arquitetura.md) e [ui/modelo-de-ui.md](../ui/modelo-de-ui.md);
 convenções gerais em [tecnico/convencoes-de-codigo.md](../tecnico/convencoes-de-codigo.md); processo e as regras numeradas em
-[regras/processo.md](../regras/processo.md).
+[regras/processo.md](processo.md).
 
 ## Metade disto é automático
 Sete hooks rodam **antes** de qualquer `Write|Edit|MultiEdit` e **bloqueiam** o que não passa. Não é

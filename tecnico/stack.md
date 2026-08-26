@@ -38,11 +38,11 @@ Express 5 + TypeScript **ESM puro**. Principais libs:
 `express` 5, `mongoose` 8, `mongodb` 7, `better-auth` 1.6, `zod` 3, `openai` 6, `stripe` 22,
 `resend` 4, `posthog-node` 5, `multer` 2, `pdf-parse` 2, `mammoth`, `docx`, `pdf-lib`, `qrcode`,
 `youtube-transcript`, `cors`, `dotenv`, e `@aws-sdk/client-s3` + `@aws-sdk/s3-request-presigner`
-(storage S3/Railway Buckets da Biblioteca — ver [tecnico/biblioteca.md](../tecnico/biblioteca.md)).
+(storage S3/Railway Buckets da Biblioteca — ver [tecnico/biblioteca.md](biblioteca.md)).
 
 Dev/teste: `tsx` (watch, porta 3333), `tsc-alias`, `vitest` 2.1 com **duas configs** (unit e
 integração), `supertest`, `mongodb-memory-server`, `@vitest/coverage-v8`. A suíte é grande e
-madura — ver [tecnico/testes.md](../tecnico/testes.md).
+madura — ver [tecnico/testes.md](testes.md).
 
 ## Frontend (`apps/web`)
 Next.js 15 (App Router) + React 19 + TypeScript + **Tailwind v4** + shadcn/ui. Principais libs:
@@ -59,7 +59,7 @@ Não existe `tailwind.config.*` — Tailwind v4 configura por CSS. Lint: `next l
 `lint` é `tsc --noEmit` (não há ESLint lá).
 
 ## Serviços Python
-FastAPI, chamados por HTTP com shared-secret, deploy isolado (Railway). Ver [tecnico/integracoes.md](../tecnico/integracoes.md).
+FastAPI, chamados por HTTP com shared-secret, deploy isolado (Railway). Ver [tecnico/integracoes.md](integracoes.md).
 
 - **omr** — OpenCV, leitura de folha de resposta.
 - **youtube-transcript** — dois tiers: primeiro tenta legenda via `yt-dlp`; se não houver, baixa o
@@ -85,7 +85,7 @@ FastAPI, chamados por HTTP com shared-secret, deploy isolado (Railway). Ver [tec
 Duas formas:
 
 **1. Direto** — Mongo **com replica set** (transações de billing) e `.env` copiado dos
-`.env.example`, depois `pnpm dev`. Detalhe das envs em [tecnico/integracoes.md](../tecnico/integracoes.md) e em
+`.env.example`, depois `pnpm dev`. Detalhe das envs em [tecnico/integracoes.md](integracoes.md) e em
 `apps/api/src/env.ts`.
 
 **2. Via Docker Compose** — `docker-compose.yml` sobe `mongo` (já com replica set), `api` e `web`.

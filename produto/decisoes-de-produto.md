@@ -127,7 +127,7 @@ volume justificar. É canal de produto, não vitrine: staff mexe pelas ações i
 # Decisões de 2026-08-15 (fundação do motor de assertividade)
 
 As três abaixo foram tomadas juntas e são **pré-condição** uma da outra. Nenhuma está implementada —
-todas dependem do ADR-0012 (ver [produto/motor-assertividade.md](../produto/motor-assertividade.md)).
+todas dependem do ADR-0012 (ver [produto/motor-assertividade.md](motor-assertividade.md)).
 
 ## Indicadores por KC, mirando IDEB
 Reportar desempenho por **Knowledge Component** em vez de por nota da prova, com o código **BNCC**

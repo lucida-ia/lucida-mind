@@ -52,7 +52,7 @@ decisão pedagógica é o fim.
 - Nunca prometer "IA que substitui o professor" — a palavra final é sempre do professor.
 - Usar "diagnóstico por competência", não "analytics" (jargão técnico).
 
-Ver [regras/comunicacao.md](../regras/comunicacao.md) para copy de produto (UI, ton, métricas).
+Ver [regras/comunicacao.md](../../regras/comunicacao.md) para copy de produto (UI, ton, métricas).
 
 ## Fronteira entre visão e entrega (obrigatória)
 

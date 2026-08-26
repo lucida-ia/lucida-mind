@@ -38,7 +38,7 @@ funções. Documentação em `docs/` é o inverso: **pt-BR**, com hook próprio 
 
 ## Naming
 - Arquivos: `kebab-case` (`create-exam.ts`, `exam-detail.tsx`). **Sem** sufixo `.use-case` / `.dto` —
-  ver o layout plano em [tecnico/arquitetura.md](../tecnico/arquitetura.md).
+  ver o layout plano em [tecnico/arquitetura.md](arquitetura.md).
 - Classes / tipos / componentes: `PascalCase` (`CreateExamUseCase`, `Button`).
 - Variáveis / funções / props / hooks: `camelCase` (`handleSubmit`, `useExamStore`).
 - Stores Zustand: `useCamelCaseStore` (hoje só três: `useWizardStore`, `useLessonWizardStore`,
@@ -74,4 +74,4 @@ Só a api exige isso — é ela que usa `moduleResolution: NodeNext`; a web usa 
 Mensagens em **inglês**, imperativo curto.
 
 > As regras invioláveis e o checklist de revisão (que os reviewers aplicam) estão em [regras/codigo.md](../regras/codigo.md).
-> Arquitetura específica do backend em [tecnico/arquitetura.md](../tecnico/arquitetura.md); do frontend em [ui/modelo-de-ui.md](../ui/modelo-de-ui.md).
+> Arquitetura específica do backend em [tecnico/arquitetura.md](arquitetura.md); do frontend em [ui/modelo-de-ui.md](../ui/modelo-de-ui.md).

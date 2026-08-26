@@ -6,7 +6,7 @@ status: canônico
 
 # Modelo de UI (Next.js 15 + React 19)
 
-Fonte: skill `lucida-frontend`. Identidade visual em [ui/identidade-visual.md](../ui/identidade-visual.md); tokens em [ui/design-tokens.md](../ui/design-tokens.md).
+Fonte: skill `lucida-frontend`. Identidade visual em [ui/identidade-visual.md](identidade-visual.md); tokens em [ui/design-tokens.md](design-tokens.md).
 
 ## Server Components por padrão
 `"use client"` **só quando** precisa de estado, eventos, refs, Context ou API de browser — nunca "por
@@ -42,7 +42,7 @@ inglês. Não usar `useState` por campo.
   sub-componentes pode passar de 200 sem ser red flag.
 - `page.tsx` e features grandes são **orquestradores finos**.
 - **shadcn-first**: sempre reutilizar primitivos de `components/ui/` (Button, Input, Dialog, Sheet…) em
-  vez de recriar. Recriar do zero é violação. Ver [ui/design-tokens.md](../ui/design-tokens.md).
+  vez de recriar. Recriar do zero é violação. Ver [ui/design-tokens.md](design-tokens.md).
 
 ## Estrutura
 ```
@@ -77,4 +77,4 @@ Além de cor de terceiro e de data-viz determinada por algoritmo:
 ## PWA
 O app é instalável: `manifest.ts`, ícones (192/512/maskable/apple), `viewportFit: "cover"` no layout
 e um `service-worker-registrar` em `components/pwa/`. Há utilitários `.safe-top`/`.safe-bottom` para
-a safe-area — ver [ui/design-tokens.md](../ui/design-tokens.md). `providers.tsx` fica na raiz de `app/`.
+a safe-area — ver [ui/design-tokens.md](design-tokens.md). `providers.tsx` fica na raiz de `app/`.

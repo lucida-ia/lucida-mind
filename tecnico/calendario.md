@@ -82,7 +82,7 @@ array `routers` — o autenticado e o `makeExamNotificationInternalRouter`.
 
 ## Env e degradação
 - `CRON_SECRET` (≥16) — gate da rota de dispatch. Sem ela, **só o reenvio manual do professor funciona**;
-  o cron devolve 503. É a **mesma** env do `expire-credits` (ver [tecnico/integracoes.md](../tecnico/integracoes.md)).
+  o cron devolve 503. É a **mesma** env do `expire-credits` (ver [tecnico/integracoes.md](integracoes.md)).
 - **Gotcha de ops**: o código está pronto, mas o **cron do Railway ainda não foi registrado** — até
   registrar (`POST .../dispatch-exam-window-notifications` com `x-cron-secret`, sugerido a cada 15 min/hora),
   a abertura automática não dispara e-mail sozinha; depende do botão de reenvio.
@@ -92,4 +92,4 @@ array `routers` — o autenticado e o `makeExamNotificationInternalRouter`.
   (o e-mail é sobre a oportunidade, não sobre ter respondido). O gate de submissão por janela fica nos use
   cases de `begin-exam*` (`schedule.availabilityAt(now)`), não aqui.
 - Acesso de assinante: `SubscriberAccessPolicy` (staff, membro de org, ou assinatura ativa) —
-  **compartilhada com a Biblioteca** (ver [tecnico/biblioteca.md](../tecnico/biblioteca.md)). Custo: a feature **não debita crédito**.
+  **compartilhada com a Biblioteca** (ver [tecnico/biblioteca.md](biblioteca.md)). Custo: a feature **não debita crédito**.

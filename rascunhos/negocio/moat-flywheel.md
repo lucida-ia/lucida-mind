@@ -9,7 +9,7 @@ status: rascunho
 > **Rascunho — nunca validado.** É a tese estratégica escrita em jun/2026, não decisão fechada pelo
 > time. Vale como hipótese e como vocabulário; não como afirmação sobre a Lucida. A seção "Onde o
 > código está hoje" é a exceção — essa foi conferida contra o repositório.
-> Tração em [negocio/metricas.md](../negocio/metricas.md).
+> Tração em [negocio/metricas.md](metricas.md).
 
 ## A tese em uma frase
 
@@ -17,7 +17,7 @@ O defensável não é gerar avaliação com qualidade (copiável por qualquer fe
 **interoperabilidade entre o que avaliar, quando avaliar e como avaliar**, fechada com **outcome
 medido** — gerando um data network effect que players digital-first não capturam.
 
-Fundamento técnico-científico dessa tese em [produto/motor-assertividade.md](../produto/motor-assertividade.md).
+Fundamento técnico-científico dessa tese em [produto/motor-assertividade.md](../../produto/motor-assertividade.md).
 
 ## Flywheel vs. moat
 
@@ -71,7 +71,7 @@ copiável.
 **Risco a vigiar:** vanity data — volume sem loops fechados gera moat ilusório.
 
 **Janela competitiva estimada:** ~18 meses antes de big tech fechar o gap em PT-BR (detalhe em
-[negocio/competidores.md](../negocio/competidores.md)).
+[negocio/competidores.md](competidores.md)).
 
 ## Os cinco pontos de interoperabilidade (o moat, destrinchado)
 

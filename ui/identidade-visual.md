@@ -7,7 +7,7 @@ status: canônico
 # Identidade visual
 
 Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver [negocio/posicionamento.md](../negocio/posicionamento.md)). Tokens
-de código em [ui/design-tokens.md](../ui/design-tokens.md).
+de código em [ui/design-tokens.md](design-tokens.md).
 
 ## Paletas
 ### Professor (azul)

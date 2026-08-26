@@ -46,7 +46,7 @@ a custo marginal zero para o usuário.
 
 **A defesa não é feature — é moat de dado.** Loop fechado + dado de papel/discursivo + densidade
 no wedge BNCC é o que os players de distribuição não têm e não constroem rápido.
-Detalhes em [negocio/moat-flywheel.md](../negocio/moat-flywheel.md).
+Detalhes em [negocio/moat-flywheel.md](moat-flywheel.md).
 
 ## O diferencial ainda é tese
 

@@ -53,7 +53,7 @@ Não empurrar a venda institucional antes de o gancho de eficiência do professo
 - **Organização** = `organization` do plugin do BetterAuth. `organizationId = null` → professor
   individual. Convite por e-mail com aceite em `/accept-invite`.
 - **Pooling de créditos por org**: a `CreditWallet` tem `scope` (`user` | `org`) — a instituição
-  banca o consumo dos professores membros. Ver [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
+  banca o consumo dos professores membros. Ver [tecnico/billing-ledger.md](../../tecnico/billing-ledger.md).
 - **Dashboard de instituição** (`/analytics`, frente roxa): overview, professor, turma, aluno, prova
   e membros; envio de notificações pelo admin da org; preferências por organização.
 - **Kintal** tem visão de instituição (`/kintal/instituicoes/[orgId]`) para o time operar contratos.
@@ -61,7 +61,7 @@ Não empurrar a venda institucional antes de o gancho de eficiência do professo
 ## O que ainda não existe
 
 - **Plano institucional como SKU** — sem faixa por volume, sem assinatura de org no Stripe.
-- **Área do aluno** — o aluno não tem login hoje (ver [regras/produto.md](../regras/produto.md)).
+- **Área do aluno** — o aluno não tem login hoje (ver [regras/produto.md](../../regras/produto.md)).
 - **Modelo multi-tenant fechado** — proposto no ADR de mesmo nome (instituição = `organization`,
   org-padrão por professor, `organizationId` obrigatório, roles owner/admin/secretary/teacher, aluno
   como usuário só-por-convite). Está **em branch, não no `main`**. É a fundação da milestone
@@ -71,4 +71,4 @@ Não empurrar a venda institucional antes de o gancho de eficiência do professo
 
 A instituição é a **camada de consentimento LGPD** para o dado do aluno menor.
 `organizationId` no modelo de dados é o controlador de dado; o professor avulso responde como
-controlador individual. Detalhe: [produto/suite.md](../produto/suite.md) §ambiente-do-aluno.
+controlador individual. Detalhe: [produto/suite.md](../../produto/suite.md) §ambiente-do-aluno.
