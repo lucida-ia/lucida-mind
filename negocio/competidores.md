@@ -1,13 +1,12 @@
 ---
-destino: negocio/competidores.md (arquivo novo)
-acao: criar
-origem: contexto-externo.md §10
 quando_usar: discutir cenário competitivo, ameaças, diferencial real, radar big tech
-última_revisão: 2026-06
-status: rascunho
+última_revisão: 2026-08-25
+status: canônico
 ---
 
 # Cenário competitivo
+
+> Levantamento de **jun/2026** — cheque antes de citar funding ou timeline de concorrente.
 
 ## Concorrentes diretos
 
@@ -46,4 +45,10 @@ a custo marginal zero para o usuário.
 
 **A defesa não é feature — é moat de dado.** Loop fechado + dado de papel/discursivo + densidade
 no wedge BNCC é o que os players de distribuição não têm e não constroem rápido.
-Detalhes em negocio/moat-flywheel.md.
+Detalhes em [negocio/moat-flywheel.md](../negocio/moat-flywheel.md).
+
+## O diferencial ainda é tese
+
+O moat de dado por competência BNCC **não existe em código**. Enquanto não existir, o único
+diferencial no ar é o fluxo integrado PT-BR + papel — que a tabela acima classifica como contestável.
+É o argumento para tratar a Fase 1 do motor como prioridade, não como roadmap.

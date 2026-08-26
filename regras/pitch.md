@@ -1,10 +1,7 @@
 ---
-destino: regras/pitch.md (arquivo novo) OU adicionar seção em regras/comunicacao.md
-acao: criar
-origem: contexto-externo.md §11
 quando_usar: escrever pitch, landing page, copy de aquisição, narrativa para investidor
-última_revisão: 2026-06
-status: rascunho
+última_revisão: 2026-08-25
+status: canônico
 ---
 
 # Narrativas de pitch (pós-pivô jun/2026)
@@ -51,4 +48,16 @@ decisão pedagógica é o fim.
 - Nunca prometer "IA que substitui o professor" — a palavra final é sempre do professor.
 - Usar "diagnóstico por competência", não "analytics" (jargão técnico).
 
-Ver regras/comunicacao.md para copy de produto (UI, ton, métricas).
+Ver [regras/comunicacao.md](../regras/comunicacao.md) para copy de produto (UI, ton, métricas).
+
+## Fronteira entre visão e entrega (obrigatória)
+
+O hero e a narrativa de investidor descrevem o **destino**, não o estado atual. Hoje o produto **não
+diagnostica por competência BNCC**: as questões não carregam tag de habilidade e o analytics é por
+prova (ver [negocio/moat-flywheel.md](../negocio/moat-flywheel.md) §"Onde o código está hoje").
+
+Regra: em material de **aquisição** (landing, anúncio, copy de venda), só prometer o que está no ar —
+gerar, aplicar em papel e online, corrigir objetiva e discursiva com rubrica, e as análises por
+turma/aluno/prova que existem. Em material de **investidor ou visão**, a competência BNCC entra
+como tese explicitamente rotulada de roadmap. Vender diagnóstico por habilidade como entregue é
+promessa que o produto não cumpre na primeira sessão do professor.

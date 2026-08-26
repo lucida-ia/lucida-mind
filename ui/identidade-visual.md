@@ -6,8 +6,8 @@ status: canônico
 
 # Identidade visual
 
-Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver negocio/posicionamento.md). Tokens
-de código em ui/design-tokens.md.
+Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver [negocio/posicionamento.md](../negocio/posicionamento.md)). Tokens
+de código em [ui/design-tokens.md](../ui/design-tokens.md).
 
 ## Paletas
 ### Professor (azul)
@@ -63,4 +63,4 @@ de marca cita `300/400/500/700` — o **600** é extra e vive só no código.
 - Nunca: rotacionar, mudar proporções, adicionar outline, recolorir, acrescentar elementos.
 
 ## Tom de voz
-Claro, direto e de apoio ao professor. Copy de UI sempre em pt-BR (ver regras/comunicacao.md).
+Claro, direto e de apoio ao professor. Copy de UI sempre em pt-BR (ver [regras/comunicacao.md](../regras/comunicacao.md)).

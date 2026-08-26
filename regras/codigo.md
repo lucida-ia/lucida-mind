@@ -7,9 +7,9 @@ status: canônico
 # Regras de código (invioláveis)
 
 Sintetiza o que os agents `backend-reviewer` e `frontend-reviewer` cobram e o que os **hooks**
-bloqueiam antes mesmo da revisão. Detalhe arquitetural em tecnico/arquitetura.md e ui/modelo-de-ui.md;
-convenções gerais em tecnico/convencoes-de-codigo.md; processo e as regras numeradas em
-regras/processo.md.
+bloqueiam antes mesmo da revisão. Detalhe arquitetural em [tecnico/arquitetura.md](../tecnico/arquitetura.md) e [ui/modelo-de-ui.md](../ui/modelo-de-ui.md);
+convenções gerais em [tecnico/convencoes-de-codigo.md](../tecnico/convencoes-de-codigo.md); processo e as regras numeradas em
+[regras/processo.md](../regras/processo.md).
 
 ## Metade disto é automático
 Sete hooks rodam **antes** de qualquer `Write|Edit|MultiEdit` e **bloqueiam** o que não passa. Não é
@@ -36,7 +36,7 @@ quando o arquivo editado não tem teste nenhum.
   controller, erro de domínio não mapeado no middleware, fluxo que começa e não fecha.
 - **Idioma**: todo identificador/arquivo/schema em **inglês**. Copy de UI/marketing em pt-BR. As três
   exceções reais (escopo temporal do legado, segmento de URL, valores de enum em pt-BR) estão em
-  tecnico/convencoes-de-codigo.md — não trate nenhuma delas como violação.
+  [tecnico/convencoes-de-codigo.md](../tecnico/convencoes-de-codigo.md) — não trate nenhuma delas como violação.
 - **Comentários**: só o porquê não-óbvio, em inglês. Sem redundância, sem código comentado.
   Doc em `docs/` é o inverso: pt-BR.
 - **Naming**: arquivos `kebab-case`, classes `PascalCase`, vars `camelCase`, sem prefixo `I`.
@@ -68,7 +68,7 @@ quando o arquivo editado não tem teste nenhum.
 ## Frontend (checklist do frontend-reviewer)
 - **`"use client"` só quando necessário**; nada de `useState` em server component.
 - **shadcn-first**: reutilizar os primitivos de `components/ui/`; não recriar. A lista completa dos
-  **15** está em ui/design-tokens.md — conferir antes de criar qualquer um.
+  **15** está em [ui/design-tokens.md](../ui/design-tokens.md) — conferir antes de criar qualquer um.
 - **Hex nunca hardcoded** — usar tokens (`bg-brand-primary`). Paleta certa por frente (professor azul,
   instituição roxo).
 - **Arquivo de componente ≤ ~200 linhas**, uma responsabilidade; `page.tsx` é orquestrador fino.
@@ -87,7 +87,7 @@ O skill autoriza duas, e o reviewer é instruído a **não** tratá-las como vio
 
 ## Teste
 - **Teste não se deleta pra fazer build passar.** Se virou obsoleto, o commit explica por quê.
-- Estratégia por camada e estado da cobertura em tecnico/testes.md.
+- Estratégia por camada e estado da cobertura em [tecnico/testes.md](../tecnico/testes.md).
 
 ## Como os reviewers respondem
 Devolvem veredito (`✅ aprovado / ⚠️ com ressalvas / ❌ reprovado`) com bloqueantes e ressalvas em

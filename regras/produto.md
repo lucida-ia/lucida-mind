@@ -12,7 +12,7 @@ Invariantes de comportamento que o produto respeita. Mecânica em tecnico/*.
 Integrações são **opcionais por env**. Sem a env, a feature correspondente devolve **503/502** mas o
 resto da api continua. Vale para OMR (502), Stripe (cartão), NFE.io, Classroom (card indisponível),
 PostHog (no-op), transcrição, **Biblioteca/S3** (503 sem `LIBRARY_S3_*`), CRON (503). Nunca derrubar o
-app por falta de integração secundária. Detalhe em tecnico/integracoes.md.
+app por falta de integração secundária. Detalhe em [tecnico/integracoes.md](../tecnico/integracoes.md).
 
 > **PIX é diferente**: não é opcional-por-env, é **desligado por kill-switch** (`PIX_TOPUP_ENABLED =
 > false`) — devolve 503 **mesmo com `ABACATEPAY_*` configurado**. É pausa intencional, não falta de env.
@@ -33,11 +33,11 @@ app por falta de integração secundária. Detalhe em tecnico/integracoes.md.
 - **Questão aberta exige rubrica** — não existe aberta sem critérios/níveis.
 - **Correção de aberta é assistida, não automática**: a IA sugere nível por critério; **só conta no
   score depois da aprovação do professor**. A IA nunca arbitra a nota numérica sozinha.
-- Preço de IA é **determinístico por config** — o que é cotado é o que é debitado (tecnico/billing-ledger.md).
+- Preço de IA é **determinístico por config** — o que é cotado é o que é debitado ([tecnico/billing-ledger.md](../tecnico/billing-ledger.md)).
 - **Tipo de atividade** (`exam`/`mockExam`/`quiz`/`exerciseList`, default `exam`) só classifica/filtra a
   prova — não muda geração, preço ou correção.
 - A **Biblioteca** (arquivos do professor, extract-once) é fonte de geração; reutilizar arquivo já
-  extraído **não cobra crédito** de extração (tecnico/biblioteca.md).
+  extraído **não cobra crédito** de extração ([tecnico/biblioteca.md](../tecnico/biblioteca.md)).
 - **Dois "aprovar" distintos**: a **aprovação da correção** (professor valida o nível sugerido pela IA, e
   só então conta no score) é diferente da **média de aprovação** (`passingGrade`, default 6) — esta é só a
   nota de corte que classifica aluno aprovado/reprovado nas **análises**, configurável por professor.
@@ -46,7 +46,7 @@ app por falta de integração secundária. Detalhe em tecnico/integracoes.md.
 - Toda ação de IA **debita créditos**; há pré-check de saldo antes de operações caras.
 - Saldo esgotado tem **dois** erros distintos, e a copy precisa distinguir: `InsufficientCredits`
   (professor individual — quem compra é ele) e `InstitutionOutOfCredits` (pool da instituição — quem
-  compra é o admin). Ver tecnico/billing-ledger.md.
+  compra é o admin). Ver [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
 - Mongo **precisa de replica set** — o débito atômico usa transação. Sem isso, qualquer cobrança quebra.
 - Welcome credits são **idempotentes** (não duplicar em retry).
 

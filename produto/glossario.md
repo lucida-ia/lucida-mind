@@ -50,5 +50,5 @@ explica em pt-BR.
 | **CubeScope / CubeBreakdown** | Parâmetros do "cubo" de analytics. Escopo: `instituicao\|professor\|turma\|aluno\|prova`. Corte: `none\|questao\|dificuldade\|habilidade\|criterio_rubrica\|estilo\|tempo\|peer\|turmas\|alunos\|provas`. |
 | **Notification / Severity** | Mensagem in-app na inbox do usuário, com severidade `info\|success\|warning\|alert`. Enviada individualmente ou por campanha (staff ou admin de org). |
 | **RoadmapItem** | Item do roadmap público, com estágio (`suggested\|under_review\|planned\|in_progress\|shipped\|declined`), produto (`exam\|analytics`) e votos da comunidade. |
-| **KC (Knowledge Component)** | Unidade de habilidade que uma questão exercita — código BNCC quando aplicável, slug provisório quando não. Base do motor de assertividade; **ainda não existe no código**. Ver produto/motor-assertividade.md. |
+| **KC (Knowledge Component)** | Unidade de habilidade que uma questão exercita — código BNCC quando aplicável, slug provisório quando não. Base do motor de assertividade; **ainda não existe no código**. Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md). |
 | **Q-matrix** | O mapa questão → KC(s). No ADR-0012, vira a coleção `learning_objects`, um documento por `questionId`. **Proposto, não implementado**. |

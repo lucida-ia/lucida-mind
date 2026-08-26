@@ -38,7 +38,7 @@ funções. Documentação em `docs/` é o inverso: **pt-BR**, com hook próprio 
 
 ## Naming
 - Arquivos: `kebab-case` (`create-exam.ts`, `exam-detail.tsx`). **Sem** sufixo `.use-case` / `.dto` —
-  ver o layout plano em tecnico/arquitetura.md.
+  ver o layout plano em [tecnico/arquitetura.md](../tecnico/arquitetura.md).
 - Classes / tipos / componentes: `PascalCase` (`CreateExamUseCase`, `Button`).
 - Variáveis / funções / props / hooks: `camelCase` (`handleSubmit`, `useExamStore`).
 - Stores Zustand: `useCamelCaseStore` (hoje só três: `useWizardStore`, `useLessonWizardStore`,
@@ -60,7 +60,7 @@ Só a api exige isso — é ela que usa `moduleResolution: NodeNext`; a web usa 
 - **Arquivos enxutos.** Componente acima de ~200 linhas ou com mais de uma responsabilidade deve ser
   decomposto.
 - Sempre reutilizar os primitivos de `apps/web/src/components/ui/` (shadcn), customizados com os
-  tokens da marca, em vez de recriar do zero. A lista completa está em ui/design-tokens.md.
+  tokens da marca, em vez de recriar do zero. A lista completa está em [ui/design-tokens.md](../ui/design-tokens.md).
 
 ## Clean code
 - **Early return** para guard clauses; sem pirâmide de `if`.
@@ -73,5 +73,5 @@ Só a api exige isso — é ela que usa `moduleResolution: NodeNext`; a web usa 
 ## Commits
 Mensagens em **inglês**, imperativo curto.
 
-> As regras invioláveis e o checklist de revisão (que os reviewers aplicam) estão em regras/codigo.md.
-> Arquitetura específica do backend em tecnico/arquitetura.md; do frontend em ui/modelo-de-ui.md.
+> As regras invioláveis e o checklist de revisão (que os reviewers aplicam) estão em [regras/codigo.md](../regras/codigo.md).
+> Arquitetura específica do backend em [tecnico/arquitetura.md](../tecnico/arquitetura.md); do frontend em [ui/modelo-de-ui.md](../ui/modelo-de-ui.md).

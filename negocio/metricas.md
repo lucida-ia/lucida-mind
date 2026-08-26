@@ -1,16 +1,13 @@
 ---
-destino: negocio/metricas.md (arquivo novo)
-acao: criar
-origem: contexto-externo.md §9
 quando_usar: reportar tração, falar de MRR, retenção, base pagante, métricas de uso
-última_revisão: 2026-06
-status: rascunho
+última_revisão: 2026-08-25
+status: canônico
 ---
 
 # Métricas atuais
 
-> ⚠ Re-baseline de checkout (jun/2026): base pagante reiniciada. O histórico de 40 pagantes e MRR
-> R$ 749,55 é referência, não posição atual.
+> Números de **jun/2026**. Re-baseline de checkout naquele mês reiniciou a base pagante: o histórico
+> de 40 pagantes e MRR R$ 749,55 é referência, não posição atual. Confirme antes de usar em pitch.
 
 ## Situação atual (jun/2026)
 
@@ -31,11 +28,21 @@ atual (R$ 49,90+) — ticket realizado histórico era R$ 18,74; fechar essa defa
 aquisição nova no imediato.
 
 **Break-even:** dezenas de pagantes no preço de tabela — ver custos fixos em
-negocio/monetizacao-creditos.md.
+[negocio/monetizacao-creditos.md](../negocio/monetizacao-creditos.md).
 
 ## Notas de interpretação
 
 - **Churn involuntário ≠ cancelamento.** Falha de pagamento não é o cliente pedindo para sair —
-  separar sempre ao reportar retenção (ver regras/comunicacao.md).
+  separar sempre ao reportar retenção (ver [regras/comunicacao.md](../regras/comunicacao.md)).
 - Usabilidade 80% = 80% da base ativa respondeu ao menos uma prova; não confundir com NPS ou
   satisfação.
+
+## De onde sai cada número
+
+Não há relatório único.
+
+- **Receita e assinatura** — Stripe, mais as transações do domínio `billing`. O `/kintal/financeiro`
+  cruza receita com despesa operacional.
+- **Uso do produto** — `/kintal/metricas`, combinando Mongo (provas, submissões, correções) com
+  PostHog via HogQL (funil de signup, assinatura, top-up, geração, submissão).
+- **Leads e social** — fora do produto. Ver [negocio/canais-aquisicao.md](../negocio/canais-aquisicao.md).

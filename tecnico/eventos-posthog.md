@@ -7,7 +7,7 @@ status: canônico
 # Eventos PostHog
 
 Taxonomia de produto da Lucida. Setup, envs e degradação ficam em
-tecnico/integracoes.md (seção PostHog) — aqui é **o que** medimos.
+[tecnico/integracoes.md](../tecnico/integracoes.md) (seção PostHog) — aqui é **o que** medimos.
 
 **Duas fontes, uma taxonomia.** Nome dos eventos em `snake_case` inglês, espelhado nos dois lados:
 - **API (server-side)** — `apps/api/src/shared/observability/event-names.ts`. Eventos de **funil

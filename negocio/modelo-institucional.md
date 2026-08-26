@@ -1,13 +1,14 @@
 ---
-destino: negocio/modelo-institucional.md (arquivo novo)
-acao: criar
-origem: contexto-externo.md §6
 quando_usar: discutir preço institucional, canal parceiro vs. direto, desconto por volume, GTM professor-led
-última_revisão: 2026-06
-status: rascunho
+última_revisão: 2026-08-25
+status: canônico
 ---
 
 # Modelo institucional
+
+> Preços e faixas são de **jun/2026**, e **nenhum deles está no código**: o produto só conhece os
+> quatro planos individuais. Contrato institucional é negociado fora do sistema e liquidado com
+> crédito manual no escopo `org` da carteira.
 
 ## Precificação
 
@@ -46,8 +47,27 @@ Professor adota (gancho de eficiência)
 **Ordem importa:** o movimento institucional é *downstream* do amor do professor pelo produto.
 Não empurrar a venda institucional antes de o gancho de eficiência do professor estar cravado.
 
+## O que já existe no produto
+
+- **Organização** = `organization` do plugin do BetterAuth. `organizationId = null` → professor
+  individual. Convite por e-mail com aceite em `/accept-invite`.
+- **Pooling de créditos por org**: a `CreditWallet` tem `scope` (`user` | `org`) — a instituição
+  banca o consumo dos professores membros. Ver [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
+- **Dashboard de instituição** (`/analytics`, frente roxa): overview, professor, turma, aluno, prova
+  e membros; envio de notificações pelo admin da org; preferências por organização.
+- **Kintal** tem visão de instituição (`/kintal/instituicoes/[orgId]`) para o time operar contratos.
+
+## O que ainda não existe
+
+- **Plano institucional como SKU** — sem faixa por volume, sem assinatura de org no Stripe.
+- **Área do aluno** — o aluno não tem login hoje (ver [regras/produto.md](../regras/produto.md)).
+- **Modelo multi-tenant fechado** — proposto no ADR de mesmo nome (instituição = `organization`,
+  org-padrão por professor, `organizationId` obrigatório, roles owner/admin/secretary/teacher, aluno
+  como usuário só-por-convite). Está **em branch, não no `main`**. É a fundação da milestone
+  "Instituição".
+
 ## LGPD e dado do aluno
 
 A instituição é a **camada de consentimento LGPD** para o dado do aluno menor.
 `organizationId` no modelo de dados é o controlador de dado; o professor avulso responde como
-controlador individual. Detalhe: produto/suite.md §ambiente-do-aluno.
+controlador individual. Detalhe: [produto/suite.md](../produto/suite.md) §ambiente-do-aluno.

@@ -7,7 +7,7 @@ status: canônico
 # Mapa de domínios (`apps/api/src/domains/`)
 
 27 bounded contexts implementados, cada um com as camadas de que precisa (ver
-tecnico/arquitetura.md). **Nem todo domínio tem as 4** — `calendar` não tem `infrastructure/`
+[tecnico/arquitetura.md](../tecnico/arquitetura.md)). **Nem todo domínio tem as 4** — `calendar` não tem `infrastructure/`
 (lê pelo repositório de `exam`), `support` só tem `presentation/`, `webhook-dispatch` só tem
 `application/` + `infrastructure/`.
 
@@ -18,15 +18,15 @@ tecnico/arquitetura.md). **Nem todo domínio tem as 4** — `calendar` não tem 
 | `student` | Alunos. |
 | `exam` | Provas (questões objetivas + abertas, shareId, estilo, segurança, **janela de resposta `ExamSchedule`**). |
 | `submission` | Respostas de aluno + correção de abertas (fila, rubricas, notas por critério, aprovação). |
-| `calendar` | Visão de leitura das provas com janela agendada (`/app/calendario`); gate de assinante. Ver tecnico/calendario.md. |
-| `exam-notification` | Outbox Mongo (sem Redis) dos e-mails de "atividade disponível" quando a janela abre; cron + reenvio manual. Ver tecnico/calendario.md. |
+| `calendar` | Visão de leitura das provas com janela agendada (`/app/calendario`); gate de assinante. Ver [tecnico/calendario.md](../tecnico/calendario.md). |
+| `exam-notification` | Outbox Mongo (sem Redis) dos e-mails de "atividade disponível" quando a janela abre; cron + reenvio manual. Ver [tecnico/calendario.md](../tecnico/calendario.md). |
 | `course` | Cursos do professor — agrupam turmas/provas. |
 | `lesson-plan` | Planos de aula (snapshots de turma/curso/disciplina, BNCC, export DOCX, duplicação). |
 | `ai-ops` | Geração/correção via OpenAI; extractors PDF/DOCX/text/YouTube; recorte por faixa de páginas; pt-BR/inglês/espanhol. |
-| `library` | **Biblioteca** — upload de arquivos (presigned S3/Railway Buckets), extração de texto, acesso por dono/org/assinante, taxonomia por disciplina+segmento; fonte de conteúdo do `ai-ops`. Ver tecnico/biblioteca.md. |
+| `library` | **Biblioteca** — upload de arquivos (presigned S3/Railway Buckets), extração de texto, acesso por dono/org/assinante, taxonomia por disciplina+segmento; fonte de conteúdo do `ai-ops`. Ver [tecnico/biblioteca.md](../tecnico/biblioteca.md). |
 | `scan` | **OMR** — agregado próprio (`ScanResult`), **geração das folhas de resposta em PDF** (QR + marcadores ArUco), aprovação e listagem por prova. A leitura em si é proxy para o serviço Python `services/omr`. |
-| `classroom` | Integração Google Classroom (Fase 1: importar turmas/alunos). Ver produto/decisoes-de-produto.md para o estado das Fases 2/3. |
-| `billing` | Créditos, ledger, débito atômico, assinaturas Stripe, top-ups por cartão, webhook, modos de billing de organização. PIX (AbacatePay) **desativado** por kill-switch — ver tecnico/billing-ledger.md e tecnico/integracoes.md. |
+| `classroom` | Integração Google Classroom (Fase 1: importar turmas/alunos). Ver [produto/decisoes-de-produto.md](../produto/decisoes-de-produto.md) para o estado das Fases 2/3. |
+| `billing` | Créditos, ledger, débito atômico, assinaturas Stripe, top-ups por cartão, webhook, modos de billing de organização. PIX (AbacatePay) **desativado** por kill-switch — ver [tecnico/billing-ledger.md](../tecnico/billing-ledger.md) e [tecnico/integracoes.md](../tecnico/integracoes.md). |
 | `invoicing` | NFS-e via NFE.io, disparada por transações de billing. |
 | `finance` | Dashboard financeiro staff-only (receita, despesas, categorização). |
 | `analytics` | Visões de organização — "cubo" parametrizável. Escopos: `instituicao \| professor \| turma \| aluno \| prova`. |
@@ -48,7 +48,7 @@ depende do ADR-0013. A contraparte no front (`apps/web/src/app/aluno/`,
 
 **Proposto, não implementado:** `learning-object` — a coleção-registro da Q-matrix (um doc por
 `questionId`, com `kc[]`, `family_id`, `nivel_cognitivo`). Decidido no ADR-0012, ainda em branch.
-Ver produto/motor-assertividade.md.
+Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md).
 
 ## Entidades centrais (domínios core)
 - **Exam** — id, classId, courseId (snapshot), ownerId, title, description (≤ **10.000** chars),
@@ -58,7 +58,7 @@ Ver produto/motor-assertividade.md.
   no **3º strike** de troca de aba/blur e flagra a submission), questions[], shareId, courseWorkId,
   usage (telemetria de tokens), **`schedule`** (VO `ExamSchedule`: availableFrom/availableUntil/
   notifyOnOpen) + `notificationsMaterializedAt`. LaTeX em questões é texto inline (sem campo
-  dedicado) — ver tecnico/ai-ops.md e tecnico/calendario.md.
+  dedicado) — ver [tecnico/ai-ops.md](../tecnico/ai-ops.md) e [tecnico/calendario.md](../tecnico/calendario.md).
 - **Question** (VO) — tipo `multipleChoice|trueFalse|open`; objetiva tem opções/gabarito; aberta tem
   **Rubric** + referenceAnswer. Dificuldade em pt-BR (`fácil|médio|difícil`).
 - **Rubric** — criteria[] → cada critério tem levels[] (com points). Max = maior nível por critério.
@@ -84,9 +84,9 @@ Ver produto/motor-assertividade.md.
   ("*Always returns level + objectives so a save can also clear them*") — um form de edição que não
   popular ambos **apaga** os dois. O use case do servidor respeita `!== undefined`; quem força é o web.
 - **TeacherAssistant** — vínculo N:N professor↔auxiliar dentro de uma organização, revogação por
-  soft-delete (`revokedAt`). Ver regras/produto.md.
+  soft-delete (`revokedAt`). Ver [regras/produto.md](../regras/produto.md).
 - **CreditWallet** — scope (`user|org`), source (`subscription|topup|welcome|promo|admin_grant`),
   balance, expiresAt, externalRef. A ordem de consumo é por **prioridade da fonte**:
   subscription (0) → topup/admin_grant (1) → promo (2) → welcome (3).
 
-Detalhe de créditos em tecnico/billing-ledger.md; de geração/correção em tecnico/ai-ops.md.
+Detalhe de créditos em [tecnico/billing-ledger.md](../tecnico/billing-ledger.md); de geração/correção em [tecnico/ai-ops.md](../tecnico/ai-ops.md).
