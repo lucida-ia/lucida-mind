@@ -8,7 +8,7 @@ status: canônico
 
 Tokens vivem em `apps/web/src/styles/globals.css`, dentro de `@theme` do Tailwind v4. **Hex nunca é
 hardcoded em componente** — use as classes utilitárias geradas dos tokens (`bg-brand-primary`,
-`text-ink`, etc.). Valores de cor/marca em ui/identidade-visual.md.
+`text-ink`, etc.). Valores de cor/marca em [ui/identidade-visual.md](identidade-visual.md).
 
 ## Tokens em `@theme`
 - **Cores professor (azul)**: `--color-brand-primary #007aff`, `--color-brand-dark-01 #1d14ff`,
@@ -55,7 +55,7 @@ Além dos tokens em `@theme`, `globals.css` define utilitários reusáveis (não
 
 ## Primitivos disponíveis (`components/ui/`)
 São **15**. Reutilize em vez de recriar — recriar um destes é violação da regra shadcn-first
-(regras/codigo.md). Confira esta lista **antes** de criar qualquer primitivo:
+([regras/codigo.md](../regras/codigo.md)). Confira esta lista **antes** de criar qualquer primitivo:
 
 | | | |
 |---|---|---|

@@ -31,14 +31,14 @@ Na geração também existe `"misto"` (a IA varia a dificuldade ao longo da prov
 - **reflective** — exige reflexão.
 
 O estilo **afeta o preço por questão** (objetivas): simple custa menos, reflective/contextual mais.
-Tabela em tecnico/billing-ledger.md.
+Tabela em [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
 
 ## Idiomas de geração (OutputLanguage)
 `"pt-BR" | "en" | "es"` — a prova pode ser gerada em português, inglês ou espanhol.
 
 ## Fontes de conteúdo na geração
 Além de PDF/DOCX/texto/YouTube, a geração aceita `libraryFileIds` — arquivos da **Biblioteca** já
-extraídos, passados como fonte sem re-extração nem custo extra (ver tecnico/biblioteca.md).
+extraídos, passados como fonte sem re-extração nem custo extra (ver [tecnico/biblioteca.md](../tecnico/biblioteca.md)).
 
 ## Como a IA gera vs. como o exam armazena
 - Geração objetiva produz um tipo intermediário (`GeneratedQuestion`: enunciado, contexto, opções,
@@ -46,7 +46,7 @@ extraídos, passados como fonte sem re-extração nem custo extra (ver tecnico/b
 - Geração aberta produz `GeneratedOpenQuestion` com **rubrica gerada** (critérios com níveis) +
   resposta de referência.
 - Na **correção de aberta**, a IA **escolhe o `levelId` por critério** e justifica; **o código calcula
-  o score** a partir dos níveis (ver tecnico/ai-ops.md). A IA não inventa nota numérica.
+  o score** a partir dos níveis (ver [tecnico/ai-ops.md](../tecnico/ai-ops.md)). A IA não inventa nota numérica.
 
 ## Quantidade por geração
 1–50 questões objetivas; 1–30 discursivas.
@@ -54,11 +54,11 @@ extraídos, passados como fonte sem re-extração nem custo extra (ver tecnico/b
 ## Estilo e preço: a assimetria
 O estilo afeta o preço **só nas objetivas** (simples 25 · analítica 42 · reflexiva 45 · contextual 45,
 sobre uma base de 250). A **discursiva custa 60 por questão, fixo** — a config de geração aceita
-`style`, mas ele não muda o preço. Ver tecnico/billing-ledger.md.
+`style`, mas ele não muda o preço. Ver [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
 
 ## Recorte da fonte por faixa de páginas
 Além de escolher o arquivo, o professor escolhe **de qual página a qual página** gerar — vale tanto
-para anexo quanto para arquivo da Biblioteca. O texto é fatiado antes do prompt. Ver tecnico/ai-ops.md.
+para anexo quanto para arquivo da Biblioteca. O texto é fatiado antes do prompt. Ver [tecnico/ai-ops.md](../tecnico/ai-ops.md).
 
 ## Pós-processamento (invisível ao professor)
 - **Balanceamento de gabarito** — a posição da alternativa correta é redistribuída entre as questões,

@@ -18,7 +18,7 @@ ponto; o que muda entre contextos é **cor + um qualificador funcional**, não o
 | Aluno | "Lucida para alunos" | Azul claro `#5CDAFF` *(referência de marca; **sem token CSS** no código)* | Identidade futura; hoje o aluno só acessa o link público da prova |
 
 Regra visual: **nunca misturar** as três cores na mesma tela. Ao entrar numa frente, toda a hierarquia
-visual (CTA, links, accents) herda aquele tom. Detalhe de cores em ui/identidade-visual.md.
+visual (CTA, links, accents) herda aquele tom. Detalhe de cores em [ui/identidade-visual.md](../ui/identidade-visual.md).
 
 ## O que é só rótulo de marca vs. o que é técnico
 - Nomes **técnicos** seguem em inglês e não mudam com o rebrand: o domínio continua `exam`, a área de

@@ -27,4 +27,4 @@ status: parcial
 > objeções e critérios de qualificação. Preencher com input do time, não inferir do código.
 
 Fontes do que está afirmado: domínio `iam` (organization plugin), `billing` (escopo user/org),
-área `/analytics` no web. Posicionamento de marca em negocio/posicionamento.md.
+área `/analytics` no web. Posicionamento de marca em [negocio/posicionamento.md](posicionamento.md).

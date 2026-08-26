@@ -14,7 +14,7 @@ correção de respostas abertas e extração de conteúdo de fontes.
 tarefas** (geração objetiva/aberta, plano de aula, correção); não há modelo por tarefa. Exceção: o
 verificador de explicação (telemetria) aceita `R2_VERIFIER_MODEL` como override — e ele só roda com
 `R2_VERIFY === "1"`, **desligado por default**. Cobra-se por **tabela
-determinística** (ver tecnico/billing-ledger.md), não por token consumido. Os preços de **plano de aula**
+determinística** (ver [tecnico/billing-ledger.md](billing-ledger.md)), não por token consumido. Os preços de **plano de aula**
 são marcados como **provisórios** no código ("recalibrate once token usage is measured"); os de
 prova/correção são estáveis.
 
@@ -33,7 +33,7 @@ o código já se ajusta. (O default segue gpt-4.1-mini hoje.)
   níveis).
 - **Planos de aula**: estrutura por segmento (objetivos, BNCC, desenvolvimento, avaliação).
 - **Idiomas**: pt-BR / inglês / espanhol. **Estilos**: simple / contextual / analytical / reflective.
-  (ver produto/estilos-de-questao.md.)
+  (ver [produto/estilos-de-questao.md](../produto/estilos-de-questao.md).)
 - **Regeneração**: questão individual ou bloco de plano, com custo marginal.
 
 ## Correção de respostas abertas
@@ -47,7 +47,7 @@ o código já se ajusta. (O default segue gpt-4.1-mini hoje.)
 ## Extractors (fontes de conteúdo)
 PDF (`pdf-parse` v2, via `PDFParse`, que devolve o **texto por página** — é o que habilita a faixa de
 páginas), DOCX (`mammoth`), texto colado e **YouTube** (via serviço Python de transcrição — ver
-tecnico/integracoes.md). O material extraído alimenta a geração de provas/planos.
+[tecnico/integracoes.md](integracoes.md)). O material extraído alimenta a geração de provas/planos.
 
 **Guardas de material de fonte** (`collect-sources.ts`): abaixo de `MIN_MEANINGFUL_CHARS = 150` o
 material é recusado — é o que pega PDF escaneado sem camada de texto. Erros: `EmptySourceMaterialError`,
@@ -58,7 +58,7 @@ O professor pode recortar **um intervalo de páginas** da fonte, tanto de um ane
 da Biblioteca. `collect-sources.ts` recebe `attachmentRanges` (por índice do anexo) e
 `librarySourceRanges` (por `fileId`) e fatia o texto **antes** do prompt
 (`page-range.ts`, `slice-extraction-by-page-range.ts`). No arquivo da Biblioteca o recorte usa os
-`pageTextSegments` persistidos — ver tecnico/biblioteca.md.
+`pageTextSegments` persistidos — ver [tecnico/biblioteca.md](biblioteca.md).
 
 ## LaTeX / matemática nas questões
 Fórmula matemática é **LaTeX inline no texto** (`statement`, `context`, `explanation`, `options`,
@@ -72,18 +72,18 @@ Na geração, cada campo passa por um pipeline de normalização (em ordem):
    `$ $`, e envolve ambientes `begin/end` soltos em `$$`.
 
 Provas antigas com LaTeX corrompido são reparadas pelo script `backfill:math-latex` (mesmo pipeline,
-retroativo; `--dry-run` disponível). Ver tecnico/stack.md.
+retroativo; `--dry-run` disponível). Ver [tecnico/stack.md](stack.md).
 
 ## Biblioteca como fonte (`libraryFileIds`)
 A geração também aceita arquivos da **Biblioteca** (domínio `library`): passados via `libraryFileIds`, o
 `ai-ops` resolve pela porta `library-source-resolver` (impl. `LibrarySourceResolverAdapter`) e recebe o
 **texto já extraído** — **sem re-extração e sem custo de crédito** pela reutilização. Detalhe em
-tecnico/biblioteca.md.
+[tecnico/biblioteca.md](biblioteca.md).
 
 ## Streaming
 Geração longa transmite via **SSE** (`shared/http/sse.ts`) para evitar timeout de proxy. O front
 **não** usa `EventSource` (que é GET-only e não manda corpo) — faz `POST` + leitura manual do stream.
-Ver tecnico/arquitetura.md.
+Ver [tecnico/arquitetura.md](arquitetura.md).
 
 ## Pós-processamento
 `balance-answer-positions.ts` redistribui a posição da alternativa correta entre as questões, para o

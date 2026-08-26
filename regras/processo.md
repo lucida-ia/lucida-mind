@@ -7,7 +7,7 @@ status: canônico
 # Processo e regras numeradas
 
 As regras do projeto são **numeradas** para poderem ser citadas em ADR, contrato e prompt de subagent.
-As de código no detalhe estão em regras/codigo.md; aqui estão todas, com a numeração canônica.
+As de código no detalhe estão em [regras/codigo.md](codigo.md); aqui estão todas, com a numeração canônica.
 
 ## Isolamento e segurança (1–5.4)
 As que mais doem se quebrarem.
@@ -58,7 +58,7 @@ e existe para ele não voltar:
 10. **Billing inicializa antes da auth** no composition root (welcome credits). Não inverta.
 
 ## Qualidade (11–12)
-11. **Endpoint novo nasce com o trio de testes de posse** — ver tecnico/testes.md.
+11. **Endpoint novo nasce com o trio de testes de posse** — ver [tecnico/testes.md](../tecnico/testes.md).
 12. **Teste não se deleta pra fazer build passar.** Se virou obsoleto, o commit explica por quê.
 
 ## Processo (13–18)
@@ -115,4 +115,4 @@ ADRs retroativos de decisões que hoje só vivem no `CLAUDE.md` (monorepo pnpm, 
 BetterAuth no lugar de Clerk, débito atômico, créditos por organização, idioma, OMR como
 microsserviço, OAuth próprio do Classroom). Aceitos hoje: **0009** (banco de teste), **0010** (squads),
 **0011** (estratégia de teste por camada). Propostos, em branch: **0012** e **0013** — ver
-produto/decisoes-de-produto.md.
+[produto/decisoes-de-produto.md](../produto/decisoes-de-produto.md).

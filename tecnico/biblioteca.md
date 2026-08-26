@@ -39,12 +39,12 @@ Na geração, o professor passa `libraryFileIds`. O `ai-ops` resolve via a porta
   analytics **após** a geração concluir.
 
 Entra em `generate-exam-questions`, `generate-open-questions`, `generate-lesson-plan` e
-`regenerate-*`, ao lado de PDF/DOCX/texto/YouTube (ver tecnico/ai-ops.md).
+`regenerate-*`, ao lado de PDF/DOCX/texto/YouTube (ver [tecnico/ai-ops.md](ai-ops.md)).
 
 ## Acesso
 A `SubscriberAccessPolicy` **compartilhada** (`shared/access/subscriber-access-policy.ts`) libera para
 **staff**, **membro de organização** ou **assinante ativo** — a mesma política do Calendário (ver
-tecnico/calendario.md). No backend, o middleware `requireLibraryAccess` gateia os endpoints (acesso negado
+[tecnico/calendario.md](calendario.md)). No backend, o middleware `requireLibraryAccess` gateia os endpoints (acesso negado
 → **402**); no web, `getCanAccessLibrary()` decide entre `<LibraryView />` e `<LibraryUpsell />`.
 
 ## Storage (portas + adapters)
@@ -91,7 +91,7 @@ Códigos de erro do domínio: `LIBRARY_FILE_NOT_READY` 409, `LIBRARY_UPLOAD_INCO
 O `LibraryFile` guarda **`pageTextSegments`** (`{ pageNumber, start, end }[]`) — os offsets de cada
 página dentro do texto extraído. É o que permite ao professor escolher **um intervalo de páginas** do
 arquivo na hora de gerar: `ResolveLibrarySourcesUseCase` devolve as `pages` reconstruídas dos offsets
-e o `ai-ops` fatia antes do prompt. Ver tecnico/ai-ops.md.
+e o `ai-ops` fatia antes do prompt. Ver [tecnico/ai-ops.md](ai-ops.md).
 
 Outros campos do `LibraryFile` além dos citados acima: `originalFilename`, `mimeType`, `sizeBytes`,
 `checksum`, `extractionError`, `extractionDurationMs`.
@@ -104,4 +104,4 @@ Outros campos do `LibraryFile` além dos citados acima: `originalFilename`, `mim
   `edit-file-dialog`, `delete-file-dialog`, `subject-combobox`, `status-badge`).
 - **Wiring**: `apps/api/src/main.ts` — storage e `LibrarySourceResolverAdapter` no bloco da
   biblioteca, router via `makeLibraryRouter`. Custo de crédito por operação em
-  tecnico/billing-ledger.md.
+  [tecnico/billing-ledger.md](billing-ledger.md).

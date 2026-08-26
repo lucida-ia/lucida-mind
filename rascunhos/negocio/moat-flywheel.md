@@ -1,13 +1,15 @@
 ---
-destino: negocio/moat-flywheel.md (arquivo novo)
-acao: criar
-origem: contexto-externo.md §2 · §3
 quando_usar: discutir vantagem competitiva, flywheel, estratégia de longo prazo, por que o moat é defensável
-última_revisão: 2026-06
+última_revisão: 2026-08-25
 status: rascunho
 ---
 
 # Moat & Flywheel
+
+> **Rascunho — nunca validado.** É a tese estratégica escrita em jun/2026, não decisão fechada pelo
+> time. Vale como hipótese e como vocabulário; não como afirmação sobre a Lucida. A seção "Onde o
+> código está hoje" é a exceção — essa foi conferida contra o repositório.
+> Tração em [negocio/metricas.md](metricas.md).
 
 ## A tese em uma frase
 
@@ -15,7 +17,7 @@ O defensável não é gerar avaliação com qualidade (copiável por qualquer fe
 **interoperabilidade entre o que avaliar, quando avaliar e como avaliar**, fechada com **outcome
 medido** — gerando um data network effect que players digital-first não capturam.
 
-Fundamento técnico-científico dessa tese em produto/motor-assertividade.md.
+Fundamento técnico-científico dessa tese em [produto/motor-assertividade.md](../../produto/motor-assertividade.md).
 
 ## Flywheel vs. moat
 
@@ -59,7 +61,7 @@ Plano de aula (BNCC)
 A densidade necessária para o flywheel girar exige concentração num **wedge** — aposta:
 **pré-vestibular / cursinho de exatas (STEM)**, onde:
 - Avaliação recorrente sobre o mesmo conteúdo (loops fecham em semanas, não semestres).
-- LaTeX é pré-requisito inegociável — destrава a barreira técnica.
+- LaTeX é pré-requisito inegociável — destrava a barreira técnica.
 - Presença institucional + afiliados aceleram adoção.
 
 **Pré-condição crítica:** instrumentar o outcome no nível da competência BNCC (ex.: variação de acerto
@@ -69,7 +71,7 @@ copiável.
 **Risco a vigiar:** vanity data — volume sem loops fechados gera moat ilusório.
 
 **Janela competitiva estimada:** ~18 meses antes de big tech fechar o gap em PT-BR (detalhe em
-negocio/competidores.md).
+[negocio/competidores.md](competidores.md)).
 
 ## Os cinco pontos de interoperabilidade (o moat, destrinchado)
 
@@ -90,3 +92,10 @@ O motor é defensável não porque usa BKT ou DKT (algoritmos públicos), mas po
 2. O Q-matrix está ligado ao BNCC — permite comparabilidade na rede.
 3. O loop fecha com outcome: a eficácia do redesenho de metodologia é medida na avaliação seguinte,
    gerando feedback que melhora o próprio modelo — data network effect real.
+
+## Onde o código está hoje
+
+Nada do motor está implementado. As questões não carregam tag de habilidade, e o analytics calcula
+item analysis por prova, sem série longitudinal. A ponte para a Fase 1 está desenhada nos **ADR-0012**
+(questão como objeto rastreável) e **ADR-0013** (modelo multi-tenant de instituição), ainda em branch.
+Ver [produto/roadmap.md](../produto/roadmap.md).

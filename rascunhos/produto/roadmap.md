@@ -1,13 +1,14 @@
 ---
-destino: produto/roadmap.md (arquivo novo)
-acao: criar
-origem: contexto-externo.md §4.4
 quando_usar: discutir prioridades de produto, sequência de desenvolvimento, lente de moat
-última_revisão: 2026-06
-status: rascunho
+última_revisão: 2026-08-25
+status: parcial
 ---
 
 # Roadmap de produto (lente de moat)
+
+> **Parcial.** A priorização e a sequência abaixo são proposta de jun/2026, não roadmap aprovado —
+> o que o time está executando vive nas **GitHub Issues**, na milestone Instituição. As seções "O que
+> já está entregue" e "Onde a Fase 1 está sendo desenhada" foram conferidas no código e valem.
 
 | Peça | Papel no moat | Prioridade |
 |---|---|---|
@@ -36,13 +37,40 @@ backbone + LaTeX + discursivas
 **Diagnóstico por competência BNCC o quanto antes** — é o que fecha o loop e torna o moat
 mensurável. Sem ele, não é possível distinguir dado que acumula vantagem de vanity data.
 
+## O que já está entregue
+
+- **LaTeX em provas** — ✅ entregue. LaTeX inline renderizado com KaTeX na prova online e na
+  imprimível, com pipeline de reparo/normalização e backfill retroativo. Ver [tecnico/ai-ops.md](../../tecnico/ai-ops.md).
+- **Provas discursivas + rubrica** — ✅ entregue, com correção assistida por IA e aprovação do
+  professor. Ver [produto/suite.md](../../produto/suite.md).
+- **Plano de aula** — ✅ entregue como módulo (BNCC, DOCX, gerar prova a partir do plano). O que
+  **não** existe é o papel de *backbone*: o resultado da avaliação não volta a escrever no plano no
+  nível da habilidade.
+- **Inferência por KC** — ❌ não começou. Questões não carregam tag de habilidade.
+
+## Onde a Fase 1 está sendo desenhada
+
+A ponte para o motor está em **dois ADRs de produto ainda em branch, fora do `main`**:
+
+- **ADR-0012 — questão como objeto rastreável**: KC / Q-matrix, `family_id`.
+- **ADR-0013 — modelo multi-tenant de instituição**: instituição = `organization` do BetterAuth,
+  org-padrão por professor, `organizationId` obrigatório, roles owner/admin/secretary/teacher,
+  **aluno = usuário só-por-convite**, migração opt-in.
+
+> Na branch os arquivos ainda estão numerados 0009 e 0010, que colidem com os do `main`. 0012 e 0013
+> são os números já decididos para o merge — é como o resto da base os chama.
+
+O roadmap de produto corrente é operado em **GitHub Issues**, na milestone **Instituição** —
+distinto desta lente de moat, que é a estratégia de longo prazo. As duas se encontram no modelo
+multi-tenant: a área do aluno, que a milestone prioriza, depende dele.
+
 ## Critério de sequenciamento: a escada de maturidade
 
-O escopo de cada mudança de código no motor segue as fases de produto/motor-assertividade.md (§4):
+O escopo de cada mudança de código no motor segue as fases de [produto/motor-assertividade.md](../../produto/motor-assertividade.md) (§4):
 
 | Fase | O que existe | O que destrava |
 |---|---|---|
-| 0 — Atual | Item analysis isolado por prova, sem KC | Escopo imediato: tagging de KC + `family_id` nas questões (proposta de schema em produto/motor-assertividade.md §8 — aguardando avaliação) |
+| 0 — Atual | Item analysis isolado por prova, sem KC | Escopo imediato: tagging de KC + `family_id` nas questões (proposta de schema em [produto/motor-assertividade.md](../../produto/motor-assertividade.md) §8 — aguardando avaliação) |
 | 1 — Objeto longitudinal | Questões carregam KC(s) via Q-matrix | Séries temporais por KC entre provas |
 | 2 — BKT por KC | ≥4 observações por KC | `p(domínio)`, "aprendido vs. não", Confiável/Direcional |
 | 3 — Pré-requisito (CDM) | Grafo de KCs + volume de padrões | Loop fechado de redesenho de material |
@@ -50,7 +78,7 @@ O escopo de cada mudança de código no motor segue as fases de produto/motor-as
 
 ## Restrições de design do gerador
 
-Duas regras de produto/motor-assertividade.md (§5–§6) que restringem geração e orientação ao professor:
+Duas regras de [produto/motor-assertividade.md](../../produto/motor-assertividade.md) (§5–§6) que restringem geração e orientação ao professor:
 
 - **N ≥ 4 atividades com tópicos sobrepostos** por KC antes de feedback confiável — orientar o
   professor a construir sequências, não provas avulsas. Abaixo disso, estimativa é "Direcional".

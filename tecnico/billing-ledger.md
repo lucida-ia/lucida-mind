@@ -6,7 +6,7 @@ status: canônico
 
 # Billing — wallets, ledger e custo por operação
 
-Domínio `billing`. O lado comercial (planos/top-ups) está em negocio/monetizacao-creditos.md; aqui é a
+Domínio `billing`. O lado comercial (planos/top-ups) está em [negocio/monetizacao-creditos.md](../negocio/monetizacao-creditos.md); aqui é a
 mecânica.
 
 ## Wallets e ledger

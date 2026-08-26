@@ -61,7 +61,7 @@ autenticado → `401` (em recurso de organização: membro de outra org → `404
 confirmaria a existência do recurso).
 
 Hoje todo controller com id tem o par dono-autorizado / não-dono-como-inexistente. As regras de
-isolamento 5.1–5.3 (ver regras/processo.md) passaram a ter teste — antes eram só texto.
+isolamento 5.1–5.3 (ver [regras/processo.md](../regras/processo.md)) passaram a ter teste — antes eram só texto.
 
 O teste de posse por rota (`*.integration.test.ts` com `supertest`) continua valendo como garantia
 ponta a ponta em rotas escolhidas, **não** como veículo de cobertura da camada.

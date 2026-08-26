@@ -7,7 +7,7 @@ status: canônico
 # O framework `.claude/` do monorepo
 
 Inventário do que existe em `lucida-monorepo/.claude/`. As regras que ele aplica estão em
-regras/processo.md e regras/codigo.md.
+[regras/processo.md](../regras/processo.md) e [regras/codigo.md](../regras/codigo.md).
 
 Um princípio explica o desenho: **permissão é concedida para o loop rodar**, e o que protege são os
 hooks — que rodam antes de qualquer comando — não a aprovação passo a passo.
@@ -23,7 +23,7 @@ Auto-carregadas quando o contexto bate na descrição.
 | `lucida-code-conventions` | Convenções transversais — idioma, comentários, clean code, naming |
 
 > **Cuidado com o `backend-clean-ddd`**: o `references/folder-structure.md` dele descreve uma estrutura
-> de pastas aninhada que **o código não segue**. O layout real é plano — ver tecnico/arquitetura.md.
+> de pastas aninhada que **o código não segue**. O layout real é plano — ver [tecnico/arquitetura.md](arquitetura.md).
 
 ## Agents (9)
 Dois grupos.

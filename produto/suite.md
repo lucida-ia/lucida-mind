@@ -6,12 +6,12 @@ status: canônico
 
 # Suíte de produto
 
-Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em tecnico/dominios.md.
+Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em [tecnico/dominios.md](../tecnico/dominios.md).
 
 ## Provas (exam + ai-ops)
 - **Geração por IA**: a partir de um tema/material, gera questões **objetivas** (múltipla escolha / V-F)
   e **abertas** (com rubrica). Parâmetros: estilo, dificuldade, idioma (pt-BR/inglês/espanhol),
-  quantidade. Detalhe em produto/estilos-de-questao.md.
+  quantidade. Detalhe em [produto/estilos-de-questao.md](estilos-de-questao.md).
 - **Montagem manual** e edição questão a questão; **regeneração** de uma questão específica.
 - **Tipo de atividade**: cada prova tem um tipo (`activityType`) — **Prova**, **Simulado**, **Quiz** ou
   **Lista de Exercícios** — usado para classificar/filtrar; não muda geração, preço nem correção.
@@ -49,13 +49,13 @@ Acervo de materiais do professor (`/app/biblioteca`): sobe **PDF/DOCX/TXT** uma 
 storage, presigned), a Lucida **extrai o texto** e organiza por **disciplina e segmento**
 (Fundamental/Médio/Faculdade/Infoprodutor). Esses arquivos viram **fonte reutilizável** na geração de
 provas e planos de aula — sem re-upload nem custo extra de crédito na reutilização. Acesso liberado para
-staff, membros de organização ou assinantes ativos (senão, tela de upsell). Detalhe em tecnico/biblioteca.md.
+staff, membros de organização ou assinantes ativos (senão, tela de upsell). Detalhe em [tecnico/biblioteca.md](../tecnico/biblioteca.md).
 
 ## Calendário (calendar + exam-notification)
 Visão de **agenda das provas com janela** (`/app/calendario`): mostra num grid de mês quando cada
 atividade abre/fecha. Quando uma prova marcada com "avisar ao abrir" entra na janela, a Lucida **dispara
 e-mail aos alunos** com o link, automaticamente (ou por reenvio manual do professor). Feature **de
-assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe em tecnico/calendario.md.
+assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe em [tecnico/calendario.md](../tecnico/calendario.md).
 
 ## Organização do dia a dia
 - **Turmas** (class), **alunos** (student) e **cursos** (course) que agrupam turmas/provas. A turma guarda
@@ -63,7 +63,7 @@ assinante** (staff, instituição ou assinatura ativa; senão, upsell). Detalhe 
   aprendizagem** (BNCC ou personalizados).
 - **Google Classroom**: importa turmas e alunos com reconciliação por e-mail (Fase 1).
 - **Média de aprovação**: o professor configura sua **nota de corte** (default 6) — usada para classificar
-  aprovado/reprovado nas análises e nos indicadores. Ver produto/decisoes-de-produto.md.
+  aprovado/reprovado nas análises e nos indicadores. Ver [produto/decisoes-de-produto.md](decisoes-de-produto.md).
 - **Onboarding**: tour guiado (mascote Lulu) na primeira vez no `/app`, refazível pelo menu de perfil.
 - **"Lulu sugere"**: card no dashboard que aponta o que fazer agora — correções pendentes, alunos em
   risco. A Lulu não é só mascote do tour; é a superfície de sugestão do dashboard.
@@ -80,7 +80,7 @@ Dashboard de **organização** (frente roxa, `/analytics`). Motor de analytics p
 com **escopo** ∈ `instituicao | professor | turma | aluno | prova` e **corte** (breakdown) ∈ `none |
 questao | dificuldade | habilidade | criterio_rubrica | estilo | tempo | peer | turmas | alunos |
 provas`. Gestão de membros é tela própria, não escopo do cubo. Detalhe em
-produto/decisoes-de-produto.md.
+[produto/decisoes-de-produto.md](decisoes-de-produto.md).
 
 ## Plataforma para parceiros (public-api + api-access + webhook-dispatch)
 REST externo com API keys HMAC: turmas, alunos, links de prova, resultados — e **geração de prova por
@@ -103,7 +103,7 @@ o auxiliar passa a operar **em nome** do professor supervisionado, com um seleto
 (`revokedAt`), e a gestão dos vínculos existe tanto no painel da instituição quanto no Kintal.
 
 Delegação concede os **dados** do professor, nunca a **autoridade administrativa** dele — ver
-regras/produto.md.
+[regras/produto.md](../regras/produto.md).
 
 ## Notificações in-app
 Inbox do usuário (`/app/notificacoes` e `/analytics/notificacoes`) com sino e contador, além de
