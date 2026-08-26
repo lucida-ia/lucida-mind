@@ -96,6 +96,6 @@ O motor é defensável não porque usa BKT ou DKT (algoritmos públicos), mas po
 ## Onde o código está hoje
 
 Nada do motor está implementado. As questões não carregam tag de habilidade, e o analytics calcula
-item analysis por prova, sem série longitudinal. A ponte para a Fase 1 está desenhada em dois ADRs
-ainda em branch — *questão como objeto rastreável* e *modelo multi-tenant de instituição*.
+item analysis por prova, sem série longitudinal. A ponte para a Fase 1 está desenhada nos **ADR-0012**
+(questão como objeto rastreável) e **ADR-0013** (modelo multi-tenant de instituição), ainda em branch.
 Ver [produto/roadmap.md](../produto/roadmap.md).

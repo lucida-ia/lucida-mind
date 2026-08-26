@@ -71,4 +71,8 @@ Não empurrar a venda institucional antes de o gancho de eficiência do professo
 
 A instituição é a **camada de consentimento LGPD** para o dado do aluno menor.
 `organizationId` no modelo de dados é o controlador de dado; o professor avulso responde como
-controlador individual. Detalhe: [produto/suite.md](../../produto/suite.md) §ambiente-do-aluno.
+controlador individual.
+
+Hoje isso é teoria: o aluno não tem conta, só responde pelo link público
+([regras/produto.md](../../regras/produto.md)). A questão de consentimento só fica concreta quando a
+área do aluno existir.

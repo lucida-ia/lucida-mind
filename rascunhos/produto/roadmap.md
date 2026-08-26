@@ -52,13 +52,13 @@ mensurável. Sem ele, não é possível distinguir dado que acumula vantagem de 
 
 A ponte para o motor está em **dois ADRs de produto ainda em branch, fora do `main`**:
 
-- **Questão como objeto rastreável** — KC / Q-matrix, `family_id`.
-- **Modelo multi-tenant de instituição** — instituição = `organization` do BetterAuth, org-padrão por
-  professor, `organizationId` obrigatório, roles owner/admin/secretary/teacher, **aluno = usuário
-  só-por-convite**, migração opt-in.
+- **ADR-0012 — questão como objeto rastreável**: KC / Q-matrix, `family_id`.
+- **ADR-0013 — modelo multi-tenant de instituição**: instituição = `organization` do BetterAuth,
+  org-padrão por professor, `organizationId` obrigatório, roles owner/admin/secretary/teacher,
+  **aluno = usuário só-por-convite**, migração opt-in.
 
-> Cite os dois **pelo título**. Na branch eles estão numerados 0009 e 0010, que já estão ocupados no
-> `main` — vão ser renumerados no merge, e qualquer número escrito agora nasce errado.
+> Na branch os arquivos ainda estão numerados 0009 e 0010, que colidem com os do `main`. 0012 e 0013
+> são os números já decididos para o merge — é como o resto da base os chama.
 
 O roadmap de produto corrente é operado em **GitHub Issues**, na milestone **Instituição** —
 distinto desta lente de moat, que é a estratégia de longo prazo. As duas se encontram no modelo
