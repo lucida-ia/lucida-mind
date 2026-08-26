@@ -14,7 +14,9 @@ rascunhos/negocio/metricas.md   →   negocio/metricas.md
 1. Alguém do time confirma o conteúdo. Números de negócio pedem uma fonte real (Stripe, o painel do
    Kintal, o que estiver valendo); estratégia pede aceite explícito de quem decide.
 2. `git mv rascunhos/<secao>/<arquivo>.md <secao>/<arquivo>.md`
-3. Ajuste `última_revisão` e troque `status: rascunho` por `canônico`.
+3. Ajuste `última_revisão` e o `status`: vira `canônico`, ou continua `parcial` se sobrou lacuna
+   declarada no próprio doc — é o caso de `produto/roadmap.md`, que tem seções conferidas no código
+   e outras que são proposta.
 4. Mova a linha do [`INDEX.md`](../INDEX.md) da seção "Rascunhos" para a seção da área.
 5. Tire o aviso de "não validado" do topo do arquivo.
 

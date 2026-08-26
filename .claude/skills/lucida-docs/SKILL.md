@@ -59,6 +59,25 @@ Uma ou duas frases dizendo o que é. Sem "este documento descreve".
 **`última_revisão` é quando o doc foi conferido, não quando foi escrito.** Corrigiu um fato? Suba.
 Não conferiu? Não suba — data falsa é pior que data velha.
 
+## Onde o doc mora: `rascunhos/` ou a raiz
+
+**Quem decide não é o `status:` do frontmatter, é a pasta.** Doc que ninguém do time validou vive em
+`rascunhos/`, espelhando a estrutura da base:
+
+```
+rascunhos/negocio/metricas.md   ← não validado
+negocio/monetizacao-creditos.md ← canônico
+```
+
+Assim dá para ver o estado de tudo num `ls`, sem abrir arquivo por arquivo. Promover é `git mv`
+preservando o caminho, mais os ajustes de índice e frontmatter — a receita inteira está em
+[rascunhos/LEIA-ME.md](../../../rascunhos/LEIA-ME.md), e o caminho de volta também.
+
+**Você não promove nada.** Tirar um doc de `rascunhos/` exige alguém do time confirmar o conteúdo;
+número de negócio pede fonte real. Escreveu conteúdo não validado? Nasce em `rascunhos/`. Na dúvida
+sobre se algo foi validado, trate como não validado — foi assim que oito docs subiram a canônico sem
+revisão nesta base.
+
 ## Links
 
 Referência a outro doc é **link markdown relativo**, sempre:
@@ -76,8 +95,13 @@ Todo doc novo entra no [`INDEX.md`](../../../INDEX.md) — doc fora do índice �
 primária. Divergiu, o doc está velho. Boa parte é conferida pelo `check-drift.sh` — mas ele só
 alcança contagem, enum e tabela. Gotcha, invariante e o porquê de uma decisão são revisão humana.
 
-**Contexto de negócio** (`negocio/`, `regras/pitch.md`): não tem fonte no repositório e nenhum script
-alcança. Marque o vintage numa linha no topo.
+**Contexto de negócio** (`rascunhos/negocio/`, `rascunhos/regras/pitch.md`): não tem fonte no
+repositório e nenhum script alcança. Marque o vintage numa linha no topo.
+
+O corte não é por pasta, é por afirmação. `negocio/monetizacao-creditos.md` é canônico e misto: preço
+dos planos, créditos por ciclo e o kill-switch do PIX saem do código e o `check-drift.sh` confere; o
+contrato institucional negociado fora do sistema é negócio puro. Rode o detector também nos docs de
+negócio — parte deles ele alcança.
 
 Nunca misture as duas numa afirmação só. "O plano institucional custa R$ 374,25" é falso se o produto
 não tem esse SKU — o certo é dizer o preço **e** que ele é negociado fora do sistema.
