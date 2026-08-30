@@ -7,7 +7,8 @@ status: canônico
 # Regras de código (invioláveis)
 
 Sintetiza o que os agents `backend-reviewer` e `frontend-reviewer` cobram e o que os **hooks**
-bloqueiam antes mesmo da revisão. Detalhe arquitetural em [tecnico/arquitetura.md](../tecnico/arquitetura.md) e [ui/modelo-de-ui.md](../ui/modelo-de-ui.md);
+bloqueiam antes mesmo da revisão. Inventário dos hooks, agents e comandos em [tecnico/framework-claude.md](../tecnico/framework-claude.md).
+Detalhe arquitetural em [tecnico/arquitetura.md](../tecnico/arquitetura.md) e [ui/modelo-de-ui.md](../ui/modelo-de-ui.md);
 convenções gerais em [tecnico/convencoes-de-codigo.md](../tecnico/convencoes-de-codigo.md); processo e as regras numeradas em
 [regras/processo.md](processo.md).
 

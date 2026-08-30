@@ -2,11 +2,15 @@
 quando_usar: listar os módulos do produto e o que cada um faz, entender o escopo funcional
 última_revisão: 2026-08-25
 status: canônico
+tags: [biblioteca, classroom, correcao, omr]
 ---
 
 # Suíte de produto
 
-Os módulos que o usuário toca. Mapeamento técnico (domínios da api) em [tecnico/dominios.md](../tecnico/dominios.md).
+Os módulos que o usuário toca; o problema que eles resolvem está em
+[negocio/visao-geral.md](../negocio/visao-geral.md). Mapeamento técnico (domínios da api) em
+[tecnico/dominios.md](../tecnico/dominios.md); o significado preciso de cada termo, em
+[produto/glossario.md](glossario.md).
 
 ## Provas (exam + ai-ops)
 - **Geração por IA**: a partir de um tema/material, gera questões **objetivas** (múltipla escolha / V-F)

@@ -1,0 +1,10 @@
+{
+  "useMarkdownLinks": true,
+  "newLinkFormat": "relative",
+  "alwaysUpdateLinks": true,
+  "readableLineLength": true,
+  "showInlineTitle": true,
+  "showLineNumber": false,
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "assets"
+}

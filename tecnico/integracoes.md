@@ -2,6 +2,7 @@
 quando_usar: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog, S3/Biblioteca, cron
 última_revisão: 2026-08-25
 status: canônico
+tags: [analytics, billing, classroom, omr]
 ---
 
 # Integrações externas
@@ -73,7 +74,7 @@ e chama a **API de transcrição da OpenAI** (`WHISPER_MODEL`). Não há Whisper
 arquivo). Fallback JS frágil. Deploy Railway.
 
 ## PostHog (analytics + error tracking)
-Cloud US. O web usa `posthog-js` atrás de um reverse proxy de **dois** rewrites —
+Taxonomia de eventos em [tecnico/eventos-posthog.md](eventos-posthog.md). Cloud US. O web usa `posthog-js` atrás de um reverse proxy de **dois** rewrites —
 `/ingest/static/*` → `us-assets.i.posthog.com` (assets) e `/ingest/*` → `us.i.posthog.com` (ingestão) —
 mais `skipTrailingSlashRedirect: true` e `ui_host: "https://us.posthog.com"`. Envs do web:
 `NEXT_PUBLIC_POSTHOG_KEY` e `NEXT_PUBLIC_POSTHOG_HOST` (default `/ingest`). API usa

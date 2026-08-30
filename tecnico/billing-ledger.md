@@ -2,6 +2,7 @@
 quando_usar: mexer em créditos, wallet, ledger, débito atômico, expiração, custo por operação de IA
 última_revisão: 2026-08-25
 status: canônico
+tags: [billing, instituicao]
 ---
 
 # Billing — wallets, ledger e custo por operação

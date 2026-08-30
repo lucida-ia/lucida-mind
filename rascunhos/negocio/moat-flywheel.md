@@ -2,6 +2,7 @@
 quando_usar: discutir vantagem competitiva, flywheel, estratégia de longo prazo, por que o moat é defensável
 última_revisão: 2026-08-25
 status: rascunho
+tags: [moat]
 ---
 
 # Moat & Flywheel

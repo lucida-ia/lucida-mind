@@ -2,6 +2,7 @@
 quando_usar: discutir prioridades de produto, sequência de desenvolvimento, lente de moat
 última_revisão: 2026-08-25
 status: parcial
+tags: [moat]
 ---
 
 # Roadmap de produto (lente de moat)
@@ -66,11 +67,11 @@ multi-tenant: a área do aluno, que a milestone prioriza, depende dele.
 
 ## Critério de sequenciamento: a escada de maturidade
 
-O escopo de cada mudança de código no motor segue as fases de [produto/motor-assertividade.md](../../produto/motor-assertividade.md) (§4):
+O escopo de cada mudança de código no motor segue as fases de [produto/maturidade-do-motor.md](../../produto/maturidade-do-motor.md):
 
 | Fase | O que existe | O que destrava |
 |---|---|---|
-| 0 — Atual | Item analysis isolado por prova, sem KC | Escopo imediato: tagging de KC + `family_id` nas questões (proposta de schema em [produto/motor-assertividade.md](../../produto/motor-assertividade.md) §8 — aguardando avaliação) |
+| 0 — Atual | Item analysis isolado por prova, sem KC | Escopo imediato: tagging de KC + `family_id` nas questões (proposta de schema em [produto/objeto-de-aprendizagem.md](../../produto/objeto-de-aprendizagem.md) — aguardando avaliação) |
 | 1 — Objeto longitudinal | Questões carregam KC(s) via Q-matrix | Séries temporais por KC entre provas |
 | 2 — BKT por KC | ≥4 observações por KC | `p(domínio)`, "aprendido vs. não", Confiável/Direcional |
 | 3 — Pré-requisito (CDM) | Grafo de KCs + volume de padrões | Loop fechado de redesenho de material |
@@ -78,7 +79,7 @@ O escopo de cada mudança de código no motor segue as fases de [produto/motor-a
 
 ## Restrições de design do gerador
 
-Duas regras de [produto/motor-assertividade.md](../../produto/motor-assertividade.md) (§5–§6) que restringem geração e orientação ao professor:
+Duas regras de [produto/maturidade-do-motor.md](../../produto/maturidade-do-motor.md) que restringem geração e orientação ao professor:
 
 - **N ≥ 4 atividades com tópicos sobrepostos** por KC antes de feedback confiável — orientar o
   professor a construir sequências, não provas avulsas. Abaixo disso, estimativa é "Direcional".

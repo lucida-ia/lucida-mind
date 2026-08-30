@@ -2,6 +2,7 @@
 quando_usar: consultar a taxonomia de eventos PostHog (nome, propriedades, onde dispara), montar funil/insight, instrumentar evento novo
 última_revisão: 2026-08-25
 status: canônico
+tags: [analytics]
 ---
 
 # Eventos PostHog

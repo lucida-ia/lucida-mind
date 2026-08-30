@@ -74,7 +74,8 @@ e existe para ele não voltar:
     dos hooks — foi medido que os hooks de `Bash` e de `Write` rodam em subagent. Cole assim mesmo:
     hook pega o que é padrão, não se o subagent respeitou escopo, idioma ou fronteira de escrita.
 18. **`.claude/**` é meta-trabalho do loop principal, nunca delegado.** Quem edita um guardrail precisa
-    estar sob os guardrails.
+    estar sob os guardrails. O inventário do que existe lá está em
+    [tecnico/framework-claude.md](../tecnico/framework-claude.md).
 
 > Regra escrita = regra seguida. Se o Claude quebrou uma regra, não é falha dele — é lacuna na
 > documentação ou ausência de hook bloqueante.

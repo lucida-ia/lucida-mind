@@ -2,6 +2,7 @@
 quando_usar: decidir comportamento de produto — degradação, idiomas, rubrica, aprovação, replica set, acesso do aluno, features de assinante
 última_revisão: 2026-08-25
 status: canônico
+tags: [correcao, instituicao]
 ---
 
 # Regras de produto

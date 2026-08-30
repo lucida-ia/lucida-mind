@@ -45,6 +45,7 @@ Direto e corrido. Frase curta, voz ativa, sem preâmbulo e sem fecho.
 quando_usar: <em que situação abrir este doc — é o que vai para o INDEX.md>
 última_revisão: AAAA-MM-DD
 status: canônico
+tags: [billing, instituicao]   # opcional
 ---
 
 # Título
@@ -55,6 +56,13 @@ Uma ou duas frases dizendo o que é. Sem "este documento descreve".
 ```
 
 `status`: `canônico` (vale hoje), `parcial` (tem lacuna declarada), `rascunho` (não aprovado).
+
+`tags` é opcional e existe para o grafo do Obsidian: cada tag vira um nó que liga docs de pastas
+diferentes. **Só tagueie o doc que é substancialmente sobre o assunto** — que tem seção dedicada a
+ele, não que o menciona de passagem. Medido nesta base: `ia` é mencionado em 38 dos 38 docs e
+`assinatura` em 29 — taguear por menção ligaria quase tudo a quase tudo e destruiria o grafo. As nove
+em uso, com 3 a 8 docs cada: `billing`, `instituicao`, `moat`, `analytics`, `ia`, `correcao`,
+`biblioteca`, `omr`, `classroom`. Tag nova só se separar um grupo real de 3+ docs.
 
 **`última_revisão` é quando o doc foi conferido, não quando foi escrito.** Corrigiu um fato? Suba.
 Não conferiu? Não suba — data falsa é pior que data velha.
@@ -87,7 +95,26 @@ Detalhe em [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
 ```
 
 Caminho cru (`tecnico/billing-ledger.md` solto no texto) não navega. Arquivo na raiz linka sem `../`.
-Todo doc novo entra no [`INDEX.md`](../../../INDEX.md) — doc fora do índice é doc invisível.
+O texto do link é o caminho **a partir da raiz**; o alvo é relativo ao arquivo. Os dois divergem, e é
+de propósito.
+
+Doc novo entra em **dois** lugares: no [`INDEX.md`](../../../INDEX.md) e no `mapa-*` da sua área
+(`tecnico/mapa-tecnico.md`, `negocio/mapa-do-negocio.md`…). Doc fora do índice é doc invisível; doc
+fora do mapa não aparece na ordem de leitura de quem está chegando.
+
+**Exceção: pasta com nota-índice.** `produto/decisoes/` tem 22 notas e nenhuma delas está no
+`INDEX.md` — quem entra no índice é [`produto/decisoes-de-produto.md`](../../../produto/decisoes-de-produto.md),
+que lista todas com uma linha cada. Decisão nova vira uma nota na pasta **e** uma linha na tabela
+desse índice. A regra real é "nenhum doc é inalcançável", não "todo doc no INDEX.md".
+
+**Nunca `[[wikilink]]`.** A base é um vault do Obsidian e o Obsidian resolve link markdown relativo
+sem ajuda nenhuma — mas o validador do `check-drift.sh` só enxerga link markdown, e dois arquivos de mesmo
+nome (`icp-beachhead.md` existe em `negocio/` e em `rascunhos/negocio/`) ficariam ambíguos. O
+`.obsidian/app.json` já força `useMarkdownLinks`, então o autocomplete do editor sai no formato certo.
+
+**Gotcha ao renomear ou mover dentro do Obsidian:** com `alwaysUpdateLinks`, ele reescreve o **alvo**
+de todo link que apontava para o arquivo — mas não o **texto**. Depois de um `git mv` promovendo
+rascunho, os textos ainda dizem `rascunhos/…` e precisam ser corrigidos à mão.
 
 ## As duas metades da base
 

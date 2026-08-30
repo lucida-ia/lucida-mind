@@ -2,6 +2,7 @@
 quando_usar: discutir cenário competitivo, ameaças, diferencial real, radar big tech
 última_revisão: 2026-08-25
 status: rascunho
+tags: [moat]
 ---
 
 # Cenário competitivo

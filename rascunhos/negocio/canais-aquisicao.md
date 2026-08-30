@@ -14,7 +14,7 @@ status: rascunho
 - **Professores parceiros** (principal canal atual): professores que já usam e recomendam organicamente.
 - **Recomendações de professores**: boca a boca qualificado dentro de redes de educadores.
 - **Grupos educacionais** sem automações / gestão pedagógica avaliativa — canal de entrada direto para
-  ICP 2b (instituições).
+  ICP 2b (instituições) — ver [negocio/icp-beachhead.md](icp-beachhead.md).
 - **Collabs com micro influenciadores no Instagram**: rotina do professor com a Lucida.
 
 ### Programa de afiliados
@@ -46,7 +46,9 @@ A degressão de 20% → 8% é por volumetria: quanto maior o volume indicado, me
 | Seguidores Instagram | ~1.000 |
 
 **Principal alavanca de curto prazo:** migrar a base histórica e os leads frios para o preço de
-tabela atual — vale mais que aquisição nova no imediato.
+tabela atual — vale mais que aquisição nova no imediato. Tamanho da base pagante em
+[negocio/metricas.md](metricas.md); o preço de tabela em vigor, em
+[negocio/monetizacao-creditos.md](../../negocio/monetizacao-creditos.md).
 
 ## O que o produto oferece de suporte a canal
 

@@ -6,6 +6,8 @@ status: canônico
 
 # Arquitetura
 
+Versões, libs, comandos e layout do monorepo em [tecnico/stack.md](stack.md).
+
 ## Backend — Clean Architecture + DDD por feature
 Cada feature é um **bounded context** em `apps/api/src/domains/<feature>/` com 4 camadas e direção de
 dependência fixa:

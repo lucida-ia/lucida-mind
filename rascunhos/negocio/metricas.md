@@ -2,6 +2,7 @@
 quando_usar: reportar tração, falar de MRR, retenção, base pagante, métricas de uso
 última_revisão: 2026-08-25
 status: rascunho
+tags: [billing]
 ---
 
 # Métricas atuais

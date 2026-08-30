@@ -128,7 +128,7 @@ fence = re.compile(r"```.*?```", re.S)
 link = re.compile(r"\]\(([^)#]+\.md)[^)]*\)")
 bad = []
 for root, dirs, files in os.walk(base):
-    dirs[:] = [d for d in dirs if d != ".git"]
+    dirs[:] = [d for d in dirs if d not in (".git", ".obsidian")]
     for name in files:
         if not name.endswith(".md"):
             continue

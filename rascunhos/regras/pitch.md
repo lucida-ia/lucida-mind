@@ -2,6 +2,7 @@
 quando_usar: escrever pitch, landing page, copy de aquisição, narrativa para investidor
 última_revisão: 2026-08-25
 status: parcial
+tags: [moat]
 ---
 
 # Narrativas de pitch (pós-pivô jun/2026)

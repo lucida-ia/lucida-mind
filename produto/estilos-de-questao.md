@@ -2,6 +2,7 @@
 quando_usar: definir tipos de questão, estilos de geração, dificuldade, idiomas suportados
 última_revisão: 2026-08-25
 status: canônico
+tags: [billing, correcao, ia]
 ---
 
 # Estilos de questão, dificuldade e idiomas
@@ -9,6 +10,8 @@ status: canônico
 Fontes: `apps/api/src/domains/exam/domain/question.ts`,
 `apps/api/src/domains/ai-ops/domain/generation-types.ts`,
 `apps/api/src/domains/ai-ops/domain/open-generation-types.ts` (questões abertas).
+Definição de `Question`, `Rubric` e `ExamStyle` em [produto/glossario.md](glossario.md); o preço de
+cada estilo, em [tecnico/billing-ledger.md](../tecnico/billing-ledger.md).
 
 ## Tipos de questão (no exam)
 `QuestionType = "multipleChoice" | "trueFalse" | "open"`

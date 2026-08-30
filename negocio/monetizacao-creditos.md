@@ -2,6 +2,7 @@
 quando_usar: falar de preços, planos, assinatura, top-ups, créditos de boas-vindas, modelo de receita
 última_revisão: 2026-08-25
 status: canônico
+tags: [billing]
 ---
 
 # Monetização — assinatura + créditos

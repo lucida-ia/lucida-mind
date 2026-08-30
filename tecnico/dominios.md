@@ -7,7 +7,8 @@ status: canônico
 # Mapa de domínios (`apps/api/src/domains/`)
 
 27 bounded contexts implementados, cada um com as camadas de que precisa (ver
-[tecnico/arquitetura.md](arquitetura.md)). **Nem todo domínio tem as 4** — `calendar` não tem `infrastructure/`
+[tecnico/arquitetura.md](arquitetura.md)). As entidades citadas aqui estão definidas em
+[produto/glossario.md](../produto/glossario.md). **Nem todo domínio tem as 4** — `calendar` não tem `infrastructure/`
 (lê pelo repositório de `exam`), `support` só tem `presentation/`, `webhook-dispatch` só tem
 `application/` + `infrastructure/`.
 

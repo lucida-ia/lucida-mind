@@ -2,6 +2,7 @@
 quando_usar: discutir preço institucional, canal parceiro vs. direto, desconto por volume, GTM professor-led
 última_revisão: 2026-08-25
 status: rascunho
+tags: [billing, instituicao]
 ---
 
 # Modelo institucional

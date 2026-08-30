@@ -2,6 +2,7 @@
 quando_usar: mexer na Biblioteca — upload de arquivos, presigned S3, extração de texto, fonte de geração
 última_revisão: 2026-08-25
 status: canônico
+tags: [biblioteca]
 ---
 
 # Biblioteca — arquivos do professor como fonte de conteúdo

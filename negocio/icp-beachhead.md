@@ -25,6 +25,10 @@ status: parcial
 > a definir — perfil específico do professor (segmento de ensino, disciplina, rede pública vs privada),
 > beachhead inicial (por onde começar a vender), canais de aquisição, ciclo de venda institucional,
 > objeções e critérios de qualificação. Preencher com input do time, não inferir do código.
+>
+> Há uma proposta para essas lacunas em
+> [rascunhos/negocio/icp-beachhead.md](../rascunhos/negocio/icp-beachhead.md) — **não validada por
+> ninguém do time**, então serve para revisar, não para citar.
 
 Fontes do que está afirmado: domínio `iam` (organization plugin), `billing` (escopo user/org),
 área `/analytics` no web. Posicionamento de marca em [negocio/posicionamento.md](posicionamento.md).

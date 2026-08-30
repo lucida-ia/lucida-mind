@@ -2,6 +2,7 @@
 quando_usar: mexer em geração/correção de IA, modelo OpenAI, extractors, streaming SSE, pricing de IA, LaTeX/matemática
 última_revisão: 2026-08-25
 status: canônico
+tags: [biblioteca, correcao, ia]
 ---
 
 # ai-ops — geração e correção por IA

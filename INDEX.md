@@ -2,19 +2,24 @@
 > Comece aqui. Abra só o doc relevante. Se a resposta não estiver na base, diga que não está.
 
 ## Negócio
+- [negocio/mapa-do-negocio.md](negocio/mapa-do-negocio.md) — Use quando: se orientar na área e ver em que ordem ler os docs de negócio
 - [negocio/visao-geral.md](negocio/visao-geral.md) — Use quando: explicar o que é a Lucida, o problema e a proposta de valor
 - [negocio/posicionamento.md](negocio/posicionamento.md) — Use quando: falar de marca, sub-marcas, as três frentes (professor/instituição/aluno)
 - [negocio/monetizacao-creditos.md](negocio/monetizacao-creditos.md) — Use quando: falar de planos, preços, top-ups, créditos de boas-vindas
 - [negocio/icp-beachhead.md](negocio/icp-beachhead.md) — Use quando: discutir público-alvo e expansão (parcial — ICP detalhado e GTM estão em rascunho)
 
 ## Produto
+- [produto/mapa-do-produto.md](produto/mapa-do-produto.md) — Use quando: se orientar na área e ver em que ordem ler os docs de produto
 - [produto/suite.md](produto/suite.md) — Use quando: listar os módulos do produto e o que cada um faz
 - [produto/glossario.md](produto/glossario.md) — Use quando: precisar do significado de um termo de domínio (exam, submission, rubric, OMR…)
 - [produto/estilos-de-questao.md](produto/estilos-de-questao.md) — Use quando: tipos de questão, estilos de geração, dificuldade, idiomas
-- [produto/decisoes-de-produto.md](produto/decisoes-de-produto.md) — Use quando: entender o porquê de uma decisão (rebrand, analytics-cubo, OMR, Classroom)
-- [produto/motor-assertividade.md](produto/motor-assertividade.md) — Use quando: fundamentar o motor de assertividade (BKT/CDM/IRT), definir escopo por fase de maturidade, consultar parâmetros e princípios de design de avaliação
+- [produto/decisoes-de-produto.md](produto/decisoes-de-produto.md) — Use quando: entender o porquê de uma decisão. É o índice de `produto/decisoes/`, uma nota por decisão
+- [produto/motor-assertividade.md](produto/motor-assertividade.md) — Use quando: fundamentar o motor de assertividade (BKT/CDM/IRT), sustentar a tese de moat, consultar as referências científicas
+- [produto/maturidade-do-motor.md](produto/maturidade-do-motor.md) — Use quando: definir escopo de mudança por fase de maturidade, consultar parâmetros e os dois princípios de design de avaliação
+- [produto/objeto-de-aprendizagem.md](produto/objeto-de-aprendizagem.md) — Use quando: consultar o schema proposto da Q-matrix, regras de feedback, e o que o ADR-0012 decidiu
 
 ## Técnico
+- [tecnico/mapa-tecnico.md](tecnico/mapa-tecnico.md) — Use quando: se orientar na área e ver em que ordem ler os docs técnicos
 - [tecnico/stack.md](tecnico/stack.md) — Use quando: saber versões, libs, comandos, layout do monorepo
 - [tecnico/arquitetura.md](tecnico/arquitetura.md) — Use quando: criar/mover domínio, decisão de camada (Clean Arch + DDD), DI manual, ordem de middleware
 - [tecnico/dominios.md](tecnico/dominios.md) — Use quando: mapear os domínios da api e suas entidades centrais
@@ -29,11 +34,13 @@
 - [tecnico/framework-claude.md](tecnico/framework-claude.md) — Use quando: saber que skill/agent/comando/hook existe no monorepo, escolher quem chamar, entender o que é bloqueado automaticamente
 
 ## UI
+- [ui/mapa-da-ui.md](ui/mapa-da-ui.md) — Use quando: se orientar na área e ver em que ordem ler os docs de UI
 - [ui/modelo-de-ui.md](ui/modelo-de-ui.md) — Use quando: criar tela/componente, Server vs Client, Server Action, estado, shadcn-first
 - [ui/design-tokens.md](ui/design-tokens.md) — Use quando: usar tokens CSS, theme switch, primitivos shadcn de components/ui
 - [ui/identidade-visual.md](ui/identidade-visual.md) — Use quando: escolher cor, tipografia, logo, contraste, tom de voz
 
 ## Regras
+- [regras/mapa-das-regras.md](regras/mapa-das-regras.md) — Use quando: descobrir qual dos quatro docs tem a regra que você procura
 - [regras/codigo.md](regras/codigo.md) — Use quando: revisar/escrever código — regras invioláveis, hooks bloqueantes, checklist dos reviewers
 - [regras/processo.md](regras/processo.md) — Use quando: citar uma regra numerada, entender como se trabalha no monorepo, decidir onde registrar uma decisão
 - [regras/produto.md](regras/produto.md) — Use quando: decidir comportamento de produto (degradação graciosa, idiomas, rubrica, replica set)
@@ -60,6 +67,11 @@ Convenção em [rascunhos/LEIA-ME.md](rascunhos/LEIA-ME.md).
 - [rascunhos/regras/pitch.md](rascunhos/regras/pitch.md) — pitch, landing page, copy de aquisição, narrativa para investidor
 
 ---
+
+Este repositório também é um **vault do Obsidian** — abra a pasta como vault para ver o grafo,
+os backlinks e o painel [`Lucida.base`](Lucida.base) (status e `última_revisão` de tudo).
+Cada área tem um `mapa-*` com a ordem de leitura; este índice segue sendo a rota mais curta
+para um doc específico.
 
 Os docs fora de `rascunhos/` saem do código. Divergiu do código, o código ganha — e
 `./check-drift.sh` aponta onde.

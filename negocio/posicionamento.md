@@ -2,6 +2,7 @@
 quando_usar: falar de marca, nome, sub-marcas, as três frentes (professor/instituição/aluno), como nomear o produto
 última_revisão: 2026-08-25
 status: canônico
+tags: [instituicao]
 ---
 
 # Posicionamento — "Lucida única"
