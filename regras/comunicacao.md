@@ -8,11 +8,13 @@ status: canônico
 
 ## Copy de produto
 - **UI sempre em pt-BR** (labels, botões, mensagens, placeholders). É a única parte do produto em
-  português — o código é inglês (ver tecnico/convencoes-de-codigo.md).
+  português — o código é inglês (ver [tecnico/convencoes-de-codigo.md](../tecnico/convencoes-de-codigo.md)).
 - **Tom por frente**: claro, direto, de apoio ao professor. A cor acompanha a frente (professor azul,
-  instituição roxo) — ver ui/identidade-visual.md. Não misturar tons numa mesma tela.
+  instituição roxo) — ver [ui/identidade-visual.md](../ui/identidade-visual.md). Não misturar tons numa mesma tela.
 - **Uma marca**: é "Lucida", sem sub-marcas. "Lucida para professores/instituições/alunos" é
-  qualificador, não nome de produto separado (negocio/posicionamento.md).
+  qualificador, não nome de produto separado ([negocio/posicionamento.md](../negocio/posicionamento.md)).
+- **Narrativa de pitch e copy de aquisição** não são regra: há uma proposta em
+  [rascunhos/regras/pitch.md](../rascunhos/regras/pitch.md), **não validada por ninguém do time**.
 
 ## Métricas e tração (cuidado com nuance)
 - **Churn involuntário ≠ cancelamento.** Falha de pagamento (cartão recusado, expirado) não é o cliente

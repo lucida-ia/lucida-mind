@@ -1,13 +1,13 @@
 ---
 quando_usar: escolher cor, tipografia, logo, checar contraste, definir tom de voz da marca
-última_revisão: 2026-06-27
+última_revisão: 2026-08-25
 status: canônico
 ---
 
 # Identidade visual
 
-Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver negocio/posicionamento.md). Tokens
-de código em ui/design-tokens.md.
+Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver [negocio/posicionamento.md](../negocio/posicionamento.md)). Tokens
+de código em [ui/design-tokens.md](design-tokens.md).
 
 ## Paletas
 ### Professor (azul)
@@ -49,6 +49,13 @@ hierarquia herda o tom.
 - Hierarquia: H1 Poppins Regular 70pt/lh1 · H2 40pt/lh1 · corpo 20pt/lh1 · detalhe Light 18pt/lh1.1.
 - Nunca: esticar/distorcer, outline em texto, justificar, kern apertado, trocar a fonte.
 
+> **Ressalva do código, não da marca**: `globals.css` aplica `letter-spacing: -0.01em` no `body` via
+> `@layer base`. É um aperto global de −1%, tecnicamente em tensão com "nunca kern apertado". Está
+> registrado aqui para a divergência não ser redescoberta; mudar é decisão de design.
+
+Na web, a Poppins é carregada com os weights `300, 400, 500, 600, 700` via `next/font`. A referência
+de marca cita `300/400/500/700` — o **600** é extra e vive só no código.
+
 ## Logotipo
 - Tamanho mínimo: **160px** (logo completo), **40px** (só o símbolo).
 - Área de proteção: largura da letra "c" do logotipo, em todos os lados.
@@ -56,4 +63,4 @@ hierarquia herda o tom.
 - Nunca: rotacionar, mudar proporções, adicionar outline, recolorir, acrescentar elementos.
 
 ## Tom de voz
-Claro, direto e de apoio ao professor. Copy de UI sempre em pt-BR (ver regras/comunicacao.md).
+Claro, direto e de apoio ao professor. Copy de UI sempre em pt-BR (ver [regras/comunicacao.md](../regras/comunicacao.md)).

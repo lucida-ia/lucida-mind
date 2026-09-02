@@ -1,7 +1,8 @@
 ---
 quando_usar: mexer na Biblioteca — upload de arquivos, presigned S3, extração de texto, fonte de geração
-última_revisão: 2026-06-30
+última_revisão: 2026-08-25
 status: canônico
+tags: [biblioteca]
 ---
 
 # Biblioteca — arquivos do professor como fonte de conteúdo
@@ -39,12 +40,12 @@ Na geração, o professor passa `libraryFileIds`. O `ai-ops` resolve via a porta
   analytics **após** a geração concluir.
 
 Entra em `generate-exam-questions`, `generate-open-questions`, `generate-lesson-plan` e
-`regenerate-*`, ao lado de PDF/DOCX/texto/YouTube (ver tecnico/ai-ops.md).
+`regenerate-*`, ao lado de PDF/DOCX/texto/YouTube (ver [tecnico/ai-ops.md](ai-ops.md)).
 
 ## Acesso
 A `SubscriberAccessPolicy` **compartilhada** (`shared/access/subscriber-access-policy.ts`) libera para
 **staff**, **membro de organização** ou **assinante ativo** — a mesma política do Calendário (ver
-tecnico/calendario.md). No backend, o middleware `requireLibraryAccess` gateia os endpoints (acesso negado
+[tecnico/calendario.md](calendario.md)). No backend, o middleware `requireLibraryAccess` gateia os endpoints (acesso negado
 → **402**); no web, `getCanAccessLibrary()` decide entre `<LibraryView />` e `<LibraryUpsell />`.
 
 ## Storage (portas + adapters)
@@ -69,12 +70,39 @@ tecnico/calendario.md). No backend, o middleware `requireLibraryAccess` gateia o
 Sem as `LIBRARY_S3_*` → `UnavailableFileStorage` injetado, endpoints da Biblioteca devolvem **503**,
 resto da api segue.
 
-> **Gotcha conhecido**: o bucket precisa de **CORS** liberado para o `WEB_ORIGIN` (upload/download
-> presigned vêm do browser). Não há fallback de proxy pela API — sem CORS, o upload falha no browser.
+> **Gotcha conhecido**: o bucket precisa de **CORS** liberado para o `WEB_ORIGIN`, porque o **PUT
+> presigned** (e o download presigned) sai do browser direto para o bucket. Sem CORS, o upload falha.
+>
+> Isso **não** vale para a pré-visualização: existe um proxy same-origin,
+> `GET /v1/library/files/:id/preview` (`StreamFilePreviewUseCase` + porta `getObjectStream`),
+> justamente para o browser renderizar o PDF sem depender do CORS do bucket.
+
+TTL dos presigned: **900s** para upload, **300s** para download.
+
+No `confirmUpload` o `headObject` é **autoritativo** — tamanho e mime declarados pelo cliente não são
+confiados; acima do teto, o objeto é deletado e o registro apagado.
+
+Texto extraído vai **inline** até **256 KB** (`INLINE_TEXT_MAX_BYTES`); acima disso vai para um objeto
+companion (`storageKey.companionTextKey`).
+
+Códigos de erro do domínio: `LIBRARY_FILE_NOT_READY` 409, `LIBRARY_UPLOAD_INCOMPLETE` 409,
+`LIBRARY_FILE_TOO_LARGE` 400, `LIBRARY_STORAGE_NOT_CONFIGURED` 503, `LIBRARY_ACCESS_DENIED` 402.
+
+## Faixa de páginas
+O `LibraryFile` guarda **`pageTextSegments`** (`{ pageNumber, start, end }[]`) — os offsets de cada
+página dentro do texto extraído. É o que permite ao professor escolher **um intervalo de páginas** do
+arquivo na hora de gerar: `ResolveLibrarySourcesUseCase` devolve as `pages` reconstruídas dos offsets
+e o `ai-ops` fatia antes do prompt. Ver [tecnico/ai-ops.md](ai-ops.md).
+
+Outros campos do `LibraryFile` além dos citados acima: `originalFilename`, `mimeType`, `sizeBytes`,
+`checksum`, `extractionError`, `extractionDurationMs`.
 
 ## Pontas soltas
-- **Seed** de disciplinas: `pnpm --filter @lucida/api run seed:library-subjects`.
+- **Scripts**: `seed:library-subjects` (disciplinas) e `backfill:page-segments` (offsets de página
+  em arquivos antigos).
 - **UI**: `/app/biblioteca` → `features/app/biblioteca/` (`library-view`, `library-file-card`,
-  `library-picker-dialog`, `library-filters`, `library-upsell`).
-- **Wiring**: `apps/api/src/main.ts` (storage + `LibrarySourceResolverAdapter` ~659–696; router
-  ~1456–1461). Custo de crédito por operação em tecnico/billing-ledger.md.
+  `library-picker-dialog`, `library-filters`, `library-upsell`, `upload-dialog`, `upload-client`,
+  `edit-file-dialog`, `delete-file-dialog`, `subject-combobox`, `status-badge`).
+- **Wiring**: `apps/api/src/main.ts` — storage e `LibrarySourceResolverAdapter` no bloco da
+  biblioteca, router via `makeLibraryRouter`. Custo de crédito por operação em
+  [tecnico/billing-ledger.md](billing-ledger.md).

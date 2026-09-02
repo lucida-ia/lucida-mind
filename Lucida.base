@@ -1,0 +1,37 @@
+filters:
+  or:
+    - note.status == "canônico"
+    - note.status == "parcial"
+    - note.status == "rascunho"
+properties:
+  note.status:
+    displayName: Status
+  note.última_revisão:
+    displayName: Última revisão
+  note.quando_usar:
+    displayName: Use quando
+views:
+  - type: table
+    name: Toda a base
+    order:
+      - file.name
+      - note.status
+      - note.última_revisão
+      - note.quando_usar
+  - type: table
+    name: Por área
+    group_by: file.folder
+    order:
+      - file.name
+      - note.status
+      - note.última_revisão
+  - type: table
+    name: Não validado
+    filters:
+      and:
+        - note.status != "canônico"
+    order:
+      - file.name
+      - note.status
+      - note.última_revisão
+      - note.quando_usar

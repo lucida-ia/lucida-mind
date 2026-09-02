@@ -1,0 +1,12 @@
+.DS_Store
+
+# Config do Obsidian: o funcional é versionado (app, core-plugins, graph).
+# O que fica de fora é estado de máquina ou gosto pessoal.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/appearance.json
+.obsidian/hotkeys.json
+.obsidian/cache
+.obsidian/plugins/
+.obsidian/themes/
+.obsidian/snippets/

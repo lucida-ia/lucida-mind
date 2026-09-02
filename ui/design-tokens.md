@@ -1,6 +1,6 @@
 ---
 quando_usar: usar tokens CSS, aplicar theme switch (analytics/kintal), escolher primitivo shadcn
-última_revisão: 2026-06-27
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -8,7 +8,7 @@ status: canônico
 
 Tokens vivem em `apps/web/src/styles/globals.css`, dentro de `@theme` do Tailwind v4. **Hex nunca é
 hardcoded em componente** — use as classes utilitárias geradas dos tokens (`bg-brand-primary`,
-`text-ink`, etc.). Valores de cor/marca em ui/identidade-visual.md.
+`text-ink`, etc.). Valores de cor/marca em [ui/identidade-visual.md](identidade-visual.md).
 
 ## Tokens em `@theme`
 - **Cores professor (azul)**: `--color-brand-primary #007aff`, `--color-brand-dark-01 #1d14ff`,
@@ -28,9 +28,20 @@ hardcoded em componente** — use as classes utilitárias geradas dos tokens (`b
 
 ## Theme switches
 Aplicados num wrapper de layout — os componentes shadcn herdam **sem** precisar de `variant`:
-- **`.theme-analytics`** — remapeia os semânticos (`--color-primary`, `--color-ring`, shadows) para o
-  **roxo** da instituição. É o que faz `/analytics/*` "virar roxo" automaticamente.
-- **`.theme-kintal`** — remapeia para **grayscale** (backoffice interno, sem cor de produto): só neutros.
+Os dois trocam **exatamente quatro** vars semânticas — `--color-ring`, `--color-accent`,
+`--color-accent-foreground` e `--shadow-focus` — mais `::selection` e `.pulse-dot`.
+
+**`--color-primary` NÃO é remapeado** por nenhum dos dois: segue `#0a0a0a` em toda parte. E os tokens
+de marca (`--color-brand-*`, `--color-analytics-*`) ficam intactos de propósito, para componentes
+compartilhados que precisem da cor de produto continuarem funcionando.
+
+- **`.theme-analytics`** — aponta as quatro para o **roxo** da instituição
+  (`--color-analytics-primary`). É o que faz o que é "neutro" em `/analytics/*` herdar roxo.
+- **`.theme-kintal`** — aponta as quatro para **grayscale** (`--color-gray-800`, `--color-ink`):
+  backoffice interno, sem cor de produto.
+
+Ou seja: um componente que usa `bg-primary` **não** muda de cor entre as frentes. Quem herda o tema é
+o que usa ring, accent e foco.
 
 ## Classes utilitárias e print
 Além dos tokens em `@theme`, `globals.css` define utilitários reusáveis (não recriar):
@@ -43,7 +54,25 @@ Além dos tokens em `@theme`, `globals.css` define utilitários reusáveis (não
   export é Ctrl+P → salvar PDF).
 
 ## Primitivos disponíveis (`components/ui/`)
-Reutilize estes em vez de recriar: `button` (variantes primary/accent/outline/ghost/on-dark + sizes via
-`cva`), `input`, `textarea`, `label`, `dialog`, `dropdown-menu`, `sheet`, `action-menu`,
-`clickable-card`, `container`. Todos usam `cn()` (clsx + tailwind-merge) e `cva()` para variantes, com
-os tokens da marca.
+São **15**. Reutilize em vez de recriar — recriar um destes é violação da regra shadcn-first
+([regras/codigo.md](../regras/codigo.md)). Confira esta lista **antes** de criar qualquer primitivo:
+
+| | | |
+|---|---|---|
+| `action-menu` | `dialog` | `popover` |
+| `button` | `dropdown-menu` | `select` |
+| `calendar` | `input` | `sheet` |
+| `clickable-card` | `label` | `switch` |
+| `container` | `date-time-picker` | `textarea` |
+
+O `button` tem variantes primary (default) / accent / outline / ghost / on-dark e sizes
+`sm | md | lg | xl` (default `md`). Todos usam `cn()` (clsx + tailwind-merge) e `cva()` para variantes,
+com os tokens da marca.
+
+## Configuração
+`components.json`: style `new-york`, baseColor `neutral`, `iconLibrary: lucide`, e
+`tailwind.config: ""` — **não existe `tailwind.config.*`** no repositório. Tailwind v4 configura por
+CSS, dentro do `@theme` do `globals.css`.
+
+Além dos tokens, `globals.css` importa `tw-animate-css` e `katex/dist/katex.min.css`, e aplica
+`letter-spacing: -0.01em` no `body` via `@layer base`.

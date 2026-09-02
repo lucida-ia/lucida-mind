@@ -1,6 +1,6 @@
 ---
 quando_usar: precisar do significado preciso de um termo de domínio da Lucida
-última_revisão: 2026-06-30
+última_revisão: 2026-08-25
 status: canônico
 ---
 
@@ -33,9 +33,22 @@ explica em pt-BR.
 | **Organization** (organização/instituição) | Instituição que agrupa professores e dados. `organizationId = null` significa professor individual. |
 | **passingGrade** (média de aprovação) | Nota de corte do professor (0–10, default **6**), campo do usuário no BetterAuth. Resolve `org → professor → 6` (org adiado). Classifica aprovado/reprovado nas análises (sai como `meta.passingGrade` no cubo). **Não** é a aprovação da correção. |
 | **ExamStyle** | Estilo de geração: `simple`, `contextual`, `analytical`, `reflective`. Afeta texto e preço. |
-| **CreditWallet** (carteira) | Saldo de créditos com escopo (`user`/`org`), origem (`subscription`/`topup`/`welcome`/`promo`/`admin_grant`) e validade (`expiresAt`). Não há mais origem `pix` (top-up PIX desativado). |
+| **CreditWallet** (carteira) | Saldo de créditos com escopo (`user`/`org`), origem (`subscription`/`topup`/`welcome`/`promo`/`admin_grant`) e validade (`expiresAt`). Não há mais origem `pix` (top-up PIX desativado). Consumo por prioridade da origem. |
 | **LibraryFile** | Arquivo da Biblioteca (`pdf`/`docx`/`txt`) com status (`UPLOADING`/`PROCESSING`/`READY`/`ERROR`), texto extraído, disciplina/segmento e métricas de uso. Fonte de conteúdo para geração. |
 | **LibrarySubject** | Disciplina nomeada da Biblioteca, dentro de um segmento (`FUNDAMENTAL`/`MEDIO`/`FACULDADE`/`INFOPRODUTOR`). |
-| **Ledger** | Registro de movimentos de crédito (créditos/débitos) com rastreio de tokens usados. |
+| **Ledger** | Registro de movimentos de crédito (créditos/débitos) com rastreio de tokens usados, `relatedAction` e um `reason` de conjunto fechado. Coleções `credit_wallets` e `credit_ledger`. |
 | **BetterAuth** | Framework de autenticação (Google OAuth + e-mail/senha + plugin de organização). Sessão no cookie `lucida.session_token`. |
 | **Kintal** | Backoffice interno staff-only (não exposto ao cliente). |
+| **TeacherAssistant** (auxiliar) | Vínculo N:N entre um professor e um auxiliar, dentro de uma organização. Revogação por soft-delete (`revokedAt`). O auxiliar opera **em nome** do professor, com os dados dele — nunca com a autoridade administrativa dele. |
+| **SubscriberAccessPolicy** | A política única que decide "é assinante?": staff **ou** membro de organização **ou** assinatura ativa. Governa Biblioteca e Calendário; sem direito → 402 + upsell. |
+| **SecurityLevel** (modo de aplicação) | `off` (livre) ou `strict` (estrito). No estrito, a submissão auto-finaliza no **3º strike** de troca de aba/blur e fica flagrada. Editável depois da criação; prova copiada herda o modo. |
+| **IntegrityFlags** | Contadores de comportamento durante a prova online: `tabSwitches`, `focusLosses`, `copyAttempts`, `rightClickAttempts`, `violationCount`. |
+| **SubmissionEndReason** | Como a submissão terminou: `submitted`, `time_expired`, `violation` (3º strike no modo estrito) ou `abandoned` (placeholder, não emitido hoje). |
+| **ExamLinkToken** | Token que identifica um aluno específico num link de prova (`/exam/[shareId]/start/[token]`), pré-preenchendo a identidade. Emitido pelo escopo `exams:share` da API pública. |
+| **ApiKeyScope** | Permissão de uma chave da API pública: `classes:read/write`, `students:read/write`, `exams:read/write/share`. |
+| **MatriculaScope** | Escopo de unicidade da matrícula numa organização: `teacher` (default) ou `organization`. Configurável em `organization-preferences`. |
+| **CubeScope / CubeBreakdown** | Parâmetros do "cubo" de analytics. Escopo: `instituicao\|professor\|turma\|aluno\|prova`. Corte: `none\|questao\|dificuldade\|habilidade\|criterio_rubrica\|estilo\|tempo\|peer\|turmas\|alunos\|provas`. |
+| **Notification / Severity** | Mensagem in-app na inbox do usuário, com severidade `info\|success\|warning\|alert`. Enviada individualmente ou por campanha (staff ou admin de org). |
+| **RoadmapItem** | Item do roadmap público, com estágio (`suggested\|under_review\|planned\|in_progress\|shipped\|declined`), produto (`exam\|analytics`) e votos da comunidade. |
+| **KC (Knowledge Component)** | Unidade de habilidade que uma questão exercita — código BNCC quando aplicável, slug provisório quando não. Base do motor de assertividade; **ainda não existe no código**. Ver [produto/motor-assertividade.md](motor-assertividade.md). |
+| **Q-matrix** | O mapa questão → KC(s). No ADR-0012, vira a coleção `learning_objects`, um documento por `questionId`. **Proposto, não implementado**. Schema em [produto/objeto-de-aprendizagem.md](objeto-de-aprendizagem.md). |
