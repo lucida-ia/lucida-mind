@@ -50,9 +50,9 @@
 
 ## Rascunhos — não validados
 
-**Não cite nada daqui como fato da Lucida.** São propostas de jun/2026 que ninguém do time conferiu:
-tração, preço institucional, cenário competitivo, ICP e narrativa de pitch. Estão indexados para
-serem achados e revisados — não para embasar cotação a cliente, pitch ou decisão de preço.
+**Não cite nada daqui como fato da Lucida.** São propostas que ninguém do time conferiu: tração, preço
+institucional, cenário competitivo, ICP, narrativa de pitch, régua de reativação, estratégia com a Unifast e funil de autoavaliação. As oito primeiras
+são de jun/2026. Estão indexados para serem achados e revisados — não para embasar cotação a cliente, pitch ou decisão de preço.
 
 Validado, o arquivo sobe de pasta com `git mv` e entra na seção correspondente acima.
 Convenção em [rascunhos/LEIA-ME.md](rascunhos/LEIA-ME.md).
@@ -61,6 +61,9 @@ Convenção em [rascunhos/LEIA-ME.md](rascunhos/LEIA-ME.md).
 - [rascunhos/negocio/metricas.md](rascunhos/negocio/metricas.md) — tração, MRR, retenção, base pagante
 - [rascunhos/negocio/modelo-institucional.md](rascunhos/negocio/modelo-institucional.md) — preço institucional, canal parceiro vs. direto, desconto por volume
 - [rascunhos/negocio/canais-aquisicao.md](rascunhos/negocio/canais-aquisicao.md) — canais, afiliados, o que foi testado e descartado
+- [rascunhos/negocio/ativacao-e-inatividade.md](rascunhos/negocio/ativacao-e-inatividade.md) — tags de inatividade do professor, do cadastro sem uso à prova não aplicada, que sinal existe para cada uma e como calibrar os cortes pelo uso assíduo
+- [rascunhos/negocio/estrategia-jornada-e-canal-unifast.md](rascunhos/negocio/estrategia-jornada-e-canal-unifast.md) — posicionamento School/Creators como camada de jornada e evidência de aprendizagem, cinco forças, estratégia e o canal de aquisição via Unifast (out/2026)
+- [rascunhos/negocio/funil-autoavaliacao.md](rascunhos/negocio/funil-autoavaliacao.md) — funil de autoavaliação (raio-x de aprendizagem): etapas, perguntas, pontuação, roteamento, call do consultor, uso como inscrição de evento
 - [rascunhos/negocio/competidores.md](rascunhos/negocio/competidores.md) — cenário competitivo, radar de big tech
 - [rascunhos/negocio/moat-flywheel.md](rascunhos/negocio/moat-flywheel.md) — vantagem competitiva, flywheel, janela competitiva
 - [rascunhos/produto/roadmap.md](rascunhos/produto/roadmap.md) — prioridades e sequência de desenvolvimento pela lente de moat
