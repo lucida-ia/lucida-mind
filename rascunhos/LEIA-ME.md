@@ -27,7 +27,9 @@ ficar mentindo com ar de verdade.
 
 Onze docs de contexto de negócio — tração, preço institucional, ICP, canais, concorrência, moat,
 roadmap, narrativas de pitch, a régua de reativação por inatividade, a estratégia de jornada com o
-canal Unifast e o funil de autoavaliação. Os oito primeiros são de jun/2026; os dois últimos, de out/2026. Nenhum tem fonte no repositório, então nem o `check-drift.sh` alcança: só uma pessoa pode
+canal Unifast e o funil de autoavaliação. Os oito primeiros são de jun/2026; os dois últimos, de out/2026.
+Na raiz da pasta fica ainda o `estado-e-direcao.md`, um snapshot consolidado de jul/2026 cujo destino
+(raiz da base ou `negocio/`) não foi decidido. Nenhum tem fonte no repositório, então nem o `check-drift.sh` alcança: só uma pessoa pode
 validá-los.
 
 O `produto/motor-assertividade.md` saiu daqui em jul/2026, depois de revisado — é o precedente de

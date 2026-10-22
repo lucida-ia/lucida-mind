@@ -57,6 +57,7 @@ são de jun/2026. Estão indexados para serem achados e revisados — não para 
 Validado, o arquivo sobe de pasta com `git mv` e entra na seção correspondente acima.
 Convenção em [rascunhos/LEIA-ME.md](rascunhos/LEIA-ME.md).
 
+- [rascunhos/estado-e-direcao.md](rascunhos/estado-e-direcao.md) — snapshot consolidado de jul/2026: onde a Lucida está e para onde caminha, com as divergências entre estratégia e código. Destino ainda a decidir.
 - [rascunhos/negocio/icp-beachhead.md](rascunhos/negocio/icp-beachhead.md) — ICP detalhado, wedge de cursinho STEM, GTM professor-led. Preenche o "a definir" do canônico.
 - [rascunhos/negocio/metricas.md](rascunhos/negocio/metricas.md) — tração, MRR, retenção, base pagante
 - [rascunhos/negocio/modelo-institucional.md](rascunhos/negocio/modelo-institucional.md) — preço institucional, canal parceiro vs. direto, desconto por volume
