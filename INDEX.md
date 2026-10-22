@@ -65,6 +65,7 @@ Convenção em [rascunhos/LEIA-ME.md](rascunhos/LEIA-ME.md).
 - [rascunhos/negocio/ativacao-e-inatividade.md](rascunhos/negocio/ativacao-e-inatividade.md) — tags de inatividade do professor, do cadastro sem uso à prova não aplicada, que sinal existe para cada uma e como calibrar os cortes pelo uso assíduo
 - [rascunhos/negocio/estrategia-jornada-e-canal-unifast.md](rascunhos/negocio/estrategia-jornada-e-canal-unifast.md) — posicionamento School/Creators como camada de jornada e evidência de aprendizagem, cinco forças, estratégia e o canal de aquisição via Unifast (out/2026)
 - [rascunhos/negocio/funil-autoavaliacao.md](rascunhos/negocio/funil-autoavaliacao.md) — funil de autoavaliação (raio-x de aprendizagem): etapas, perguntas, pontuação, roteamento, call do consultor, uso como inscrição de evento
+- [rascunhos/negocio/playbook-cs-jornada.md](rascunhos/negocio/playbook-cs-jornada.md) — playbook de CS: jornada avaliativa com o que já existe, convenção uma atividade = uma competência, cadência e placar de saúde
 - [rascunhos/negocio/competidores.md](rascunhos/negocio/competidores.md) — cenário competitivo, radar de big tech
 - [rascunhos/negocio/moat-flywheel.md](rascunhos/negocio/moat-flywheel.md) — vantagem competitiva, flywheel, janela competitiva
 - [rascunhos/produto/roadmap.md](rascunhos/produto/roadmap.md) — prioridades e sequência de desenvolvimento pela lente de moat

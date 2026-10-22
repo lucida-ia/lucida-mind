@@ -25,9 +25,9 @@ ficar mentindo com ar de verdade.
 
 ## O que tem aqui hoje
 
-Onze docs de contexto de negócio — tração, preço institucional, ICP, canais, concorrência, moat,
+Doze docs de contexto de negócio — tração, preço institucional, ICP, canais, concorrência, moat,
 roadmap, narrativas de pitch, a régua de reativação por inatividade, a estratégia de jornada com o
-canal Unifast e o funil de autoavaliação. Os oito primeiros são de jun/2026; os dois últimos, de out/2026.
+canal Unifast, o funil de autoavaliação e o playbook de CS da jornada. Os oito primeiros são de jun/2026; os três últimos, de out/2026.
 Na raiz da pasta fica ainda o `estado-e-direcao.md`, um snapshot consolidado de jul/2026 cujo destino
 (raiz da base ou `negocio/`) não foi decidido. Nenhum tem fonte no repositório, então nem o `check-drift.sh` alcança: só uma pessoa pode
 validá-los.
