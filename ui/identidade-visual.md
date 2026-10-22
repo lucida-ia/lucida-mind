@@ -1,12 +1,12 @@
 ---
 quando_usar: escolher cor, tipografia, logo, checar contraste, definir tom de voz da marca
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
 # Identidade visual
 
-Fonte: skill `brand-lucida`. Uma marca, três frentes por cor (ver [negocio/posicionamento.md](../negocio/posicionamento.md)). Tokens
+Fonte: skill `brand-lucida`. Três frentes de uso por cor (ver [negocio/posicionamento.md](../negocio/posicionamento.md)). Tokens
 de código em [ui/design-tokens.md](design-tokens.md).
 
 ## Paletas
@@ -27,7 +27,18 @@ de código em [ui/design-tokens.md](design-tokens.md).
 | Roxo claro (bg suave/accents) | `#927AFC` | 2645 C |
 
 ### Aluno (azul claro)
-Frente de marca **futura** (sem auth dedicada hoje): azul claro `#5CDAFF`.
+Usada na Área do Aluno (`/aluno/*`), pelo wrapper `.theme-student`. A marca define só o principal; os
+tons escuros existem no código porque `#5CDAFF` em branco fica muito abaixo de AA para texto.
+
+| Uso | Hex | Token |
+|---|---|---|
+| Azul claro principal | `#5CDAFF` | `--color-student-primary` |
+| Escuro 01 (menor texto, anel de foco) | `#0E7490` | `--color-student-dark-01` |
+| Escuro 02 (ênfase) | `#155E75` | `--color-student-dark-02` |
+| Claro (bg suave) | `#A8ECFF` | `--color-student-light` |
+
+Os tons escuros e o claro **não estão na referência de marca**; vivem só no código. Texto sobre o
+accent é `ink`, não branco — o azul claro não sustenta texto branco em AA.
 
 ### Neutros (todas as frentes)
 Azul super escuro `#051E2C` (fundo dark) · Off white `#F9F5EA` · Preto `#000000` · Branco `#FFFFFF` ·
@@ -41,6 +52,8 @@ hierarquia herda o tom.
   4.5:1, então para **texto pequeno** use `#1D14FF` (~8.1:1).
 - `#6C3CFB` em branco = **5.71:1** → **AA para texto normal** (≥ 14px). Para mais folga em texto pequeno,
   `#4D30CE` (~7.3:1).
+- `#5CDAFF` em branco = **1.62:1** → não serve para texto. Para texto pequeno, `#0E7490` (~5.4:1); para ênfase,
+  `#155E75` (~7.3:1).
 
 ## Tipografia
 - **Poppins** — toda a UI (corpo e títulos).

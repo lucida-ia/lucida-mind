@@ -11,8 +11,9 @@ Uma nota por decisão em `produto/decisoes/`; esta página é o índice.
 
 | Decisão | Em uma linha |
 |---|---|
-| [rebrand "Lucida única"](decisoes/rebrand-lucida-unica.md) | uma marca, três frentes por cor + qualificador; sub-marcas descontinuadas |
-| [analytics como "cubo"](decisoes/analytics-cubo.md) | motor parametrizável calculado on-read, por escopo + corte |
+| [rebrand "Lucida única"](decisoes/rebrand-lucida-unica.md) | uma marca, três frentes por cor + qualificador; sub-marcas descontinuadas; frentes de mercado substituídas por School/Creators |
+| [Lucida School e Lucida Creators](decisoes/school-e-creators.md) | formal e informal; foco em experiência de aprendizagem, não em ferramental; ainda sem código |
+| [analytics como "cubo"](decisoes/analytics-cubo.md) | motor parametrizável calculado on-read, por escopo + corte; corte por habilidade ainda vazio |
 | [rebuild do scanner OMR](decisoes/scanner-omr.md) | geometria única vendorizada, ArUco + QR por aluno, scoring na API |
 | [transcrição do YouTube](decisoes/transcricao-youtube.md) | serviço Python, legenda antes de áudio, yt-dlp exige `player_client=android` |
 | [Google Classroom](decisoes/google-classroom.md) | Fase 1 feita; Fases 2 e 3 são código morto, não feature engatilhada |
@@ -28,20 +29,23 @@ Uma nota por decisão em `produto/decisoes/`; esta página é o índice.
 | [modo de aplicação editável](decisoes/modo-de-aplicacao-editavel.md) | editável após a criação; prova copiada herda o modo |
 | [delegação a auxiliares](decisoes/delegacao-a-auxiliares.md) | vínculo N:N na organização; dá dado, nunca autoridade |
 | [roadmap público](decisoes/roadmap-publico.md) | kanban aberto com voto, como canal de priorização |
+| [hub de instituições](decisoes/hub-de-instituicoes.md) | visão agregada de várias instituições, somente leitura; diverge do ADR-0013 do código |
+| [engajamento antes e depois da janela](decisoes/engajamento-fora-da-janela.md) | atividades do aluno não dependem só das janelas do professor; forma ainda não decidida |
 
 ## Decisões de 2026-08-15 — fundação do motor de assertividade
 
 As três primeiras foram tomadas juntas e são **pré-condição** uma da outra. **Nenhuma está
-implementada**; todas dependem do ADR-0012. Fundamento em
-[produto/motor-assertividade.md](motor-assertividade.md).
+implementada.** O KC por questão de que dependem está em construção no épico #141, que substituiu o
+ADR-0012 para KC. Fundamento em [produto/motor-assertividade.md](motor-assertividade.md).
 
 | Decisão | Em uma linha |
 |---|---|
-| [indicadores por KC](decisoes/indicadores-por-kc.md) | reportar por Knowledge Component, com BNCC como chave, mirando o IDEB |
+| [indicadores por KC](decisoes/indicadores-por-kc.md) | reportar por Knowledge Component, com BNCC como chave, mirando o IDEB; em construção no #141 |
 | [aluno como usuário](decisoes/aluno-como-usuario.md) | sem identidade persistente não há série histórica por aluno |
-| [flashcards como coletor de KC](decisoes/flashcards-coletor-de-kc.md) | prova é evento raro; N≥4 por KC precisa de coleta frequente |
-| [ADR-0012 — questão rastreável](decisoes/adr-0012-questao-rastreavel.md) | `questionId` estável + bounded context `learning-object` para a Q-matrix |
-| [ADR-0013 — multi-tenant](decisoes/adr-0013-multi-tenant.md) | instituição é o `organization` do BetterAuth; aluno só-por-convite |
+| [flashcards como coletor de KC](decisoes/flashcards-coletor-de-kc.md) | prova é evento raro; N≥4 por KC precisa de atividade fora das janelas de prova |
+| [ADR-0012 — questão rastreável](decisoes/adr-0012-questao-rastreavel.md) | `questionId` + `learning-object` para a Q-matrix; parado (0009 em branch), substituído pelo #141 para KC |
+| [ADR-0013 — instituição como nível 0](decisoes/adr-0013-multi-tenant.md) | org solo para todo professor, org dona dos dados, pool único; mesclado como proposto, fases não executadas |
 
-Os dois ADRs vivem no `lucida-monorepo` (`docs/adr/`), com status `proposto`, em branch. Numeração e
-onde registrar cada tipo de decisão em [regras/processo.md](../regras/processo.md).
+O ADR-0012 da base é o 0009 do `lucida-monorepo`, só na branch `adr/0010-multi-tenant-institution`,
+status `proposto`. Numeração e onde registrar cada tipo de decisão em
+[regras/processo.md](../regras/processo.md).

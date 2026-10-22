@@ -4,19 +4,19 @@
 ## Negócio
 - [negocio/mapa-do-negocio.md](negocio/mapa-do-negocio.md) — Use quando: se orientar na área e ver em que ordem ler os docs de negócio
 - [negocio/visao-geral.md](negocio/visao-geral.md) — Use quando: explicar o que é a Lucida, o problema e a proposta de valor
-- [negocio/posicionamento.md](negocio/posicionamento.md) — Use quando: falar de marca, sub-marcas, as três frentes (professor/instituição/aluno)
+- [negocio/posicionamento.md](negocio/posicionamento.md) — Use quando: falar de marca, as frentes de mercado (Lucida School / Lucida Creators), as três frentes de uso (professor/instituição/aluno), hub e piso de instituição
 - [negocio/monetizacao-creditos.md](negocio/monetizacao-creditos.md) — Use quando: falar de planos, preços, top-ups, créditos de boas-vindas
 - [negocio/icp-beachhead.md](negocio/icp-beachhead.md) — Use quando: discutir público-alvo e expansão (parcial — ICP detalhado e GTM estão em rascunho)
 
 ## Produto
 - [produto/mapa-do-produto.md](produto/mapa-do-produto.md) — Use quando: se orientar na área e ver em que ordem ler os docs de produto
-- [produto/suite.md](produto/suite.md) — Use quando: listar os módulos do produto e o que cada um faz
+- [produto/suite.md](produto/suite.md) — Use quando: listar os módulos do produto e o que cada um faz, inclusive Área do Aluno, Meu Estilo e demo institucional
 - [produto/glossario.md](produto/glossario.md) — Use quando: precisar do significado de um termo de domínio (exam, submission, rubric, OMR…)
 - [produto/estilos-de-questao.md](produto/estilos-de-questao.md) — Use quando: tipos de questão, estilos de geração, dificuldade, idiomas
 - [produto/decisoes-de-produto.md](produto/decisoes-de-produto.md) — Use quando: entender o porquê de uma decisão. É o índice de `produto/decisoes/`, uma nota por decisão
 - [produto/motor-assertividade.md](produto/motor-assertividade.md) — Use quando: fundamentar o motor de assertividade (BKT/CDM/IRT), sustentar a tese de moat, consultar as referências científicas
 - [produto/maturidade-do-motor.md](produto/maturidade-do-motor.md) — Use quando: definir escopo de mudança por fase de maturidade, consultar parâmetros e os dois princípios de design de avaliação
-- [produto/objeto-de-aprendizagem.md](produto/objeto-de-aprendizagem.md) — Use quando: consultar o schema proposto da Q-matrix, regras de feedback, e o que o ADR-0012 decidiu
+- [produto/objeto-de-aprendizagem.md](produto/objeto-de-aprendizagem.md) — Use quando: consultar o schema proposto da Q-matrix, regras de feedback, o estilo do professor (Modo B) e o que o épico #141 (KC por questão) está construindo
 
 ## Técnico
 - [tecnico/mapa-tecnico.md](tecnico/mapa-tecnico.md) — Use quando: se orientar na área e ver em que ordem ler os docs técnicos
@@ -26,8 +26,8 @@
 - [tecnico/billing-ledger.md](tecnico/billing-ledger.md) — Use quando: mexer em créditos, ledger, débito atômico, custo por operação
 - [tecnico/biblioteca.md](tecnico/biblioteca.md) — Use quando: mexer na Biblioteca (upload de arquivos, presigned S3, extração, fonte de geração)
 - [tecnico/calendario.md](tecnico/calendario.md) — Use quando: mexer em agendamento de prova (janela de resposta), calendário, notificação de abertura por e-mail (outbox + cron)
-- [tecnico/ai-ops.md](tecnico/ai-ops.md) — Use quando: mexer em geração/correção de IA, modelo OpenAI, extractors, SSE
-- [tecnico/integracoes.md](tecnico/integracoes.md) — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog
+- [tecnico/ai-ops.md](tecnico/ai-ops.md) — Use quando: mexer em geração/correção de IA, modelo OpenAI, extractors, SSE, "Meu estilo", instrução do professor, LuAS (planejado)
+- [tecnico/integracoes.md](tecnico/integracoes.md) — Use quando: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog, lead público, demo institucional
 - [tecnico/eventos-posthog.md](tecnico/eventos-posthog.md) — Use quando: consultar a taxonomia de eventos PostHog (nome, propriedades, onde dispara), montar funil/insight, instrumentar evento novo
 - [tecnico/convencoes-de-codigo.md](tecnico/convencoes-de-codigo.md) — Use quando: nomear arquivo, idioma do código, comentário, import ESM, clean code
 - [tecnico/testes.md](tecnico/testes.md) — Use quando: escrever teste, entender a estratégia por camada, rodar a suíte, interpretar cobertura, montar E2E
@@ -43,7 +43,7 @@
 - [regras/mapa-das-regras.md](regras/mapa-das-regras.md) — Use quando: descobrir qual dos quatro docs tem a regra que você procura
 - [regras/codigo.md](regras/codigo.md) — Use quando: revisar/escrever código — regras invioláveis, hooks bloqueantes, checklist dos reviewers
 - [regras/processo.md](regras/processo.md) — Use quando: citar uma regra numerada, entender como se trabalha no monorepo, decidir onde registrar uma decisão
-- [regras/produto.md](regras/produto.md) — Use quando: decidir comportamento de produto (degradação graciosa, idiomas, rubrica, replica set)
+- [regras/produto.md](regras/produto.md) — Use quando: decidir comportamento de produto (degradação graciosa, idiomas, rubrica, replica set, acesso do aluno, features de assinante)
 - [regras/comunicacao.md](regras/comunicacao.md) — Use quando: escrever copy pt-BR, falar de tração/churn (involuntário ≠ cancelamento)
 
 ---

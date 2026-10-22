@@ -1,14 +1,19 @@
 ---
-quando_usar: mexer em geração/correção de IA, modelo OpenAI, extractors, streaming SSE, pricing de IA, LaTeX/matemática
-última_revisão: 2026-08-25
+quando_usar: mexer em geração/correção de IA, modelo OpenAI, extractors, streaming SSE, pricing de IA, LaTeX/matemática, "Meu estilo", instrução do professor, LuAS
+última_revisão: 2026-10-22
 status: canônico
 tags: [biblioteca, correcao, ia]
 ---
 
 # ai-ops — geração e correção por IA
 
-Domínio `ai-ops`. Concentra todas as chamadas à OpenAI: geração de questões e planos de aula,
-correção de respostas abertas e extração de conteúdo de fontes.
+Domínio `ai-ops`. Geração de questões e planos de aula, correção de respostas abertas, extração de
+conteúdo de fontes e leitura da instrução do professor. Tudo roda **dentro da api**, que chama a
+OpenAI direto (`ai-ops/infrastructure/openai/*`).
+
+**O `ai-ops` não é o único ponto que chama a OpenAI.** O domínio `teacher-style` tem o próprio cliente
+(`teacher-style/infrastructure/openai-style-annotator.ts`), que anota questões antigas na destilação
+do "Meu estilo". O serviço Python de transcrição também chama a OpenAI (ver [tecnico/stack.md](stack.md)).
 
 ## Modelo
 `OPENAI_API_KEY` obrigatório; `OPENAI_MODEL` com default **`gpt-4.1-mini`** — **um único env para todas as
@@ -36,6 +41,83 @@ o código já se ajusta. (O default segue gpt-4.1-mini hoje.)
 - **Idiomas**: pt-BR / inglês / espanhol. **Estilos**: simple / contextual / analytical / reflective.
   (ver [produto/estilos-de-questao.md](../produto/estilos-de-questao.md).)
 - **Regeneração**: questão individual ou bloco de plano, com custo marginal.
+- **Múltipla escolha sai sempre com 5 alternativas**, em todo estilo (`MULTIPLE_CHOICE_OPTION_COUNT = 5`,
+  em `exam/domain/question.ts`). A validação do exam aceita de 2 a 6 na edição manual.
+
+## Ponto de troca do gerador
+Os use cases dependem das interfaces `QuestionGenerator` (`domain/generation-types.ts`) e
+`OpenQuestionGenerator` (`domain/open-generation-types.ts`). As implementações OpenAI
+(`OpenAiQuestionGenerator`, `OpenAiOpenQuestionGenerator`) são instanciadas e injetadas em `main.ts`.
+Trocar o motor de geração é trocar essa injeção.
+
+## LuAS — planejado, não existe em código
+O time decidiu (2026-08-26/27) tirar a geração de IA da api e levá-la para um microsserviço, o
+**LuAS** (no repositório, `luaas`), consumível também por outras plataformas — por isso a ingestão de
+fontes (PDF etc.) vai junto. **Nada disso está em código**: não há `services/luaas/`, nem pacotes
+`@lucida/generation-contract`/`@lucida/extractors`, nem env, nem cliente na api. Existem só contratos
+em rascunho (`docs/contracts/rascunhos/luaas-*.md`), a auditoria
+`docs/audits/2026-08-26-engine-de-geracao-luaas.md` e as decisões de 26–27/ago em `docs/decisions/`.
+
+O desenho planejado: `services/luaas/` no próprio monorepo; a primeira onda leva geração de questões
+e deixa **plano de aula e correção** na api; API key por cliente, medição de uso e quota ficam num
+contrato ainda não escrito. O encaixe na api é o ponto de troca acima.
+
+## Instrução do professor
+O professor escreve uma instrução livre ("foque em X, ignore Y"). Ela **nunca entra crua no prompt**:
+`POST /v1/ai/parse-instruction` passa o texto (até 2.000 caracteres) pelo `openai-instruction-extractor.ts`,
+que devolve um conjunto fechado de intenções (`InstructionIntents`: `focusTopics`, `excludeTopics`,
+`emphasis`, `audience`, `excerpt`) mais o que foi descartado. O professor confirma, e as rotas de
+geração e regeneração recebem `intents`, renderizadas por template próprio
+(`prompts/shared/teacher-intents-block.ts`). Se chegar `instruction` sem `intents`, o gerador extrai
+na hora.
+
+`parse-instruction` **não debita crédito**. Tem rate limit por usuário real: 20 por minuto e 200 por
+dia; acima disso, **429** (`AI_INSTRUCTION_THROTTLED`).
+
+## Prova-modelo
+`modelExamText` (até 200.000 caracteres) é uma prova antiga colada pelo professor, usada como
+**referência de forma** — tipo de enunciado, tamanho, organização —, nunca de conteúdo
+(`prompts/shared/model-exam-block.ts`). Entra delimitada como conteúdo não confiável e **não é
+persistida**.
+
+## Meu estilo (`teacher-style`)
+Perfil de estilo destilado das provas que o próprio professor escreveu (ADR-0018). Página
+**"Meu estilo"** no app (`/app/meu-estilo`).
+
+| Rota | O que faz |
+|---|---|
+| `GET /v1/teacher-style` | Lê o perfil |
+| `PUT /v1/teacher-style` | Grava `manualOverrides` (incluir/excluir questão da evidência) |
+| `POST /v1/teacher-style/distill` | Destila (ou redestila) o perfil |
+
+- **Destilação síncrona, com lease** de 10 min por professor (`teacher_style_distill_leases`): clique
+  duplo recebe **409**. Só a anotação usa LLM; o resto é aritmética.
+- **Janela de evidência**: o menor entre 12 meses, 20 provas e 200 questões. Cópias da mesma prova
+  contam uma vez. Questão `ai` sem edição e questão sem explicação ficam fora.
+- **Anotação por eixos fechados** — `surface`, `context`, `reasoningSteps`, `bloom`, `integration`, mais
+  um teste de coerência explicação × gabarito (incoerente sai). O perfil guarda proporções por chave,
+  nunca texto livre, para que nada de prova antiga vire instrução no prompt.
+- **Peso de cada questão** = autoria × confiabilidade × recência. Autoria: `ai` 0, `ai_edited` 0,6,
+  `manual`/`imported` 1, ausente 0. Confiabilidade: 1 com respostas suficientes, 0,5 sem.
+  Recência: meia-vida de 6 meses, piso 0,25.
+- **Mínimo de 5 questões** com peso; abaixo disso, **422**.
+- **`manualOverrides` substitui a lista inteira** a cada `PUT` e recalcula sem chamar a IA. Redestilar
+  preserva os overrides cujas questões continuam na janela.
+- Persistência: coleção `teacher_style_profiles`, com `_id = ownerId` — um perfil por professor.
+
+**Acesso**: as três rotas e o uso na geração passam pela `SubscriberAccessPolicy` — staff, membro de
+instituição ou assinante ativo. Negado, devolve **402** próprio (`TEACHER_STYLE_ACCESS_DENIED`,
+`TeacherStyleAccessDeniedError`, em `require-teacher-style-access.ts`), distinto do 402 de saldo. A
+checagem roda antes do billing. **A destilação não debita crédito.**
+
+**Uso na geração**: a flag `useTeacherStyle` existe nas quatro rotas de geração/regeneração de
+questões (objetivas e abertas) — não no plano de aula. Com perfil, os eixos entram pelo bloco
+`prompts/teacher-style-block.ts`; sem perfil, vale o estilo pronto.
+
+## Ordem de precedência no prompt
+Invariantes do produto → perfil do professor → instrução (intents) → estilo pronto
+(`simple`/`contextual`/`analytical`/`reflective`). A prova-modelo entra depois do material e antes
+das intents, como referência de forma.
 
 ## Correção de respostas abertas
 - A IA recebe a rubrica e a resposta do aluno e **escolhe o `levelId` por critério**, com justificativa

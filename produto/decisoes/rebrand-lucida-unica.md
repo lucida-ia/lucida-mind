@@ -9,3 +9,6 @@ status: canônico
 Sem sub-marcas (Exam/Learning/Analytics descontinuadas). Uma marca, três frentes por **cor +
 qualificador**; nomes técnicos seguem em inglês. Login unificado por frente **adiado**.
 Detalhe em [negocio/posicionamento.md](../../negocio/posicionamento.md).
+
+Em out/2026 as frentes de mercado passaram a ser Lucida School e Lucida Creators — ver
+[produto/decisoes/school-e-creators.md](school-e-creators.md).

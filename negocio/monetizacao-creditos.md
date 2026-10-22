@@ -1,6 +1,6 @@
 ---
 quando_usar: falar de preços, planos, assinatura, top-ups, créditos de boas-vindas, modelo de receita
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 tags: [billing]
 ---
@@ -28,7 +28,8 @@ Os anuais têm ~20% de economia vs. mensal. Todos: alunos e provas ilimitados, c
 ilimitada, análises por turma e aluno.
 
 ## Top-ups (avulsos)
-Para esgotamento fora do ciclo. Pacotes via **Stripe (cartão)**. O **PIX (AbacatePay)** está
+Para esgotamento fora do ciclo. Pacotes via **Stripe (cartão)** — existem no produto, embora o
+FAQ da página `/precos` do site ainda diga que avulsos virão "em breve" (divergência interna do site). O **PIX (AbacatePay)** está
 **temporariamente desativado** (kill-switch `PIX_TOPUP_ENABLED = false`; ver [tecnico/integracoes.md](../tecnico/integracoes.md)) —
 apenas cartão por enquanto. Validade de **365 dias**. Fonte: `apps/api/src/domains/billing/domain/topup.ts`.
 
@@ -67,6 +68,22 @@ membros ficam congeladas) ou **`unlimited`** (sem checagem de saldo, mas com led
 
 Consequência comercial: quando o pool da instituição acaba, o erro é `InstitutionOutOfCredits` — quem
 precisa comprar é o **admin**, não o professor que travou. É outra conversa de suporte e outra copy.
+
+O site já vende um plano **Instituição** com preço **"Sob medida"** (pool de créditos institucional,
+análises consolidadas, onboarding dedicado, CTA "Falar com a gente"). Não há SKU institucional no
+código: o contrato é negociado fora do sistema.
+
+**Para onde vai (decidido, não executado):** o ADR-0013 do monorepo (status **proposto**) faz da
+organização a raiz da conta. Todo crédito vira **pool único da org** — o professor solo é um pool de
+1 — e o direito a recurso pago passa a vir do **plano** (assinatura individual ou plano Instituição),
+não de pertencer a uma org. **O código atual ainda usa a carteira pessoal** com o fail-safe descrito
+acima.
+
+## O que não consome crédito
+- **"Meu estilo"** exige acesso de assinante (assinatura ativa, membro de instituição ou staff), mas
+  **destilar o perfil não debita**. Gerar com o estilo custa o mesmo que gerar sem.
+- **Ler a instrução do professor** (transformar "foque em X" em intenções estruturadas) não debita;
+  é limitado por rate limit.
 
 ## Expiração por fonte
 - **Assinatura** — expira no fim do ciclo (`expiresAt = currentPeriodEnd`). No mensal os créditos

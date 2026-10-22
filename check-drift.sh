@@ -43,7 +43,7 @@ echo
 
 echo "tecnico/dominios.md"
 check "dominios.md" "número de bounded contexts" \
-  "27" "$(find "$API/domains" -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d ' ')"
+  "31" "$(find "$API/domains" -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d ' ')"
 
 echo
 echo "tecnico/integracoes.md"
@@ -99,9 +99,9 @@ check "dominios.md" "limite da descrição da prova" \
 echo
 echo "tecnico/eventos-posthog.md"
 check "eventos-posthog.md" "eventos server-side" \
-  "10" "$(grep -cs -E '^  [a-zA-Z]+: "' "$API/shared/observability/event-names.ts")"
+  "14" "$(grep -cs -E '^  [a-zA-Z]+: "' "$API/shared/observability/event-names.ts")"
 check "eventos-posthog.md" "eventos client-side na taxonomia" \
-  "19" "$(grep -cs -E '^  [a-zA-Z]+: "' "$WEB/features/analytics/events.ts")"
+  "15" "$(grep -cs -E '^  [a-zA-Z]+: "' "$WEB/features/analytics/events.ts")"
 
 echo
 echo "ui/design-tokens.md"
@@ -115,9 +115,9 @@ check "framework-claude.md" "skills" \
 check "framework-claude.md" "agentes" \
   "9" "$(find "$REPO/.claude/agents" -name '*.md' | wc -l | tr -d ' ')"
 check "framework-claude.md" "comandos" \
-  "14" "$(find "$REPO/.claude/commands" -name '*.md' | wc -l | tr -d ' ')"
-check "framework-claude.md" "hooks (7 guardrails + o runner de teste)" \
-  "8" "$(find "$REPO/.claude/hooks" -maxdepth 1 -type f \( -name '*.py' -o -name '*.sh' \) ! -name '_hooklib.py' | wc -l | tr -d ' ')"
+  "15" "$(find "$REPO/.claude/commands" -name '*.md' | wc -l | tr -d ' ')"
+check "framework-claude.md" "hooks (9 guardrails + o runner de teste)" \
+  "10" "$(find "$REPO/.claude/hooks" -maxdepth 1 -type f \( -name '*.py' -o -name '*.sh' \) ! -name '_hooklib.py' | wc -l | tr -d ' ')"
 
 echo
 echo "navegação"
@@ -129,6 +129,9 @@ link = re.compile(r"\]\(([^)#]+\.md)[^)]*\)")
 bad = []
 for root, dirs, files in os.walk(base):
     dirs[:] = [d for d in dirs if d not in (".git", ".obsidian")]
+    # codebase/ é o clone do monorepo dentro do vault: os links dele são do repo, não da base.
+    if root == base:
+        dirs[:] = [d for d in dirs if d != "codebase"]
     for name in files:
         if not name.endswith(".md"):
             continue

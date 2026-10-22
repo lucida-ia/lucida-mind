@@ -1,6 +1,6 @@
 ---
 quando_usar: listar os módulos do produto e o que cada um faz, entender o escopo funcional
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 tags: [biblioteca, classroom, correcao, omr]
 ---
@@ -14,8 +14,9 @@ Os módulos que o usuário toca; o problema que eles resolvem está em
 
 ## Provas (exam + ai-ops)
 - **Geração por IA**: a partir de um tema/material, gera questões **objetivas** (múltipla escolha / V-F)
-  e **abertas** (com rubrica). Parâmetros: estilo, dificuldade, idioma (pt-BR/inglês/espanhol),
-  quantidade. Detalhe em [produto/estilos-de-questao.md](estilos-de-questao.md).
+  e **abertas** (com rubrica). Múltipla escolha sai sempre com **5 alternativas**, uma correta.
+  Parâmetros: estilo, dificuldade, idioma (pt-BR/inglês/espanhol), quantidade e, para assinante,
+  **usar o Meu Estilo** (ver abaixo). Detalhe em [produto/estilos-de-questao.md](estilos-de-questao.md).
 - **Montagem manual** e edição questão a questão; **regeneração** de uma questão específica.
 - **Tipo de atividade**: cada prova tem um tipo (`activityType`) — **Prova**, **Simulado**, **Quiz** ou
   **Lista de Exercícios** — usado para classificar/filtrar; não muda geração, preço nem correção.
@@ -24,9 +25,11 @@ Os módulos que o usuário toca; o problema que eles resolvem está em
 - **Matemática**: enunciados, alternativas e explicações suportam **fórmulas (LaTeX)**, renderizadas com
   KaTeX na prova online e na versão imprimível.
 - **Aplicação**: cada prova tem um **link público** (`/exam/[shareId]`) — o aluno responde online,
-  sem login; se não estiver na turma, entra por **auto-cadastro** (a Lucida gera `code`/`matricula`).
-  Há também um **link por aluno** (`/exam/[shareId]/start/[token]`), com a identidade pré-preenchida,
-  emitido pelo escopo `exams:share` da API pública. Versão **imprimível** e **modo de aplicação**
+  sem conta, pelo código de 7 dígitos ou pelo e-mail; se não estiver na turma, entra por
+  **auto-cadastro** (a Lucida gera `code`/`matricula`). Quem já tem tentativa recebe só o status; se
+  o aluno travar numa tentativa em andamento, o professor a **libera**. Há também um **link por
+  aluno** (`/exam/[shareId]/start/[token]`), com a identidade pré-preenchida, emitido pelo escopo
+  `exams:share` da API pública e pela Área do Aluno. Versão **imprimível** e **modo de aplicação**
   (livre / estrito) configurável — no estrito, a prova auto-finaliza no 3º strike de troca de aba.
   O modo é editável **depois** da criação, e uma prova copiada **herda** o modo da origem.
 - **Faixa de páginas**: ao usar um PDF (anexo ou da Biblioteca), o professor escolhe de qual página
@@ -39,6 +42,21 @@ Os módulos que o usuário toca; o problema que eles resolvem está em
 - **Aberta**: corrigida com **rubrica** — a IA sugere o nível por critério e justifica; o **professor
   revisa e aprova**. Só nota aprovada conta para o score. Existe fila de correção (`/app/corrigir-provas`).
 - **Nota final**: 0–10, uma casa decimal.
+
+## Meu Estilo (teacher-style)
+Página `/app/meu-estilo`. A Lucida **destila** o perfil de estilo do professor a partir das provas
+que ele escreveu (não das geradas por IA) e o professor pode incluir ou excluir questões da base.
+Na geração, o professor marca se quer usar o perfil; sem perfil, cai no preset. Feature **de
+assinante** (staff, organização ou assinatura ativa; senão, upsell).
+
+## Área do Aluno (student-portal)
+Área autenticada do aluno (`/aluno`, frente azul clara). O professor gera um **link de convite da
+turma**; o aluno cria conta (Google ou e-mail/senha) ou entra, aceita o convite e passa a ver: provas
+abertas e próximas, turmas, calendário e o resultado de cada prova respondida, com respostas e
+gabarito. Um contexto por instituição; turmas de professores sem instituição ficam em "Meus
+professores". Responde só dentro da janela (ou a qualquer hora, se a prova não tem janela). Vale para
+qualquer professor, inclusive gratuito. Regras em [regras/produto.md](../regras/produto.md); decisão
+em [produto/decisoes/aluno-como-usuario.md](decisoes/aluno-como-usuario.md).
 
 ## Planos de aula (lesson-plan + ai-ops)
 > **Em beta.** A própria UI avisa que "o módulo de Aulas ainda está em testes", e o botão
@@ -120,9 +138,16 @@ Inbox do usuário (`/app/notificacoes` e `/analytics/notificacoes`) com sino e c
 modera e edita pelas ações inline da própria página. É canal de priorização com usuário, em uso.
 
 ## Convite e aceite
-A instituição convida professor ou aluno por e-mail; o destinatário cai em `/accept-invite`, que cobre
-quatro estados: já tem conta, precisa se cadastrar e aceitar, e-mail divergente, e erro. Há reenvio e
-cópia de link para quando o e-mail não chega.
+A instituição convida **professor** por e-mail, como membro ou admin; o destinatário cai em
+`/accept-invite`, que cobre quatro estados: já tem conta, precisa se cadastrar e aceitar, e-mail
+divergente, e erro. Há reenvio e cópia de link para quando o e-mail não chega. O **aluno** não entra
+por aqui: é convidado pelo link da turma (ver Área do Aluno).
+
+## Demonstração institucional e lead
+Link de venda para escola, cursinho ou universidade: `apps/demo`, app próprio com deploy separado,
+três capítulos interativos sobre dados fictícios (personas escola, cursinho, universidade) e
+formulário de contato. O formulário grava o lead via `POST /v1/public/leads` e avisa o time por
+e-mail. A demonstração antiga em `/instituicoes/demo` continua no ar.
 
 ## Suporte
 `/app/ajuda` e `/analytics/ajuda` — formulário que abre **ticket**, com threading por e-mail via Resend

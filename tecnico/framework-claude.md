@@ -1,6 +1,6 @@
 ---
 quando_usar: saber que skill/agent/comando/hook existe no monorepo, escolher quem chamar, entender o que é bloqueado automaticamente
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
@@ -56,7 +56,7 @@ porque revisor sem `git diff` revisa só o que lhe mostraram.
 
 A implementação continua no **loop principal** com os skills carregados — é onde os hooks rodam.
 
-## Comandos (14)
+## Comandos (15)
 | Comando | O que faz |
 |---|---|
 | `/route <pedido>` | Classifica e decompõe em tarefas com dono e dependência |
@@ -69,6 +69,7 @@ A implementação continua no **loop principal** com os skills carregados — é
 | `/vote <decisão>` | Pareceres independentes de vários agentes (caro — só decisão cara de reverter) |
 | `/review-pr` | Sessão de revisão de PR, isolada em worktree, um PR por sessão |
 | `/session-end` | Fecha a sessão: diff, ADRs, docs, `TODO.md`, verificação, commit proposto |
+| `/mind-sync [escopo]` | Sincroniza esta base (`lucida-mind`) com o que mudou no código; começa pelo [`check-drift.sh`](../check-drift.sh) |
 | `/squad-review` | Revisores da área tocada, em paralelo |
 | `/squad-quality` | `qa-tester` + reviewer da área |
 | `/squad-platform` | `devops` + `dba` |
@@ -80,9 +81,9 @@ ele acorda** — o privilégio efetivo é a união dos `tools:` de todos eles.
 Para mudança pequena, chame o agente ou o skill direto: um `flow` acorda vários agentes e cada um lê o
 projeto do zero.
 
-## Hooks (7 + biblioteca)
-São o que realmente segura. Seis rodam em `PreToolUse` no matcher `Write|Edit|MultiEdit`, um no matcher
-`Bash`, e um oitavo em `PostToolUse`.
+## Hooks (10 + biblioteca)
+São o que realmente segura. Oito rodam em `PreToolUse` no matcher `Write|Edit|MultiEdit`, um no
+matcher `Bash`, e um décimo em `PostToolUse`.
 
 | Hook | Matcher | Efeito |
 |---|---|---|
@@ -92,6 +93,8 @@ São o que realmente segura. Seis rodam em `PreToolUse` no matcher `Write|Edit|M
 | `check-env-access` | Write/Edit | **Bloqueia** `process.env` cru fora de `env.ts` |
 | `check-docs-pt-br` | Write/Edit | **Avisa** sobre doc em pt-BR sem acentuação |
 | `check-claude-artifacts` | Write/Edit | Valida os próprios agents/skills/commands |
+| `check-activity-log` | Write/Edit | **Bloqueia** use case em `application/` que salva ou apaga prova sem chamar `recorder.record*` (ADR-0014); isenção explícita com `// activity-log: exempt — <motivo>` |
+| `check-local-time` | Write/Edit | **Bloqueia** em `apps/web/src/` getter de hora local (`getHours`/`getDay`/`getDate`) e `new Date("AAAA-MM-DD")` — dependem do fuso do processo |
 | `guard-dangerous-commands` | Bash | **Bloqueia** comando irreversível ou que toca produção |
 | `auto-test-runner` | PostToolUse | **Bloqueia** edição que quebra teste relacionado; avisa quando o arquivo não tem teste |
 

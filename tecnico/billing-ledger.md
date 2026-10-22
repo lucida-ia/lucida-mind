@@ -1,6 +1,6 @@
 ---
 quando_usar: mexer em créditos, wallet, ledger, débito atômico, expiração, custo por operação de IA
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 tags: [billing, instituicao]
 ---
@@ -93,6 +93,17 @@ porque o prompt já foi cacheado).
 | INFOPRODUTOR | 350 |
 
 Regenerar um bloco do plano = **60**.
+
+### O que chama a IA e não debita
+| Operação | Gate | Débito |
+|---|---|---|
+| Destilar o "Meu estilo" (`POST /v1/teacher-style/distill`) | `SubscriberAccessPolicy`: staff, membro de instituição ou assinante ativo | **nenhum** — o billing não roda nesse fluxo |
+| Usar o estilo na geração (`useTeacherStyle`) | o mesmo, checado **antes** do billing | só o preço normal da geração |
+| Ler a instrução do professor (`POST /v1/ai/parse-instruction`) | rate limit: 20/min e 200/dia por usuário | **nenhum** |
+
+Negado o acesso ao estilo, o erro é **`TeacherStyleAccessDeniedError`** (402,
+`TEACHER_STYLE_ACCESS_DENIED`) — outro 402, separado do de saldo. Detalhe em
+[tecnico/ai-ops.md](ai-ops.md).
 
 > Os preços de plano de aula são marcados como **provisórios** no código ("recalibrate once token usage
 > is measured"). Os de prova/correção são estáveis.

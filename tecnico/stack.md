@@ -1,6 +1,6 @@
 ---
 quando_usar: saber versões, libs, gerenciador, comandos, layout do monorepo, subir local
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
@@ -30,12 +30,16 @@ da raiz entram neles com `cd`.
 `packages/` hoje contém só `omr-template` (geometria/marcadores ArUco compartilhados entre a api e o
 serviço Python de OMR), consumido via `workspace:*`.
 
+**Planejado, não existe:** o microsserviço de geração **LuAS** (`services/luaas/`) e os pacotes
+`@lucida/generation-contract` e `@lucida/extractors`. Hoje a geração roda dentro da api. Ver
+[tecnico/ai-ops.md](ai-ops.md).
+
 Path alias `@/*` → `src/*` nos dois apps. Só a api usa `module/moduleResolution: NodeNext` — é por
 isso que os imports dela levam extensão `.js`; a base e a web usam `Bundler`.
 
 ## Backend (`apps/api`)
 Express 5 + TypeScript **ESM puro**. Principais libs:
-`express` 5, `mongoose` 8, `mongodb` 7, `better-auth` 1.6, `zod` 3, `openai` 6, `stripe` 22,
+`express` 5, `mongoose` 8, `mongodb` 6, `better-auth` 1.6, `zod` 3, `openai` 6, `stripe` 22,
 `resend` 4, `posthog-node` 5, `multer` 2, `pdf-parse` 2, `mammoth`, `docx`, `pdf-lib`, `qrcode`,
 `youtube-transcript`, `cors`, `dotenv`, e `@aws-sdk/client-s3` + `@aws-sdk/s3-request-presigner`
 (storage S3/Railway Buckets da Biblioteca — ver [tecnico/biblioteca.md](biblioteca.md)).
@@ -101,13 +105,13 @@ pnpm e2e
 Não há workflow de CI em `.github/` — só templates de issue e de PR.
 
 ## Scripts de migração / seed / backfill (api)
-Vivem em `apps/api/scripts/`, rodados via `pnpm --filter @lucida/api <script>`. São ~24. Por grupo:
+Vivem em `apps/api/scripts/`, rodados via `pnpm --filter @lucida/api <script>`. São 23. Por grupo:
 
 - **migrate**: `legacy`, `legacy-rename`, `billing-scope`, `normalize-user-ids`,
   `disable-test-webhook-endpoints`, `remove-api-environment`
-- **seed**: `test-org`, `roadmap`, `library-subjects`, `e2e-teacher`
+- **seed**: `test-org`, `roadmap`, `library-subjects`, `e2e-teacher`, `student-area`
 - **backfill**: `student-org`, `class-org`, `courses`, `classroom-fields`, `exam-activity-type`,
-  `submission-scores`, `math-latex`, `page-segments`
+  `submission-scores`, `math-latex`, `page-segments`, `email-provisioned`
 - **outros**: `diagnose:legacy-ids`, `billing:add-org-credits`, `eval:generation`
 
 Há ainda utilitários `.mjs` soltos na mesma pasta (`promote-staff`, `reset-password`,

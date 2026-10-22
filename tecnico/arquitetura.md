@@ -1,6 +1,6 @@
 ---
 quando_usar: criar/mover domínio, decidir camada, DI manual, ordem de middleware, como os apps conversam
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
@@ -69,11 +69,13 @@ Um error middleware global mapeia `DomainError` → HTTP e `ZodError` → 400.
 Faixas em uso, por frequência: **400** (a mais comum — input malformado, Zod **e** regra de formato),
 404 não encontrado, 422 regra de negócio com input válido, 409 conflito de estado, 403 sem permissão,
 **503** dependência não configurada (degradação graciosa), **502** falha de serviço externo,
-**402** paywall de assinante, 401 sem auth, 413/415/410 em casos pontuais.
+**402** paywall de assinante ou saldo (o "Meu estilo" tem um 402 próprio,
+`TEACHER_STYLE_ACCESS_DENIED`, para não se confundir com falta de crédito), **429** rate limit da
+leitura de instrução, 401 sem auth, 413/415/410 em casos pontuais.
 
 ## Composition root (DI manual)
 Tudo é instanciado em **`apps/api/src/main.ts`** — sem container, sem decorators. É um arquivo único
-e grande (~1.750 linhas); **não** há factory por feature (`<feature>.module.ts` não existe), e está
+e grande (~2.070 linhas); **não** há factory por feature (`<feature>.module.ts` não existe), e está
 registrado que ele fica fora da meta de cobertura.
 
 Ordem em `buildApp()`, que **não** deve ser invertida:
@@ -113,15 +115,19 @@ Browser → Next (3000)
   → @lucida/api (3333) → MongoDB, Stripe, OpenAI, Resend, serviços Python
 ```
 
+A api chama a OpenAI direto, de dentro do processo. Tirar a geração para um microsserviço (**LuAS**)
+é decisão do time, mas **não existe em código** — ver [tecnico/ai-ops.md](ai-ops.md).
+
 Mais `skipTrailingSlashRedirect: true` (exigido pela ingestão do PostHog) e um redirect
 `www.lucidaexam.com` → apex.
 
-**Nem toda rota da api está sob `/v1`.** `roadmap` e `notifications` montam sob **`/api/`**
-(`/api/roadmap`, `/api/notifications`) e **não** têm rewrite — são chamadas server-side pelo
+**Nem toda rota da api está sob `/v1`.** `roadmap`, `notifications` e as rotas de staff do Kintal
+(painel, financeiro, instituições, quadro, notificações, log de atividade) montam sob **`/api/`** (`/api/roadmap`,
+`/api/notifications`, `/api/kintal`) e **não** têm rewrite — são chamadas server-side pelo
 `apiFetch` (`server-only`), que usa `NEXT_PUBLIC_API_URL` direto. Prefixos reais:
-`/v1/{ai,analytics,billing,classes,courses,exams,grading,iam,integrations,internal,invoicing,
-lesson-plans,library,me,public,scans,students,support,tickets}`, `/api/auth`, `/api/roadmap`,
-`/api/notifications`, `/health`.
+`/v1/{ai,analytics,billing,calendar,classes,courses,exams,grading,iam,integrations,internal,invoicing,
+lesson-plans,library,me,public,scans,student-portal,students,support,teacher-style,tickets}`,
+`/api/auth`, `/api/roadmap`, `/api/notifications`, `/api/kintal`, `/health`.
 
 As rotas `/v1/internal/*` são de **cron**, gateadas por `CRON_SECRET` — ver [tecnico/integracoes.md](integracoes.md).
 

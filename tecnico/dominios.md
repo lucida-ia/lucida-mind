@@ -1,12 +1,12 @@
 ---
 quando_usar: mapear os domínios da api e suas entidades centrais, achar onde fica uma feature
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
 # Mapa de domínios (`apps/api/src/domains/`)
 
-27 bounded contexts implementados, cada um com as camadas de que precisa (ver
+31 bounded contexts implementados, cada um com as camadas de que precisa (ver
 [tecnico/arquitetura.md](arquitetura.md)). As entidades citadas aqui estão definidas em
 [produto/glossario.md](../produto/glossario.md). **Nem todo domínio tem as 4** — `calendar` não tem `infrastructure/`
 (lê pelo repositório de `exam`), `support` só tem `presentation/`, `webhook-dispatch` só tem
@@ -14,10 +14,13 @@ status: canônico
 
 | Domínio | Função |
 |---|---|
-| `iam` | Auth via BetterAuth (Google OAuth + e-mail/senha + plugin de organização); **delegação a auxiliares** (`TeacherAssistant`); impersonação staff; preferências do usuário — **`passingGrade`** (média de aprovação, default 6) e `onboardingTourCompletedAt`. |
+| `iam` | Auth via BetterAuth (Google OAuth + e-mail/senha + magic link + plugin de organização); **delegação a auxiliares** (`TeacherAssistant`); impersonação staff; preferências do usuário — **`passingGrade`** (média de aprovação, default 6) e `onboardingTourCompletedAt`. Papel **`student`** marca a conta criada pela porta do aluno (sem créditos de boas-vindas, sem `/app`; fora do portal leva 403). **`emailProvisioned`** marca conta cuja senha foi escolhida por outra pessoa (auxiliar, convite de org, Kintal) — e-mail verificado não prova posse até o titular redefinir a senha. **Organização só é criada pelo servidor** (Kintal, onboarding): `allowUserToCreateOrganization: false`. O cliente só atribui os papéis `member` e `admin`. |
 | `class` | Turmas. |
-| `student` | Alunos. |
-| `exam` | Provas (questões objetivas + abertas, shareId, estilo, segurança, **janela de resposta `ExamSchedule`**). |
+| `student` | Alunos — o registro pedagógico por turma, dono do professor. `userId` liga o registro a uma conta (Área do Aluno). |
+| `student-portal` | **Área do Aluno** (`/aluno`, ADR-0019): convite por turma, vínculo do registro à conta do aluno, contextos (cada instituição + "Meus professores") e leituras escopadas pelo que a conta possui — início, calendário, turmas, provas, resultados. Responder prova continua sendo a página pública, com token assinado para o aluno. |
+| `exam` | Provas (questões objetivas + abertas, shareId, estilo, tipo de atividade, autoria por questão, segurança, **janela de resposta `ExamSchedule`**). |
+| `activity-log` | Rastro **append-only** de alterações (ADR-0014), coleção `activity_entries`: quem (sessão real e efetiva, modo de delegação, API key ou sistema), de onde, qual ação e o diff. Hoje cobre só prova (`exam.updated`, `exam.questions_changed`, `exam.scheduled`, `exam.schedule_cleared`, `exam.copied`, `exam.deleted`); criação não loga. Lido por prova, pelo próprio professor, pelo admin da org e pelo Kintal. |
+| `teacher-style` | **Perfil de estilo do professor** ("Meu Estilo", ADR-0018): destila as questões que o professor escreveu ou editou num `StyleProfile` de distribuições por eixo, que entra nos prompts de geração. Professor pode excluir questões da evidência. Gate de assinante/org/staff. Coleção `teacher_style_profiles`. |
 | `submission` | Respostas de aluno + correção de abertas (fila, rubricas, notas por critério, aprovação). |
 | `calendar` | Visão de leitura das provas com janela agendada (`/app/calendario`); gate de assinante. Ver [tecnico/calendario.md](calendario.md). |
 | `exam-notification` | Outbox Mongo (sem Redis) dos e-mails de "atividade disponível" quando a janela abre; cron + reenvio manual. Ver [tecnico/calendario.md](calendario.md). |
@@ -40,16 +43,16 @@ status: canônico
 | `organization-preferences` | Preferências por organização — hoje, o **escopo de unicidade da matrícula** (`teacher` default vs `organization`). |
 | `roadmap` | Roadmap **público** com sugestão e voto da comunidade (`/roadmap`); CRUD staff. Não é tela do Kintal. |
 | `support` | Form de contato (`/app/ajuda`) → e-mail via Resend. |
+| `lead` | Endpoint público `POST /v1/public/leads` que recebe o formulário da demo institucional; grava em `leads` (TTL 90 dias) e avisa por e-mail. Ver [tecnico/integracoes.md](integracoes.md). |
 | `tickets` | Suporte por e-mail — inbound via Resend Inbound, threading, fila staff no Kintal. |
 
-Existe também a pasta `student-portal/`, com as 4 pastas de camada **vazias** — zero arquivos, sem
-wiring em `main.ts`. É **esqueleto**, não domínio: scaffolding para a área do aluno (issue #4), que
-depende do ADR-0013. A contraparte no front (`apps/web/src/app/aluno/`,
-`apps/web/src/features/student/`) também está vazia. Nada disso está versionado.
+**Débito posicional em `teacher-style`.** A exclusão manual de uma questão da evidência é guardada
+por `examId` + `questionIndex`. Questão não tem id estável, então reordenar ou remover questões de uma
+prova faz a exclusão apontar para outra questão.
 
-**Proposto, não implementado:** `learning-object` — a coleção-registro da Q-matrix (um doc por
-`questionId`, com `kc[]`, `family_id`, `nivel_cognitivo`). Decidido no ADR-0012, ainda em branch.
-Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md).
+**Proposto, não implementado:** domínio `knowledge` — a chave de conhecimento (KC) e o catálogo por
+organização, Fases 0 e 1 do épico #141. Existe só como contrato em PR (#221); nada em
+`apps/api/src/domains/knowledge/`. Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md).
 
 ## Entidades centrais (domínios core)
 - **Exam** — id, classId, courseId (snapshot), ownerId, title, description (≤ **10.000** chars),
@@ -61,7 +64,10 @@ Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md).
   notifyOnOpen) + `notificationsMaterializedAt`. LaTeX em questões é texto inline (sem campo
   dedicado) — ver [tecnico/ai-ops.md](ai-ops.md) e [tecnico/calendario.md](calendario.md).
 - **Question** (VO) — tipo `multipleChoice|trueFalse|open`; objetiva tem opções/gabarito; aberta tem
-  **Rubric** + referenceAnswer. Dificuldade em pt-BR (`fácil|médio|difícil`).
+  **Rubric** + referenceAnswer. Dificuldade em pt-BR (`fácil|médio|difícil`). **`authorship`** por
+  questão: `ai|ai_edited|manual|imported`, `null` = desconhecida (questões anteriores ao campo). O
+  servidor não confia no rótulo do cliente: questão `ai` editada vira `ai_edited`. É o que o
+  `teacher-style` usa para pesar a evidência.
 - **Rubric** — criteria[] → cada critério tem levels[] (com points). Max = maior nível por critério.
 - **Submission** — 21 campos. Além de examId/studentId/source/status/answers/textAnswers/score/
   openGrades/gradingStatus, carrega: `classId`, `courseId`, `ownerId`, `studentCode`, `studentName`,
@@ -75,7 +81,8 @@ Ver [produto/motor-assertividade.md](../produto/motor-assertividade.md).
   [0,1]; `null` = usa earned/max), source (`ai|manual`), status (`ai_suggested|approved`),
   `gradedByUserId`, `aiModel`, `gradedAt`. Só nota **aprovada** conta para o score.
 - **Class / Student / Course** — turma / aluno / curso. O **Student** tem `code`, `matricula`,
-  `email`, `organizationId` (que dirige a unicidade org-wide da matrícula) e campos Classroom.
+  `email`, `organizationId` (que dirige a unicidade org-wide da matrícula), campos Classroom e
+  **`userId`** (`null` até o aluno vincular a conta; uma conta pode ter registros em várias turmas).
   A **Class** guarda `stage` e `grade` como **props planas**; `EducationLevel`
   (`stage` ∈ `FUNDAMENTAL|MEDIO|SUPERIOR|CUSTOM` ou `null`, `grade` texto livre ≤30) é um VO de
   composição usado no payload aninhado da API, não um campo da entidade. Tem também

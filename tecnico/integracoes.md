@@ -1,6 +1,6 @@
 ---
-quando_usar: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog, S3/Biblioteca, cron
-última_revisão: 2026-08-25
+quando_usar: integrar/depurar Stripe, PIX, NFE.io, Resend, Classroom, OMR, YouTube, PostHog, S3/Biblioteca, cron, lead público, demo institucional
+última_revisão: 2026-10-22
 status: canônico
 tags: [analytics, billing, classroom, omr]
 ---
@@ -81,17 +81,69 @@ mais `skipTrailingSlashRedirect: true` e `ui_host: "https://us.posthog.com"`. En
 `AnalyticsCaptureClient` **fire-and-forget** (nunca aguardada); sem `POSTHOG_API_KEY` vira no-op. Envs:
 `POSTHOG_API_KEY` (sem ela → no-op), `POSTHOG_HOST` (default `https://us.i.posthog.com`). A aba "Produto"
 de `/kintal/metricas` (rota real `GET /api/kintal/metrics/behavior`, via HogQL/Query API) exige `POSTHOG_PERSONAL_API_KEY` + `POSTHOG_PROJECT_ID`, senão
-503. Session replay e feature flags adiados.
+503. Session replay e feature flags adiados. **O SDK do web não inicializa em `/exam/**` nem em `/aluno`**
+(prova pública e Área do Aluno); perfis anônimos dependem de `NEXT_PUBLIC_POSTHOG_ANON_PROFILES` — detalhe
+em [tecnico/eventos-posthog.md](eventos-posthog.md).
 
 ## NFE.io — rotas
 Webhook `POST /v1/invoicing/webhook`, montado nos **`rawBodyRouters`** para o HMAC ver os bytes exatos.
 Consulta: `GET /v1/invoicing/me` e `GET /v1/invoicing/organization` (org admin).
 
 ## Public API + webhooks
-API keys **HMAC** (`api-access`) gateiam `/v1/public/*` (`public-api`). Submissões finalizadas disparam
+API keys **HMAC** (`api-access`) gateiam `/v1/public/*` (`public-api`) — com duas exceções sem
+autenticação: a prova pública (`/v1/public/exams/*`) e o lead (`/v1/public/leads`, abaixo). Submissões finalizadas disparam
 `submission.completed` — o **único** evento da lista — para os endpoints cadastrados
 (`webhook-dispatch`). A API pública também gera prova por IA de forma assíncrona: `POST` devolve 202 +
 `jobId` e o parceiro faz polling; jobs órfãos são retomados pelo cron de resgate abaixo.
+
+## Lead público (`POST /v1/public/leads`)
+Domínio `lead` (ADR-0016). Endpoint **sem autenticação**, pensado para um único chamador: a Server
+Action do `apps/demo`, que chama **servidor a servidor** porque a api só libera CORS para `WEB_ORIGIN`.
+Router próprio montado antes do `express.json()` global, com limite de corpo de **16 kb**.
+
+| Campo | Regra |
+|---|---|
+| `name` | 2–120 caracteres |
+| `institution` | 2–200 caracteres |
+| `institutionType` | `school \| prepCourse \| university \| network \| other` |
+| `email` | e-mail válido, ≤200, normalizado para minúsculas |
+| `phone` | **obrigatório**, telefone BR: 10 ou 11 dígitos depois de tirar a máscara (fixo ou celular), gravado só com dígitos |
+| `message` | opcional, ≤2.000 |
+| `persona` | `k12 \| prepCourse \| university` ou `null` — o dataset que o visitante explorou na demo |
+| `source` | opcional, ≤60; default `institutional-demo` |
+| `website` | **honeypot**: preenchido → responde 204 e não grava nada (bot nunca sabe que foi pego) |
+
+Sucesso é **204 sem corpo**. Corpo inválido → 400 `INVALID_BODY` sem listar os campos. Estouro de
+limite → **429** `LEAD_THROTTLED`.
+
+**Rate limit em janela fixa de 1 hora**, contador atômico na coleção `lead_rate_counters` (expira por
+TTL). Três chaves, cobradas nesta ordem: **10 por fingerprint** do visitante, **3 por e-mail**,
+**200 no total** (teto global, para um formulário público não esgotar a cota da Resend que entrega
+verificação de e-mail e reset de senha). A fingerprint é `sha256` do IP com chave derivada por HKDF do
+`AUTH_SECRET`; o IP cru nunca é gravado. Como a chamada vem do container da demo, o IP real chega no
+header `x-lucida-client-ip`, aceito só com `x-lucida-forward-auth` igual a **`LEAD_FORWARD_CREDENTIAL`**
+(≥16, mesmo valor na api e na demo, diferente de `WEB_FORWARD_CREDENTIAL`). **Sem ela, o limite por
+visitante vira teto global**: todos os visitantes compartilham o IP do container e o 11º lead da hora
+leva 429.
+
+O lead é gravado na coleção **`leads`**, que **expira por TTL em 90 dias**. A entrega de verdade é o
+e-mail: depois de gravar, a api avisa via Resend para **`LEADS_NOTIFY_EMAIL ?? SUPPORT_EMAIL`**; falha no
+envio é logada e não perde o lead. **Nenhuma tela lê os leads** — nem Kintal nem web.
+
+## Demo institucional (`apps/demo`)
+Workspace próprio (`@lucida/demo`, ADR-0015) com o link de venda para escola, cursinho e universidade:
+hero, três capítulos interativos (criar, aplicar/corrigir, analisar) sobre **dados fictícios** por
+persona e formulário de contato. Não tem sessão, não lê dado de professor e não chama IA. É
+**self-contained** — copia tokens e primitivos do `apps/web` e nunca importa de `@lucida/web`. Deploy
+separado na Railway (`docker/demo.Dockerfile`), domínio próprio; porta 3001 só no dev.
+
+| Env | Para quê |
+|---|---|
+| `DEMO_API_URL` | **Server-only.** Base da api para onde a Server Action manda o lead. Sem ela o formulário não entrega |
+| `LEAD_FORWARD_CREDENTIAL` | **Server-only.** Mesmo valor da api; habilita o repasse do IP do visitante |
+| `NEXT_PUBLIC_POSTHOG_KEY` / `NEXT_PUBLIC_POSTHOG_HOST` | PostHog da demo — init próprio, reverse proxy `/ingest` próprio, sem `identify`. Sem key, o SDK não sobe |
+
+A demo tem taxonomia própria de eventos `demo_*` — ver [tecnico/eventos-posthog.md](eventos-posthog.md).
 
 ## CRON interno
 Quatro endpoints `/v1/internal/*`, todos protegidos pelo header `x-cron-secret` contra `CRON_SECRET`

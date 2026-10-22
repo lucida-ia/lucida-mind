@@ -1,6 +1,6 @@
 ---
 quando_usar: fundamentar o motor de assertividade (BKT/CDM/IRT), sustentar a tese de moat, consultar as referências científicas
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 tags: [moat]
 ---
@@ -15,12 +15,13 @@ tags: [moat]
 
 > ⚠ **Artefatos referenciados ainda não definidos nesta base** (`a definir` — lacunas conhecidas,
 > não convites a inventar):
-> - **`family_id`** — mecanismo que amarra exposições do mesmo KC entre atividades (skill Objeto de
->   Aprendizagem). Sem doc na base.
+> - **`family_id`** — mecanismo proposto para amarrar exposições do mesmo KC entre atividades. Não
+>   existe no código nem no contrato do épico #141, que usa o id do conceito no catálogo.
 > - **Skill "Objeto de Aprendizagem"** — referida como dona do schema da Q-matrix e do reporte de
 >   concentração de itens. Sem doc na base.
-> - **"Modo B (estilo)"** e **`N_min_calibracao_professor`** — calibração por provas antigas do
->   professor. Sem doc na base.
+>
+> O **Modo B (estilo)** existe como perfil de estilo do professor (ADR-0018), sem ligação com KC —
+> ver [produto/objeto-de-aprendizagem.md](objeto-de-aprendizagem.md).
 
 **KC**, **Q-matrix** e as entidades citadas aqui estão definidas em
 [produto/glossario.md](glossario.md); os domínios que este doc propõe mexer, em
@@ -29,7 +30,9 @@ tags: [moat]
 > **Este doc é uma de três partes.** O fundamento científico está em
 > [produto/motor-assertividade.md](motor-assertividade.md); os parâmetros e a escada de
 > maturidade, em [produto/maturidade-do-motor.md](maturidade-do-motor.md); o objeto proposto,
-> em [produto/objeto-de-aprendizagem.md](objeto-de-aprendizagem.md). **Nada disto existe em código.**
+> em [produto/objeto-de-aprendizagem.md](objeto-de-aprendizagem.md). **O que roda hoje é só o
+> Bloco C, na forma clássica.** KC por questão está em construção (épico #141); Knowledge Tracing,
+> CDM e DKT não estão em nenhum contrato.
 
 ---
 
@@ -59,7 +62,8 @@ Resolve **"o quê" travou** e **onde na cadeia de pré-requisito**.
 - Rupp, Templin & Henson (2010) — tratado de referência.
 
 ### Bloco C — Psicometria / IRT (base do que já roda hoje)
-Sustenta dificuldade e discriminação por item (item analysis atual).
+Sustenta dificuldade e discriminação por item. O que roda hoje é **teoria clássica**, não IRT:
+p-valor, índice de discriminação dos 27% e distratores empíricos, por prova.
 - Embretson & Reise (2000) — entrada didática no IRT.
 - Lord (1980); van der Linden & Hambleton (1997) — clássicos.
 
@@ -87,7 +91,7 @@ Nenhum ponto isolado é defensável; cada um já existe em alguma ferramenta. O 
 
 1. **Feedback nivelado** (Hattie) escrito de volta num
 2. **grafo de KC validado** (Q-matrix + BNCC), através de
-3. **objetos rastreáveis longitudinalmente** (`family_id`), numa
+3. **objetos rastreáveis longitudinalmente** (a questão ligada ao seu KC entre provas), numa
 4. **avaliação de dupla função** (somativa + formativa) sem fricção pro professor,
 5. de forma **invisível** (orquestração inferida, não digitada).
 

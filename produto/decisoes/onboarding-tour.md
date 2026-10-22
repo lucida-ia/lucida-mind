@@ -1,6 +1,6 @@
 ---
 quando_usar: entender as decisões do tour guiado (quando auto-inicia, onde a flag mora, mobile vs desktop)
-última_revisão: 2026-08-25
+última_revisão: 2026-10-22
 status: canônico
 ---
 
@@ -11,3 +11,6 @@ Primeira sessão no `/app` abre um **tour** (mascote **Lulu**) destacando os 5 c
 `onboardingTourCompletedAt` no BetterAuth + cache local anti-flicker), **refazível** pelo menu de perfil,
 **coachmarks no desktop / modal-resumo no mobile**, e **staff em modo preview não persiste** a flag.
 Instrumentado no PostHog (ver [tecnico/eventos-posthog.md](../../tecnico/eventos-posthog.md)).
+
+**Concluir o tour não é ativação.** A régua de ativação (ADR-0017) é o evento `user_activated`: a
+primeira prova do professor respondida por um aluno. Terminar o tour é só ter visto os popovers.
